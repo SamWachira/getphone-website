@@ -34,6 +34,7 @@ export default function CTASection({
             {/* Phone image */}
             <div className="absolute right-0 top-0 bottom-0 w-[55%] hidden md:block pointer-events-none">
               <img
+                src="/a36many.png"
                 alt="Nubia smartphones in multiple colors"
                 className="absolute right-0 top-1/2 -translate-y-1/2 h-[110%] w-auto max-w-none object-contain object-right"
               />
