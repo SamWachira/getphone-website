@@ -10,7 +10,6 @@ export default function PrivacyPage() {
   return (
     <>
       <PageHero
-        eyebrow="Legal"
         title="Privacy Policy"
         description="How GetPhone collects, uses, and protects customer information across applications, payments, and support interactions."
       />

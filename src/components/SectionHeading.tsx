@@ -15,15 +15,19 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={`mb-12 md:mb-14 ${centered ? 'text-center' : ''}`}>
-      <h2 className={`font-heading font-800 text-3xl md:text-4xl lg:text-[2.75rem] leading-tight ${
-        light ? 'text-white' : 'text-primary'
-      }`}>
+      {label && (
+        <span className={`inline-block text-xs font-bold uppercase tracking-widest mb-3 ${light ? 'text-accent' : 'text-accent'
+          }`}>
+          {label}
+        </span>
+      )}
+      <h2 className={`font-heading font-800 text-3xl md:text-4xl lg:text-[2.75rem] leading-tight ${light ? 'text-white' : 'text-primary'
+        }`}>
         {title}
       </h2>
       {description && (
-        <p className={`mt-4 text-lg leading-relaxed max-w-2xl ${centered ? 'mx-auto' : ''} ${
-          light ? 'text-white/70' : 'text-muted'
-        }`}>
+        <p className={`mt-4 text-lg leading-relaxed max-w-2xl ${centered ? 'mx-auto' : ''} ${light ? 'text-white/70' : 'text-muted'
+          }`}>
           {description}
         </p>
       )}

@@ -181,8 +181,12 @@ export default function Home() {
           }}
         />
 
-        <div className="section-container px-5 lg:px-8 pt-32 pb-12 md:pt-36 md:pb-16 lg:pt-40 lg:pb-20 relative z-10">
+        <div className="section-container px-5 lg:px-8 pt-40 pb-16 md:pt-44 md:pb-20 lg:pt-48 lg:pb-24 relative z-10">
           <div className="max-w-lg lg:max-w-xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/10 text-accent text-sm font-semibold mb-5 backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              Tartiib tartiib ubixi
+            </div>
 
             <h1 className="font-heading font-800 text-[2rem] md:text-[2.5rem] lg:text-[3rem] leading-[1.1] text-white mb-4 tracking-tight">
               Own a Smartphone
@@ -235,8 +239,8 @@ export default function Home() {
                 {steps.map((step, i) => (
                   <div key={step.num} className="flex justify-center">
                     <div className={`relative w-12 h-12 rounded-full flex items-center justify-center font-heading font-800 text-sm z-10 transition-all duration-300 ${i === steps.length - 1
-                        ? 'bg-accent text-white shadow-lg shadow-accent/30'
-                        : 'bg-white border-2 border-accent/30 text-accent'
+                      ? 'bg-accent text-white shadow-lg shadow-accent/30'
+                      : 'bg-white border-2 border-accent/30 text-accent'
                       }`}>
                       {step.num}
                     </div>
@@ -251,13 +255,13 @@ export default function Home() {
                 <div
                   key={step.num}
                   className={`rounded-2xl px-5 py-7 text-center transition-all duration-300 ${i === steps.length - 1
-                      ? 'bg-primary text-white shadow-xl shadow-primary/15'
-                      : 'bg-white border border-border-light shadow-sm hover:shadow-md hover:-translate-y-1'
+                    ? 'bg-primary text-white shadow-xl shadow-primary/15'
+                    : 'bg-white border border-border-light shadow-sm hover:shadow-md hover:-translate-y-1'
                     }`}
                 >
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 ${i === steps.length - 1
-                      ? 'bg-accent/20 text-accent'
-                      : 'bg-accent/10 text-accent'
+                    ? 'bg-accent/20 text-accent'
+                    : 'bg-accent/10 text-accent'
                     }`}>
                     {step.icon}
                   </div>
@@ -277,8 +281,8 @@ export default function Home() {
                 {/* Vertical timeline */}
                 <div className="flex flex-col items-center shrink-0">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center font-heading font-800 text-xs ${i === steps.length - 1
-                      ? 'bg-accent text-white'
-                      : 'bg-white border-2 border-accent/30 text-accent'
+                    ? 'bg-accent text-white'
+                    : 'bg-white border-2 border-accent/30 text-accent'
                     }`}>
                     {step.num}
                   </div>
@@ -288,8 +292,8 @@ export default function Home() {
                 </div>
                 {/* Card */}
                 <div className={`flex-1 rounded-xl px-5 py-4 ${i === steps.length - 1
-                    ? 'bg-primary text-white shadow-lg'
-                    : 'bg-white border border-border-light shadow-sm'
+                  ? 'bg-primary text-white shadow-lg'
+                  : 'bg-white border border-border-light shadow-sm'
                   }`}>
                   <div className="flex items-center gap-3 mb-1.5">
                     <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${i === steps.length - 1 ? 'bg-accent/20 text-accent' : 'bg-accent/10 text-accent'
@@ -457,7 +461,7 @@ export default function Home() {
       </section>
 
       {/* ═══ PARTNER TRUST ═══ */}
-      <section 
+      <section
         className="section-padding relative overflow-hidden w-full"
         style={{
           backgroundImage: 'url("/bg4.webp")',

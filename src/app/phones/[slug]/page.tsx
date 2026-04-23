@@ -90,7 +90,6 @@ export default async function PhoneDetailsPage({ params }: { params: Promise<{ s
             <div className="lg:col-span-7">
               <div className="mb-8">
                 <SectionHeading
-                  label="Device Specifications"
                   title="Technical Details"
                   centered={false}
                 />

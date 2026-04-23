@@ -10,14 +10,8 @@ export default function TermsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Legal"
         title="Terms of Service"
         description="The core terms that govern your use of the GetPhone website, financing journey, and related services."
-        details={[
-          { label: 'Updated', value: 'April 2026' },
-          { label: 'Scope', value: 'Website use, device financing and account responsibilities' },
-          { label: 'Support', value: 'Questions can be directed to GetPhone service points' },
-        ]}
       />
 
       <section className="section-padding bg-background">

@@ -16,7 +16,7 @@ const whyThesePhones = [
     desc: 'Built to last in everyday conditions with quality materials and solid construction.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
     ),
   },
@@ -25,7 +25,7 @@ const whyThesePhones = [
     desc: 'Premium features at accessible price points, made even more accessible through installment plans.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
       </svg>
     ),
   },
@@ -34,7 +34,7 @@ const whyThesePhones = [
     desc: 'Massive 5,000–6,000 mAh batteries that keep you connected all day without constant charging.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-        <rect x="1" y="6" width="18" height="12" rx="2" ry="2"/><line x1="23" y1="13" x2="23" y2="11"/><path d="M7 12h4"/>
+        <rect x="1" y="6" width="18" height="12" rx="2" ry="2" /><line x1="23" y1="13" x2="23" y2="11" /><path d="M7 12h4" />
       </svg>
     ),
   },
@@ -43,7 +43,7 @@ const whyThesePhones = [
     desc: 'Smooth processors and ample storage for everyday apps, mobile money, and media.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-        <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        <path d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
   },
@@ -52,7 +52,7 @@ const whyThesePhones = [
     desc: 'Direct from ZTE — every device is genuine with full manufacturer warranty and support.',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-        <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+        <path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
       </svg>
     ),
   },
@@ -90,11 +90,10 @@ export default function PhonesPage() {
             {phonesData.map((phone) => (
               <div
                 key={phone.slug}
-                className={`rounded-2xl p-6 flex flex-col transition-all duration-300 ${
-                  phone.featured
+                className={`rounded-2xl p-6 flex flex-col transition-all duration-300 ${phone.featured
                     ? 'bg-primary text-white shadow-xl shadow-primary/20'
                     : 'bg-white border border-border-light shadow-sm hover:shadow-lg hover:-translate-y-1'
-                }`}
+                  }`}
               >
                 <span className="inline-block self-start text-xs font-bold uppercase tracking-wider mb-3 text-accent">
                   {phone.category}
@@ -102,9 +101,8 @@ export default function PhonesPage() {
                 <h3 className={`font-heading font-800 text-xl mb-4 ${phone.featured ? 'text-white' : 'text-primary'}`}>
                   {phone.name}
                 </h3>
-                <div className={`w-full h-48 rounded-xl mb-5 flex items-center justify-center p-4 ${
-                  phone.featured ? 'bg-white/10' : 'bg-background-alt'
-                }`}>
+                <div className={`w-full h-48 rounded-xl mb-5 flex items-center justify-center p-4 ${phone.featured ? 'bg-white/10' : 'bg-background-alt'
+                  }`}>
                   <img src={phone.images[0]} alt={phone.name} className="h-full w-auto object-contain drop-shadow-md hover:scale-105 transition-transform duration-300" />
                 </div>
                 <ul className="space-y-2 mb-5 flex-1 break-words">

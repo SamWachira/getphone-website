@@ -46,21 +46,14 @@ export default function FindShopPage() {
   return (
     <>
       <PageHero
-        eyebrow="Retail Network"
         title="Find a Shop Near You"
         description="Visit any Hormuud branch or authorized GetPhone retailer to browse devices, pay your deposit, and walk out with a new phone."
-        details={[
-          { label: 'Cities', value: 'Mogadishu, Hargeisa, Kismayo and more' },
-          { label: 'Visit For', value: 'Device browsing, deposits and registration' },
-          { label: 'Fallback', value: 'Call 565 if you need the nearest outlet' },
-        ]}
       />
 
       {/* ═══ SEARCH INFO ═══ */}
       <section className="section-padding bg-background">
         <div className="section-container">
           <SectionHeading
-            label="Locations"
             title="Hormuud Branches & Retailers"
             description="GetPhone devices are available at Hormuud branches and authorized retailers across Somalia. Find the nearest location below."
           />

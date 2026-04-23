@@ -75,21 +75,14 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
-        eyebrow="Customer Support"
         title="Support & Assistance"
         description="Need help with your device, payments, or warranty? The GetPhone support team is available 24/7 to solve your issues."
-        details={[
-          { label: 'Helpline', value: 'Call 565 any time' },
-          { label: 'Channels', value: 'Support desk, email, chat and service centers' },
-          { label: 'Coverage', value: 'Payment, repair, lock and application support' },
-        ]}
       />
 
       {/* ═══ QUICK CATEGORIES ═══ */}
       <section className="section-padding bg-background-alt pb-10">
         <div className="section-container">
           <SectionHeading
-            label="Quick Help"
             title="What do you need help with?"
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
@@ -117,7 +110,6 @@ export default function ContactPage() {
             {/* Contact Info (Left Sidebar) */}
             <div className="lg:col-span-4 lg:order-1 order-2">
               <SectionHeading
-                label="Direct Channels"
                 title="Reach Us Directly"
                 centered={false}
               />
@@ -231,7 +223,6 @@ export default function ContactPage() {
       <section className="section-padding bg-background-alt">
         <div className="section-container">
           <SectionHeading
-            label="In-Person Support"
             title="Service & Repair Centers"
             description="Hardware issue? Bring your device to an official service center or drop-off point."
           />

@@ -71,14 +71,8 @@ export default function FAQPage() {
   return (
     <>
       <PageHero
-        eyebrow="Answers & Clarity"
         title="Frequently Asked Questions"
         description="Everything you need to know about GetPhone, our financing model, and available devices."
-        details={[
-          { label: 'Topics', value: 'Eligibility, payments, devices and benefits' },
-          { label: 'Model', value: 'Ethical, installment-based smartphone access' },
-          { label: 'Need More', value: 'Direct support is one step away' },
-        ]}
       />
 
       {/* ═══ GENERAL ═══ */}
@@ -86,7 +80,6 @@ export default function FAQPage() {
         <div className="section-container">
           <div className="max-w-3xl mx-auto">
             <SectionHeading
-              label="Getting Started"
               title="General Questions"
             />
             <FAQAccordion items={generalFaq} />
@@ -99,7 +92,6 @@ export default function FAQPage() {
         <div className="section-container">
           <div className="max-w-3xl mx-auto">
             <SectionHeading
-              label="Payments & Financing"
               title="Payment Questions"
             />
             <FAQAccordion items={paymentFaq} />
@@ -112,7 +104,6 @@ export default function FAQPage() {
         <div className="section-container">
           <div className="max-w-3xl mx-auto">
             <SectionHeading
-              label="Products & Benefits"
               title="Device & Offer Questions"
             />
             <FAQAccordion items={productFaq} />

@@ -96,21 +96,14 @@ export default function PartnersPage() {
   return (
     <>
       <PageHero
-        eyebrow="Institutional Solutions"
         title="Partner With GetPhone"
         description="Join us in expanding smartphone access across Somalia through institutional solutions, bulk programs, and development partnerships."
-        details={[
-          { label: 'Programs', value: 'Bulk procurement and managed device rollouts' },
-          { label: 'Impact', value: 'Digital inclusion for students, teams and communities' },
-          { label: 'Network', value: 'Built with telecom, hardware and payment partners' },
-        ]}
       />
 
       {/* ═══ PARTNERSHIP CATEGORIES ═══ */}
       <section className="section-padding bg-background">
         <div className="section-container">
           <SectionHeading
-            label="Partnership Types"
             title="How We Can Work Together"
             description="We offer structured partnerships for organizations across multiple sectors."
           />
@@ -133,7 +126,6 @@ export default function PartnersPage() {
       <section className="section-padding bg-background-alt">
         <div className="section-container">
           <SectionHeading
-            label="Impact Areas"
             title="Institutional Use Cases"
             description="Real-world programs that benefit from GetPhone's device financing platform."
           />
@@ -158,7 +150,6 @@ export default function PartnersPage() {
       <section className="section-padding bg-primary">
         <div className="section-container">
           <SectionHeading
-            label="The Advantage"
             title="Why Partner With GetPhone"
             light
           />
