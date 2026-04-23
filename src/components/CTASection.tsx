@@ -56,6 +56,17 @@ export default function CTASection({
 
             {/* Subtle accent glow behind phones */}
             <div className="absolute right-20 top-1/2 -translate-y-1/2 w-64 h-64 bg-accent/10 rounded-full blur-[80px] hidden md:block" />
+
+            {/* Mobile/Tablet Visual peeking from bottom right */}
+            <div className="absolute -right-16 -bottom-16 w-72 h-72 md:hidden pointer-events-none overflow-hidden">
+              <img
+                src="/a36many.webp"
+                alt="Nubia smartphones"
+                className="w-full h-full object-contain object-right-bottom opacity-40 rotate-[-15deg] transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
+            </div>
+            <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-accent/20 rounded-full blur-[60px] md:hidden pointer-events-none" />
           </>
         )}
 

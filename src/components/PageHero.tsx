@@ -16,6 +16,30 @@ export default function PageHero({
   return (
     <section className="relative overflow-hidden bg-background-alt pt-28 pb-10 md:pt-32 md:pb-12 lg:pt-36 lg:pb-14">
       <HeroBackdrop />
+      
+      {/* ── Floating Product Image (Desktop) ── */}
+      <div className="absolute right-[-2%] bottom-0 w-[45%] h-[65%] pointer-events-none hidden md:block opacity-40">
+        <img
+          src="/a56many.webp"
+          alt="ZTE Smartphones"
+          className="w-full h-full object-contain object-right-bottom"
+          style={{
+            filter: 'drop-shadow(0 -10px 40px rgba(0,0,0,0.1))',
+          }}
+        />
+        {/* Gradient fade to blend into background (horizontal and vertical) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-background-alt via-background-alt/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-background-alt/40" />
+      </div>
+
+      {/* ── Mobile peeking visual ── */}
+      <div className="absolute -right-8 -bottom-8 w-48 h-48 md:hidden pointer-events-none opacity-20 rotate-[-10deg]">
+        <img
+          src="/a56many.webp"
+          alt="ZTE Smartphones"
+          className="w-full h-full object-contain object-right-bottom"
+        />
+      </div>
 
       <div className="section-container relative z-10 px-5 lg:px-8">
         <div className="max-w-3xl border-l-4 border-accent pl-5 sm:pl-6">

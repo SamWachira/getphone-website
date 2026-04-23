@@ -181,6 +181,20 @@ export default function Home() {
           }}
         />
 
+        {/* Mobile/Tablet Visual — peeking from bottom right */}
+        <div className="absolute inset-0 md:hidden pointer-events-none overflow-hidden">
+          <div className="absolute -right-20 -bottom-20 w-[110%] h-[80%] opacity-30 rotate-12 transition-all duration-700">
+            <img 
+              src="/v80.webp" 
+              alt="Nubia V80" 
+              className="w-full h-full object-contain object-right-bottom" 
+            />
+          </div>
+          {/* Subtle accent glow */}
+          <div className="absolute -right-10 bottom-1/4 w-64 h-64 bg-accent/20 rounded-full blur-[100px]" />
+          <div className="absolute left-0 top-0 w-full h-full bg-gradient-to-tr from-primary via-primary/80 to-transparent" />
+        </div>
+
         <div className="section-container px-5 lg:px-8 pt-40 pb-16 md:pt-44 md:pb-20 lg:pt-48 lg:pb-24 relative z-10">
           <div className="max-w-lg lg:max-w-xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/10 text-accent text-sm font-semibold mb-5 backdrop-blur-sm">

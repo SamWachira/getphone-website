@@ -91,20 +91,47 @@ export default function FindShopPage() {
       </section>
 
       {/* ═══ CAN'T FIND ═══ */}
-      <section className="section-padding bg-primary">
-        <div className="section-container text-center">
-          <h2 className="font-heading font-800 text-2xl md:text-3xl text-white mb-4">
-            Can&apos;t find a shop near you?
-          </h2>
-          <p className="text-white/60 max-w-md mx-auto mb-6">
-            Call <strong className="text-accent">565</strong> and our team will help you find the nearest GetPhone retailer or arrange a solution.
-          </p>
-          <a href="tel:565" className="btn btn-white">
-            Call 565
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-            </svg>
-          </a>
+      <section className="section-padding bg-background">
+        <div className="section-container">
+          <div className="relative overflow-hidden bg-primary rounded-[2rem] px-8 py-16 md:px-16 md:py-20 lg:px-24 flex flex-col md:flex-row items-center justify-between gap-12">
+            {/* Background Texture */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+              <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+            </div>
+
+            <div className="relative z-10 max-w-xl text-center md:text-left">
+              <h2 className="font-heading font-800 text-3xl md:text-4xl lg:text-5xl text-white mb-6 leading-[1.1] tracking-tight">
+                Can&apos;t find a shop <br /> near you?
+              </h2>
+              <p className="text-white/60 text-lg md:text-xl mb-10 leading-relaxed font-medium">
+                Our support team is ready to help you find the nearest retailer or arrange an alternative solution.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center gap-6">
+                <a href="tel:565" className="btn bg-accent text-white hover:bg-accent/90 shadow-2xl shadow-accent/20 !px-12 !py-4.5 text-lg flex items-center gap-3 transition-transform hover:-translate-y-1">
+                  Call 565
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                  </svg>
+                </a>
+                <div className="flex flex-col items-center md:items-start">
+                  <span className="text-white font-bold text-sm">24/7 Support</span>
+                  <span className="text-white/40 text-xs uppercase tracking-widest font-bold">Always Available</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Peeking Product Visual (Desktop) ── */}
+            <div className="relative w-full md:w-1/2 h-64 md:h-auto hidden md:block self-stretch">
+              <div className="absolute right-[-15%] top-1/2 -translate-y-1/2 w-[120%] h-[120%] pointer-events-none">
+                <img 
+                  src="/a36many.webp" 
+                  alt="ZTE Smartphones" 
+                  className="w-full h-full object-contain object-right-bottom" 
+                />
+              </div>
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-accent/20 rounded-full blur-[100px]" />
+            </div>
+          </div>
         </div>
       </section>
     </>
