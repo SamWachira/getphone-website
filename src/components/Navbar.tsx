@@ -37,7 +37,7 @@ export default function Navbar() {
   }, [mobileOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header className="fixed top-0 left-0 right-0 z-[100]">
       {/* ── Top Utility Strip ── */}
       <div
         className={`bg-white border-b border-gray-100 transition-all duration-300 overflow-hidden ${
