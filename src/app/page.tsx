@@ -169,7 +169,7 @@ export default function Home() {
   return (
     <>
       {/* ═══ HERO ═══ */}
-      <section className="relative h-[calc(100vh-0px)] max-h-[800px] min-h-[500px] flex items-center overflow-hidden bg-primary">
+      <section className="relative h-[100dvh] max-h-[800px] min-h-[500px] flex items-center overflow-hidden bg-primary">
         {/* Background image — desktop only */}
         <div
           className="absolute inset-0 hidden md:block opacity-90 lg:opacity-100"
