@@ -1,6 +1,19 @@
 'use client';
 
 import { useState } from 'react';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const API_KEY = "AIzaSyDxBKV7Pj5KB8eCTrzeV_E-UWjgsw9TUrk";
+const genAI = new GoogleGenerativeAI(API_KEY);
+
+const SYSTEM_PROMPT = `You are the GetPhone Digital Assistant. GetPhone is a company in Somalia that provides smartphones (primarily ZTE and nubia brands) through flexible installment plans (6, 9, or 12 months). 
+Key points to remember:
+- Partnerships: Hormuud Telecom (distribution/network), ZTE (hardware), EVC Plus via Waafi (payments).
+- Benefits: 1GB data and 30 mins calls FREE daily for 1 year with every phone.
+- Process: Choose phone -> Pay deposit at Hormuud branch -> Register with Hormuud number -> Pay installments manually via eGet app.
+- Tone: Professional, helpful, and culturally respectful.
+- Financing: 0% interest, Sharia-compliant.
+Keep your answers concise and focused on helping users understand our services.`;
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,22 +22,36 @@ export default function Chatbot() {
   ]);
   const [input, setInput] = useState('');
 
-  const handleSend = (e?: React.FormEvent) => {
+  const handleSend = async (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!input.trim()) return;
 
-    // Add user message
     const userMsg = { id: Date.now(), text: input, isBot: false };
     setMessages(prev => [...prev, userMsg]);
+    const currentInput = input;
     setInput('');
 
-    // Simulate bot thinking/replying (Gemini API later)
-    setTimeout(() => {
+    try {
+      const model = genAI.getGenerativeModel({ 
+        model: "gemini-1.5-flash",
+        systemInstruction: SYSTEM_PROMPT,
+      });
+
+      const result = await model.generateContent(currentInput);
+      const response = await result.response;
+      const text = response.text();
+
       setMessages(prev => [
         ...prev, 
-        { id: Date.now() + 1, text: "Thanks for your message! Our AI capabilities are being integrated soon. Please hold tight!", isBot: true }
+        { id: Date.now() + 1, text: text, isBot: true }
       ]);
-    }, 1000);
+    } catch (error) {
+      console.error("Gemini Error:", error);
+      setMessages(prev => [
+        ...prev, 
+        { id: Date.now() + 1, text: "I'm sorry, I'm having trouble connecting right now. Please try again later or contact our support at info@getphonelimited.com.", isBot: true }
+      ]);
+    }
   };
 
   return (
