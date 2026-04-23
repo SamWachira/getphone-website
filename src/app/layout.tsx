@@ -42,11 +42,24 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "GetPhone — Affordable Smartphones, Flexible Payments",
-    description:
-      "Access quality smartphones through flexible installment plans across Somalia.",
+    description: "Access quality smartphones through flexible installment plans across Somalia with trusted telecom integration.",
     type: "website",
     locale: "en_US",
     siteName: "GetPhone",
+    images: [
+      {
+        url: "/a36many.webp",
+        width: 1200,
+        height: 630,
+        alt: "GetPhone Smartphone Catalog",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GetPhone — Affordable Smartphones, Flexible Payments",
+    description: "Access quality smartphones through flexible installment plans across Somalia.",
+    images: ["/a36many.webp"],
   },
 };
 
