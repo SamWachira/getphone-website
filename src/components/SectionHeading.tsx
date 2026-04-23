@@ -15,13 +15,6 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div className={`mb-12 md:mb-14 ${centered ? 'text-center' : ''}`}>
-      {label && (
-        <span className={`inline-block text-xs font-bold uppercase tracking-widest mb-3 ${
-          light ? 'text-accent' : 'text-accent'
-        }`}>
-          {label}
-        </span>
-      )}
       <h2 className={`font-heading font-800 text-3xl md:text-4xl lg:text-[2.75rem] leading-tight ${
         light ? 'text-white' : 'text-primary'
       }`}>

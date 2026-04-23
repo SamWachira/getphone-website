@@ -181,12 +181,8 @@ export default function Home() {
           }}
         />
 
-        <div className="section-container px-5 lg:px-8 pt-40 pb-16 md:pt-44 md:pb-20 lg:pt-48 lg:pb-24 relative z-10">
+        <div className="section-container px-5 lg:px-8 pt-32 pb-12 md:pt-36 md:pb-16 lg:pt-40 lg:pb-20 relative z-10">
           <div className="max-w-lg lg:max-w-xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/10 text-accent text-sm font-semibold mb-5 backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              Tartiib tartiib ubixi
-            </div>
 
             <h1 className="font-heading font-800 text-[2rem] md:text-[2.5rem] lg:text-[3rem] leading-[1.1] text-white mb-4 tracking-tight">
               Own a Smartphone
