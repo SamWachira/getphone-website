@@ -55,7 +55,7 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end">
+    <div className="fixed bottom-6 right-6 z-[999] flex flex-col items-end">
       {isOpen && (
         <div className="w-80 sm:w-96 max-h-[calc(100vh-140px)] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden mb-4 flex flex-col transition-all duration-300 transform origin-bottom-right">
           {/* Header */}
