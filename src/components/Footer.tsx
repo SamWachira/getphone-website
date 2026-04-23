@@ -63,7 +63,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="mb-6 flex items-center gap-2">
               <img
-                src="/logo1.png"
+                src="/logo1.webp"
                 alt="GetPhone"
                 className="h-14 w-auto object-contain brightness-0 invert"
               />

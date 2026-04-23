@@ -117,7 +117,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 relative z-50">
           <img 
-            src="/logo1.png" 
+            src="/logo1.webp" 
             alt="GetPhone" 
             className={`h-9 md:h-10 w-auto object-contain transition-all duration-300 ${!forceDark ? 'brightness-0 invert' : ''}`}
           />

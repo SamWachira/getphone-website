@@ -112,7 +112,7 @@ const featuredPhones = [
     name: 'ZTE Blade A36',
     slug: 'zte-blade-a36',
     category: 'Entry Level',
-    image: '/a36.png',
+    image: '/a36.webp',
     specs: ['6.75" HD+ Display', '64 GB Storage', '5000 mAh Battery', '4G LTE'],
     idealFor: 'Students',
   },
@@ -120,7 +120,7 @@ const featuredPhones = [
     name: 'ZTE Blade A56',
     slug: 'zte-blade-a56',
     category: 'Mid-Range',
-    image: '/a56.png',
+    image: '/a56.webp',
     specs: ['13MP AI Camera', '128 GB Storage', '10W Fast Charge', '4G LTE'],
     idealFor: 'Professionals',
   },
@@ -128,7 +128,7 @@ const featuredPhones = [
     name: 'ZTE Blade A76 5G',
     slug: 'zte-blade-a76',
     category: 'Advanced',
-    image: '/a76.png',
+    image: '/a76.webp',
     specs: ['50MP AI Camera', 'Up to 256 GB', 'Full 5G', 'Large Display'],
     idealFor: 'SME Owners',
   },
@@ -136,7 +136,7 @@ const featuredPhones = [
     name: 'Nubia V80 Series',
     slug: 'nubia-v80-pro',
     category: 'Premium',
-    image: '/v80.png',
+    image: '/v80.webp',
     specs: ['Up to 108MP Camera', '6000 mAh Battery', '120Hz Display', '5G Ready'],
     idealFor: 'Power Users',
     featured: true,
@@ -174,7 +174,7 @@ export default function Home() {
         <div
           className="absolute inset-0 hidden md:block opacity-90 lg:opacity-100"
           style={{
-            backgroundImage: 'url(/herobg.png)',
+            backgroundImage: 'url(/herobg.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center right',
             backgroundRepeat: 'no-repeat',
@@ -217,7 +217,7 @@ export default function Home() {
       <section
         className="section-padding bg-background w-full"
         style={{
-          backgroundImage: 'url("/bg1.PNG")',
+          backgroundImage: 'url("/bg1.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -316,7 +316,7 @@ export default function Home() {
       <section
         className="section-padding bg-background-alt w-full"
         style={{
-          backgroundImage: 'url("/bg2.PNG")',
+          backgroundImage: 'url("/bg2.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -404,7 +404,7 @@ export default function Home() {
       <section
         className="section-padding relative overflow-hidden w-full"
         style={{
-          backgroundImage: 'url("/bg3.PNG")',
+          backgroundImage: 'url("/bg3.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -450,7 +450,7 @@ export default function Home() {
 
             <div className="absolute inset-0">
               <img
-                src="/a56many.png"
+                src="/a56many.webp"
                 alt="GetPhone ZTE Devices"
                 className="w-full h-full object-contain object-center z-10 relative drop-shadow-2xl"
               />
@@ -464,7 +464,7 @@ export default function Home() {
       <section 
         className="section-padding relative overflow-hidden w-full"
         style={{
-          backgroundImage: 'url("/bg4.PNG")',
+          backgroundImage: 'url("/bg4.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -488,13 +488,13 @@ export default function Home() {
               },
               {
                 name: 'ZTE Corporation',
-                logo: '/ZTE.png',
+                logo: '/ZTE.webp',
                 role: 'Hardware Partner',
                 desc: 'Global smartphone manufacturer supplying quality, durable devices designed specifically for emerging market needs.',
               },
               {
                 name: 'EVC Plus',
-                logo: '/EVC-Plus.png',
+                logo: '/EVC-Plus.webp',
                 role: 'Payment Infrastructure',
                 desc: 'Fully integrated mobile money payments enabling seamless daily and weekly installment collection across Somalia.',
               },

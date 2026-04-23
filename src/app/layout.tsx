@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   ],
   metadataBase: new URL("https://getphonelimited.com"),
   icons: {
-    icon: "/getphone_favicon.png",
-    apple: "/getphone_favicon.png",
+    icon: "/getphone_favicon.webp",
+    apple: "/getphone_favicon.webp",
   },
   openGraph: {
     title: "GetPhone — Affordable Smartphones, Flexible Payments",

@@ -42,7 +42,7 @@ export default function AboutPage() {
             <div className="relative min-h-[400px] overflow-hidden rounded-3xl bg-background-alt shadow-xl group">
               <div className="pointer-events-none absolute inset-0 z-10 bg-primary/10 mix-blend-overlay" />
               <img
-                src="/gp4.PNG"
+                src="/gp4.webp"
                 alt="GetPhone Vision"
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
@@ -54,7 +54,7 @@ export default function AboutPage() {
       <section
         className="section-padding relative overflow-hidden bg-primary"
         style={{
-          backgroundImage: 'url("/bg3.PNG")',
+          backgroundImage: 'url("/bg3.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundBlendMode: 'overlay',
@@ -150,7 +150,7 @@ export default function AboutPage() {
       <section
         className="section-padding relative overflow-hidden w-full"
         style={{
-          backgroundImage: 'url("/bg4.PNG")',
+          backgroundImage: 'url("/bg4.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -174,13 +174,13 @@ export default function AboutPage() {
               },
               {
                 name: 'ZTE Corporation',
-                logo: '/ZTE.PNG',
+                logo: '/ZTE.webp',
                 role: 'Hardware Supplier',
                 desc: 'Global smartphone manufacturer providing quality, durable devices designed specifically with full warranty support.',
               },
               {
                 name: 'EVC Plus',
-                logo: '/EVC-Plus.PNG',
+                logo: '/EVC-Plus.webp',
                 role: 'Payment Infrastructure',
                 desc: 'Seamlessly integrated mobile money platform that facilitates secure manual daily installment payments via the eGet app.',
               },
