@@ -27,7 +27,7 @@ export const phonesData: PhoneData[] = [
     slug: 'zte-blade-a36',
     name: 'nubia A36',
     category: 'Entry Level',
-    images: ['/a36.PNG', '/a36.PNG', '/a36.PNG', '/a36.PNG', '/a36.PNG'],
+    images: ['/a36.png', '/a36.png', '/a36.png', '/a36.png', '/a36.png'],
     bestFor: 'Students & first-time smartphone users',
     featured: false,
     specs: {
@@ -48,7 +48,7 @@ export const phonesData: PhoneData[] = [
     slug: 'zte-blade-a56',
     name: 'ZTE Blade A56',
     category: 'Mid-Range',
-    images: ['/a56.PNG', '/a56.PNG', '/a56.PNG', '/a56.PNG', '/a56.PNG'],
+    images: ['/a56.png', '/a56.png', '/a56.png', '/a56.png', '/a56.png'],
     bestFor: 'Professionals & everyday users',
     featured: false,
     specs: {
@@ -69,7 +69,7 @@ export const phonesData: PhoneData[] = [
     slug: 'zte-blade-a76',
     name: 'ZTE Blade A76',
     category: 'Advanced',
-    images: ['/a76.PNG', '/a76.PNG', '/a76.PNG', '/a76.PNG', '/a76.PNG'],
+    images: ['/a76.png', '/a76.png', '/a76.png', '/a76.png', '/a76.png'],
     bestFor: 'SME owners & tech-savvy users',
     featured: false,
     specs: {
@@ -90,7 +90,7 @@ export const phonesData: PhoneData[] = [
     slug: 'nubia-v80-pro',
     name: 'nubia V80 Pro',
     category: 'Premium',
-    images: ['/v80.PNG', '/v80.PNG', '/v80.PNG', '/v80.PNG', '/v80.PNG'],
+    images: ['/v80.png', '/v80.png', '/v80.png', '/v80.png', '/v80.png'],
     bestFor: 'Power users & business leaders',
     featured: true,
     specs: {

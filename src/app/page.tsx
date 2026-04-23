@@ -112,7 +112,7 @@ const featuredPhones = [
     name: 'ZTE Blade A36',
     slug: 'zte-blade-a36',
     category: 'Entry Level',
-    image: '/a36.PNG',
+    image: '/a36.png',
     specs: ['6.75" HD+ Display', '64 GB Storage', '5000 mAh Battery', '4G LTE'],
     idealFor: 'Students',
   },
@@ -120,7 +120,7 @@ const featuredPhones = [
     name: 'ZTE Blade A56',
     slug: 'zte-blade-a56',
     category: 'Mid-Range',
-    image: '/a56.PNG',
+    image: '/a56.png',
     specs: ['13MP AI Camera', '128 GB Storage', '10W Fast Charge', '4G LTE'],
     idealFor: 'Professionals',
   },
@@ -128,7 +128,7 @@ const featuredPhones = [
     name: 'ZTE Blade A76 5G',
     slug: 'zte-blade-a76',
     category: 'Advanced',
-    image: '/a76.PNG',
+    image: '/a76.png',
     specs: ['50MP AI Camera', 'Up to 256 GB', 'Full 5G', 'Large Display'],
     idealFor: 'SME Owners',
   },
@@ -136,7 +136,7 @@ const featuredPhones = [
     name: 'Nubia V80 Series',
     slug: 'nubia-v80-pro',
     category: 'Premium',
-    image: '/v80.PNG',
+    image: '/v80.png',
     specs: ['Up to 108MP Camera', '6000 mAh Battery', '120Hz Display', '5G Ready'],
     idealFor: 'Power Users',
     featured: true,
@@ -174,7 +174,7 @@ export default function Home() {
         <div
           className="absolute inset-0 hidden md:block opacity-90 lg:opacity-100"
           style={{
-            backgroundImage: 'url(/herobg.PNG)',
+            backgroundImage: 'url(/herobg.png)',
             backgroundSize: 'cover',
             backgroundPosition: 'center right',
             backgroundRepeat: 'no-repeat',
@@ -450,7 +450,7 @@ export default function Home() {
 
             <div className="absolute inset-0">
               <img
-                src="/a56many.PNG"
+                src="/a56many.png"
                 alt="GetPhone ZTE Devices"
                 className="w-full h-full object-contain object-center z-10 relative drop-shadow-2xl"
               />
@@ -488,13 +488,13 @@ export default function Home() {
               },
               {
                 name: 'ZTE Corporation',
-                logo: '/ZTE.PNG',
+                logo: '/ZTE.png',
                 role: 'Hardware Partner',
                 desc: 'Global smartphone manufacturer supplying quality, durable devices designed specifically for emerging market needs.',
               },
               {
                 name: 'EVC Plus',
-                logo: '/EVC-Plus.PNG',
+                logo: '/EVC-Plus.png',
                 role: 'Payment Infrastructure',
                 desc: 'Fully integrated mobile money payments enabling seamless daily and weekly installment collection across Somalia.',
               },
