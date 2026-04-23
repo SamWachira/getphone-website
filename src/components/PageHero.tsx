@@ -4,12 +4,14 @@ interface PageHeroProps {
   title: string;
   description?: string;
   eyebrow?: string;
+  details?: { label: string; value: string }[];
 }
 
 export default function PageHero({
   title,
   description,
   eyebrow = 'GetPhone',
+  details,
 }: PageHeroProps) {
   return (
     <section className="relative overflow-hidden bg-background-alt pt-28 pb-10 md:pt-32 md:pb-12 lg:pt-36 lg:pb-14">
@@ -32,6 +34,21 @@ export default function PageHero({
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
               {description}
             </p>
+          )}
+
+          {details && details.length > 0 && (
+            <div className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
+              {details.map((detail, index) => (
+                <div key={index} className="flex flex-col">
+                  <span className="text-[0.65rem] font-bold uppercase tracking-widest text-muted/60 mb-1">
+                    {detail.label}
+                  </span>
+                  <span className="text-sm font-semibold text-primary/80">
+                    {detail.value}
+                  </span>
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </div>
