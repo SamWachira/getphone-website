@@ -15,7 +15,7 @@ logging.basicConfig(
 app = FastAPI(
     title="Getphone Temporary Bundle Provisioning API",
     description="Internal API for provisioning daily Hormuud data/voice bundles to Getphone PAYG customers.",
-    version="1.0.0",
+    version="1.0.1",
 )
 
 # CORS — only allow requests from Getphone's Firebase Hosting domains
