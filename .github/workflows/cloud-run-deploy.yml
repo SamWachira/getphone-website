@@ -35,5 +35,5 @@ jobs:
             --allow-unauthenticated \
             --add-cloudsql-instances ${{ secrets.GCP_PROJECT_ID }}:us-central1:getphone-bundles-db \
             --set-secrets DATABASE_URL=database-url:latest,HORMUUD_USERNAME=hormuud-username:latest,HORMUUD_PASSWORD=hormuud-password:latest,SCHEDULER_SECRET=scheduler-secret:latest \
-            --set-env-vars "^;;^HORMUUD_BASE_URL=https://hintegrations.hormuud.com/api;;OFFER_ID=getPhone_24hours_0.25USD;;PRODUCT_ID=3000060;;SAFETY_GUARD_HOURS=6;;TIMEZONE=Africa/Mogadishu;;CORS_ORIGINS=https://getphone-website.web.app,https://getphone-website.firebaseapp.com" \
+            --set-env-vars "^;;^HORMUUD_BASE_URL=https://hintegrations.hormuud.com/api;;OFFER_ID=getPhone_24hours_0.25USD;;PRODUCT_ID=3000060;;SAFETY_GUARD_HOURS=6;;TIMEZONE=Africa/Mogadishu;;CORS_ORIGINS=https://getphone-website.web.app,https://getphone-website.firebaseapp.com,https://getphonelimited.com" \
             --project ${{ secrets.GCP_PROJECT_ID }}
