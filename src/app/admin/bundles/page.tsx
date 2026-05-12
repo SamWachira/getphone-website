@@ -11,7 +11,7 @@ import { auth } from "@/lib/firebase";
 
 // ── Configuration ────────────────────────────────────────────────────
 // Replace with your Cloud Run URL after deployment
-const API_BASE = "https://YOUR_CLOUD_RUN_URL";
+const API_BASE = "https://getphone-bundles-api-577769500526.us-central1.run.app";
 
 // ── Types ────────────────────────────────────────────────────────────
 interface BundleNumber {
