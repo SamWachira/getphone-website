@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'getphone-bundles-backend/**'
-      - '.github/workflows/cloud-run-deploy.yml'
+      - "getphone-bundles-backend/**"
+      - ".github/workflows/cloud-run-deploy.yml"
 
 jobs:
   deploy:

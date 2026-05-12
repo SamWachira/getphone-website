@@ -67,6 +67,7 @@ function fmtDate(d: string | null) {
   return new Date(d).toLocaleString("en-GB", {
     day: "2-digit", month: "short", year: "numeric",
     hour: "2-digit", minute: "2-digit",
+    timeZone: "Africa/Mogadishu",
   });
 }
 
