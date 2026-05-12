@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'getphone-bundles-backend/**'
+      - '.github/workflows/cloud-run-deploy.yml'
 
 jobs:
   deploy:
