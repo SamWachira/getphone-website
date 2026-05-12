@@ -61,10 +61,12 @@ async function apiFetch(path: string, token: string, options: RequestInit = {}) 
   return res;
 }
 
-// ── Date Formatter ───────────────────────────────────────────────────
 function fmtDate(d: string | null) {
   if (!d) return "—";
-  return new Date(d).toLocaleString("en-GB", {
+  // Backend stores UTC but Pydantic serializes without 'Z' suffix.
+  // Append 'Z' so JS Date() correctly interprets it as UTC.
+  const utcStr = d.endsWith("Z") || d.includes("+") ? d : d + "Z";
+  return new Date(utcStr).toLocaleString("en-GB", {
     day: "2-digit", month: "short", year: "numeric",
     hour: "2-digit", minute: "2-digit",
     timeZone: "Africa/Mogadishu",
