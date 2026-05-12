@@ -163,6 +163,26 @@ function AdminDashboard({ user }: { user: User }) {
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [logFilter, setLogFilter] = useState("");
 
+  // ── 30-minute inactivity auto-logout ──────────────────────────────
+  useEffect(() => {
+    const INACTIVITY_LIMIT = 30 * 60 * 1000; // 30 minutes in ms
+    let timer: ReturnType<typeof setTimeout>;
+
+    const resetTimer = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => signOut(auth), INACTIVITY_LIMIT);
+    };
+
+    const events = ["mousemove", "keydown", "scroll", "touchstart", "click"];
+    events.forEach((evt) => window.addEventListener(evt, resetTimer));
+    resetTimer(); // start the timer
+
+    return () => {
+      clearTimeout(timer);
+      events.forEach((evt) => window.removeEventListener(evt, resetTimer));
+    };
+  }, []);
+
   const getToken = useCallback(async () => {
     return await user.getIdToken();
   }, [user]);
