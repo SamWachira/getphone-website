@@ -1,9 +1,12 @@
+import re
 from datetime import datetime, timedelta
 from typing import Optional
 from zoneinfo import ZoneInfo
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, Request
 from sqlalchemy import func
 from sqlalchemy.orm import Session
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 
 from app.config import settings
 from app.database import get_db
@@ -14,9 +17,14 @@ from app.schemas import DashboardResponse, LogEntry
 
 router = APIRouter(tags=["logs"])
 
+# Rate limit: max 60 requests per minute on read endpoints (C4)
+limiter = Limiter(key_func=get_remote_address)
+
 
 @router.get("/logs")
+@limiter.limit("60/minute")
 async def get_logs(
+    request: Request,
     limit: int = Query(default=100, le=500),
     mobile_number: Optional[str] = Query(default=None),
     db: Session = Depends(get_db),
@@ -30,7 +38,12 @@ async def get_logs(
     """
     query = db.query(BundleCallLog).order_by(BundleCallLog.attempted_at.desc())
 
+    # Security: Validate mobile_number filter parameter (M2)
     if mobile_number:
+        mobile_number = mobile_number.strip()
+        if not re.fullmatch(r"[0-9]{1,15}", mobile_number):
+            return []
+
         query = query.filter(BundleCallLog.mobile_number == mobile_number)
 
     logs = query.limit(limit).all()
@@ -52,7 +65,9 @@ async def get_logs(
 
 
 @router.get("/dashboard", response_model=DashboardResponse)
+@limiter.limit("60/minute")
 async def get_dashboard(
+    request: Request,
     db: Session = Depends(get_db),
     user: dict = Depends(get_current_user),
 ):

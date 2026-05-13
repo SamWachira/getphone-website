@@ -1,6 +1,9 @@
+import re
 from datetime import datetime
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Path, Request
 from sqlalchemy.orm import Session
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 
 from app.database import get_db
 from app.models import BundleNumber
@@ -12,9 +15,27 @@ from app.hormuud_client import HormuudClient
 
 router = APIRouter(prefix="/numbers", tags=["numbers"])
 
+# Rate limit: max 30 requests per minute on admin endpoints (C4)
+limiter = Limiter(key_func=get_remote_address)
+
+# Security: Regex pattern for validated mobile number path parameters (M1)
+MOBILE_NUMBER_PATTERN = r"^[1-9][0-9]{8}$"
+
+
+def _validate_mobile_number_param(mobile_number: str) -> str:
+    """Validate and sanitize mobile number path parameters (M1)."""
+    if not re.fullmatch(MOBILE_NUMBER_PATTERN, mobile_number):
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid mobile number format. Must be exactly 9 digits, not starting with 0.",
+        )
+    return mobile_number
+
 
 @router.post("", response_model=AddNumberResponse)
+@limiter.limit("30/minute")
 async def add_number(
+    request: Request,
     payload: AddNumberRequest,
     db: Session = Depends(get_db),
     user: dict = Depends(get_current_user),
@@ -74,7 +95,9 @@ async def add_number(
 
 
 @router.get("")
+@limiter.limit("60/minute")
 async def list_numbers(
+    request: Request,
     db: Session = Depends(get_db),
     user: dict = Depends(get_current_user),
 ):
@@ -99,12 +122,15 @@ async def list_numbers(
 
 
 @router.patch("/{mobile_number}/pause", response_model=StatusMessageResponse)
+@limiter.limit("30/minute")
 async def pause_number(
-    mobile_number: str,
+    request: Request,
+    mobile_number: str = Path(..., pattern=MOBILE_NUMBER_PATTERN),
     db: Session = Depends(get_db),
     user: dict = Depends(get_current_user),
 ):
     """Temporarily pause daily bundle provisioning for a number."""
+    _validate_mobile_number_param(mobile_number)
     record = db.query(BundleNumber).filter_by(mobile_number=mobile_number).first()
 
     if not record:
@@ -117,12 +143,15 @@ async def pause_number(
 
 
 @router.patch("/{mobile_number}/resume", response_model=StatusMessageResponse)
+@limiter.limit("30/minute")
 async def resume_number(
-    mobile_number: str,
+    request: Request,
+    mobile_number: str = Path(..., pattern=MOBILE_NUMBER_PATTERN),
     db: Session = Depends(get_db),
     user: dict = Depends(get_current_user),
 ):
     """Resume daily bundle provisioning for a paused number."""
+    _validate_mobile_number_param(mobile_number)
     record = db.query(BundleNumber).filter_by(mobile_number=mobile_number).first()
 
     if not record:
@@ -136,12 +165,15 @@ async def resume_number(
 
 
 @router.patch("/{mobile_number}/stop", response_model=StatusMessageResponse)
+@limiter.limit("30/minute")
 async def stop_number(
-    mobile_number: str,
+    request: Request,
+    mobile_number: str = Path(..., pattern=MOBILE_NUMBER_PATTERN),
     db: Session = Depends(get_db),
     user: dict = Depends(get_current_user),
 ):
     """Permanently stop daily bundle provisioning for a number."""
+    _validate_mobile_number_param(mobile_number)
     record = db.query(BundleNumber).filter_by(mobile_number=mobile_number).first()
 
     if not record:
@@ -154,8 +186,10 @@ async def stop_number(
 
 
 @router.post("/{mobile_number}/retry")
+@limiter.limit("10/minute")
 async def retry_number(
-    mobile_number: str,
+    request: Request,
+    mobile_number: str = Path(..., pattern=MOBILE_NUMBER_PATTERN),
     db: Session = Depends(get_db),
     user: dict = Depends(get_current_user),
 ):
@@ -164,6 +198,7 @@ async def retry_number(
 
     Subject to the 6-hour safety guard — will skip if recently provisioned.
     """
+    _validate_mobile_number_param(mobile_number)
     record = db.query(BundleNumber).filter_by(mobile_number=mobile_number).first()
 
     if not record:
@@ -179,8 +214,10 @@ async def retry_number(
 
 
 @router.get("/{mobile_number}/offer")
+@limiter.limit("10/minute")
 async def check_offer(
-    mobile_number: str,
+    request: Request,
+    mobile_number: str = Path(..., pattern=MOBILE_NUMBER_PATTERN),
     db: Session = Depends(get_db),
     user: dict = Depends(get_current_user),
 ):
@@ -189,6 +226,7 @@ async def check_offer(
 
     Calls GET /customer-offer and returns the active offers.
     """
+    _validate_mobile_number_param(mobile_number)
     client = HormuudClient()
     result = await client.customer_offer(mobile_number)
 

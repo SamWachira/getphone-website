@@ -1,8 +1,11 @@
+import hmac
 import logging
 import asyncio
 from datetime import datetime
-from fastapi import APIRouter, Depends, Header, HTTPException
+from fastapi import APIRouter, Depends, Header, HTTPException, Request
 from sqlalchemy.orm import Session
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 
 from app.config import settings
 from app.database import get_db, SessionLocal
@@ -14,18 +17,29 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/jobs", tags=["jobs"])
 
+# Rate limit: max 5 requests per minute on the scheduler endpoint (C4)
+limiter = Limiter(key_func=get_remote_address)
+
 
 def verify_scheduler_secret(x_scheduler_secret: str = Header(None)):
-    """Verify the Cloud Scheduler shared secret."""
+    """
+    Verify the Cloud Scheduler shared secret.
+
+    Uses hmac.compare_digest() for constant-time comparison
+    to prevent timing-based side-channel attacks (C2).
+    """
     if not x_scheduler_secret:
         raise HTTPException(status_code=401, detail="Missing scheduler secret")
 
-    if x_scheduler_secret != settings.SCHEDULER_SECRET:
+    # Security: constant-time comparison prevents timing attacks (C2)
+    if not hmac.compare_digest(x_scheduler_secret, settings.SCHEDULER_SECRET):
         raise HTTPException(status_code=403, detail="Invalid scheduler secret")
 
 
 @router.post("/provision-daily")
+@limiter.limit("5/minute")
 async def provision_daily(
+    request: Request,
     db: Session = Depends(get_db),
     _: None = Depends(verify_scheduler_secret),
 ):
@@ -37,6 +51,11 @@ async def provision_daily(
 
     Concurrency is capped by MAX_CONCURRENT_PROVISIONS (default 10)
     to avoid overwhelming the Hormuud API or the DB connection pool.
+
+    Security:
+    - Rate limited to 5 requests/minute (C4)
+    - Uses constant-time secret comparison (C2)
+    - Server-side timeout of 540s (M4)
 
     Returns a summary of results.
     """
@@ -91,10 +110,27 @@ async def provision_daily(
             finally:
                 task_db.close()
 
-    # Run all provisions concurrently with controlled parallelism
-    results = await asyncio.gather(
-        *[_provision_one(mn) for mn in mobile_numbers]
-    )
+    # Security: Server-side timeout to prevent stuck requests (M4)
+    # 540s leaves 60s buffer before Cloud Scheduler's 600s deadline
+    try:
+        results = await asyncio.wait_for(
+            asyncio.gather(*[_provision_one(mn) for mn in mobile_numbers]),
+            timeout=540,
+        )
+    except asyncio.TimeoutError:
+        logger.error(
+            "Daily provisioning job timed out after 540 seconds. "
+            "Some numbers may not have been processed."
+        )
+        return {
+            "processed": len(mobile_numbers),
+            "successful": 0,
+            "failed": 0,
+            "skipped": 0,
+            "error": "Job timed out after 540 seconds",
+            "started_at": now.isoformat(),
+            "completed_at": datetime.utcnow().isoformat(),
+        }
 
     # Aggregate results
     summary = {

@@ -209,7 +209,7 @@ function AdminDashboard({ user }: { user: User }) {
   const fetchLogs = useCallback(async () => {
     try {
       const token = await getToken();
-      const path = logFilter ? `/logs?mobile_number=${logFilter}` : "/logs";
+      const path = logFilter ? `/logs?mobile_number=${encodeURIComponent(logFilter)}` : "/logs";
       const res = await apiFetch(path, token);
       if (res.ok) setLogs(await res.json());
     } catch { /* ignore */ }
