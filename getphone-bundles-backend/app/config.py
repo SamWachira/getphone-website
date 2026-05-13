@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     # Scheduling and dedup
     SAFETY_GUARD_HOURS: int = 6
     TIMEZONE: str = "Africa/Mogadishu"
+    MAX_CONCURRENT_PROVISIONS: int = 10
 
     # Scheduler authentication
     SCHEDULER_SECRET: str
