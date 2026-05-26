@@ -96,8 +96,8 @@ export default function BrandsPage() {
             
             {/* Left Content */}
             <div className="w-full lg:w-5/12">
-              <div className="w-24 mb-6">
-                <img src="/OPPO.webp" alt="OPPO Logo" className="w-full h-auto object-contain mix-blend-multiply" />
+              <div className="w-28 md:w-32 mb-6">
+                <img src="/OPPO.webp" alt="OPPO Logo" className="w-full h-auto max-h-16 object-contain mix-blend-multiply" />
               </div>
               <span className="text-xs font-bold text-[#25a93e] tracking-widest uppercase block mb-3">
                 PREMIUM PARTNER

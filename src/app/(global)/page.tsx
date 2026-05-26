@@ -220,8 +220,8 @@ export default function GlobalHome() {
               
               {/* OPPO Card */}
               <div className="bg-white/95 backdrop-blur-sm rounded-[24px] p-6 sm:p-8 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col h-full min-h-[300px] sm:min-h-[320px] relative overflow-hidden group">
-                <div className="w-20 sm:w-24 mb-4 sm:mb-6 relative z-10">
-                  <img src="/OPPO.webp" alt="OPPO" className="w-full h-auto object-contain mix-blend-multiply" />
+                <div className="w-24 sm:w-28 mb-4 sm:mb-6 relative z-10">
+                  <img src="/OPPO.webp" alt="OPPO" className="w-full h-auto max-h-12 sm:max-h-16 object-contain mix-blend-multiply" />
                 </div>
                 <div className="relative z-10 w-[60%] sm:w-[55%] flex flex-col flex-grow">
                   <h3 className="font-heading font-700 text-[1.1rem] sm:text-[1.15rem] text-[#224167] mb-2 sm:mb-3 leading-snug">
