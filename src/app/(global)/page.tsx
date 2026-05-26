@@ -77,9 +77,9 @@ export default function GlobalHome() {
         <div className="section-container px-5 lg:px-8 relative z-10 w-full py-12 md:py-16">
           <div className="max-w-xl lg:max-w-2xl">
             <h1 className="font-heading font-800 text-[2.25rem] md:text-[3rem] lg:text-[3.5rem] leading-[1.1] text-primary mb-4 tracking-tight">
-              Smartphones for Africa.
+              Connecting Africa.
               <br />
-              <span className="text-accent">Distribution Built to Scale.</span>
+              <span className="text-accent">Smarter Distribution.</span>
             </h1>
 
             <p className="text-sm md:text-base text-gray-600 max-w-[440px] leading-relaxed mb-8 font-medium">
