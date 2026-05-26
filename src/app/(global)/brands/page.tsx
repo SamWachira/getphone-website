@@ -97,7 +97,7 @@ export default function BrandsPage() {
             {/* Left Content */}
             <div className="w-full lg:w-5/12">
               <div className="w-24 mb-6">
-                <img src="/OPPO.jpg" alt="OPPO Logo" className="w-full h-auto object-contain mix-blend-multiply" />
+                <img src="/OPPO.webp" alt="OPPO Logo" className="w-full h-auto object-contain mix-blend-multiply" />
               </div>
               <span className="text-xs font-bold text-[#25a93e] tracking-widest uppercase block mb-3">
                 PREMIUM PARTNER
@@ -139,12 +139,12 @@ export default function BrandsPage() {
             <div className="w-full lg:w-7/12 relative h-[380px] md:h-[480px]">
               <div className="absolute inset-0 bg-[#FAFBFD] rounded-[40px] transform -rotate-2 border border-gray-100" />
               <img 
-                src="/reno.JPG" 
+                src="/reno.webp" 
                 alt="OPPO Reno Device" 
                 className="absolute top-1/2 -translate-y-1/2 left-[10%] w-[42%] h-auto object-contain drop-shadow-2xl z-20 hover:-translate-y-2.5 transition-transform duration-500 rounded-2xl" 
               />
               <img 
-                src="/a36.png" 
+                src="/a36.webp" 
                 alt="OPPO A36 Device" 
                 className="absolute top-1/2 -translate-y-1/3 right-[10%] w-[42%] h-auto object-contain drop-shadow-2xl z-10 opacity-90 hover:-translate-y-2.5 transition-transform duration-500" 
               />
@@ -162,7 +162,7 @@ export default function BrandsPage() {
             {/* Right Content */}
             <div className="w-full lg:w-5/12">
               <div className="w-16 mb-6">
-                <img src="/ZTE.png" alt="ZTE Logo" className="w-full h-auto object-contain mix-blend-multiply" />
+                <img src="/ZTE.webp" alt="ZTE Logo" className="w-full h-auto object-contain mix-blend-multiply" />
               </div>
               <span className="text-xs font-bold text-[#25a93e] tracking-widest uppercase block mb-3">
                 VALUE PARTNER
@@ -204,12 +204,12 @@ export default function BrandsPage() {
             <div className="w-full lg:w-7/12 relative h-[380px] md:h-[480px]">
               <div className="absolute inset-0 bg-white rounded-[40px] transform rotate-2 border border-gray-100/60" />
               <img 
-                src="/a56.png" 
+                src="/a56.webp" 
                 alt="ZTE a56 Device" 
                 className="absolute top-1/2 -translate-y-[45%] right-[15%] w-[38%] h-auto object-contain drop-shadow-2xl z-20 hover:-translate-y-2.5 transition-transform duration-500" 
               />
               <img 
-                src="/v80.png" 
+                src="/v80.webp" 
                 alt="ZTE v80 Device" 
                 className="absolute top-1/2 -translate-y-[55%] left-[10%] w-[42%] h-auto object-contain drop-shadow-2xl z-10 hover:-translate-y-2.5 transition-transform duration-500" 
               />

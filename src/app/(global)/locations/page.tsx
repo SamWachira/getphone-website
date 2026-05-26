@@ -186,7 +186,7 @@ export default function LocationsPage() {
         <div className="section-container px-5 lg:px-8 max-w-4xl">
           <div className="bg-white rounded-[32px] p-6 border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.01)] overflow-hidden">
             <img 
-              src="/getphone_markets.PNG" 
+              src="/getphone_markets.webp" 
               alt="GetPhone Regional Footprint Map" 
               className="w-full h-auto object-contain max-h-[480px] hover:scale-[1.01] transition-transform duration-500 rounded-2xl" 
             />

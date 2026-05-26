@@ -55,7 +55,7 @@ export default function GlobalHome() {
           {/* Desktop background */}
           <div className="absolute top-0 right-0 hidden md:block w-full md:w-[60%] lg:w-[55%] h-full">
             <img 
-              src="/herobg2.png" 
+              src="/herobg2.webp" 
               alt="Global Operations" 
               className="w-full h-full object-cover object-[75%_center]"
             />
@@ -65,7 +65,7 @@ export default function GlobalHome() {
           {/* Mobile/Tablet Visual */}
           <div className="absolute inset-0 md:hidden pointer-events-none overflow-hidden">
              <img 
-               src="/herobg2.png" 
+               src="/herobg2.webp" 
                alt="Global Operations" 
                className="w-full h-full object-cover object-[70%_center] opacity-15"
              />
@@ -146,7 +146,7 @@ export default function GlobalHome() {
       <section 
         className="section-padding relative w-full border-b border-gray-100"
         style={{
-          backgroundImage: 'url("/bg1.PNG")',
+          backgroundImage: 'url("/bg1.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -179,7 +179,7 @@ export default function GlobalHome() {
             {/* Right Image */}
             <div className="w-full lg:w-7/12 flex justify-center lg:justify-end">
               <img 
-                src="/getphone_markets.PNG" 
+                src="/getphone_markets.webp" 
                 alt="GetPhone African Markets Map" 
                 className="w-full max-w-[700px] h-auto object-contain"
               />
@@ -192,7 +192,7 @@ export default function GlobalHome() {
       <section 
         className="section-padding relative w-full border-b border-gray-100"
         style={{
-          backgroundImage: 'linear-gradient(rgba(250, 250, 250, 0.9), rgba(250, 250, 250, 0.9)), url("/bg2.PNG")',
+          backgroundImage: 'linear-gradient(rgba(250, 250, 250, 0.9), rgba(250, 250, 250, 0.9)), url("/bg2.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -221,7 +221,7 @@ export default function GlobalHome() {
               {/* OPPO Card */}
               <div className="bg-white/95 backdrop-blur-sm rounded-[24px] p-6 sm:p-8 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col h-full min-h-[300px] sm:min-h-[320px] relative overflow-hidden group">
                 <div className="w-20 sm:w-24 mb-4 sm:mb-6 relative z-10">
-                  <img src="/OPPO.jpg" alt="OPPO" className="w-full h-auto object-contain mix-blend-multiply" />
+                  <img src="/OPPO.webp" alt="OPPO" className="w-full h-auto object-contain mix-blend-multiply" />
                 </div>
                 <div className="relative z-10 w-[60%] sm:w-[55%] flex flex-col flex-grow">
                   <h3 className="font-heading font-700 text-[1.1rem] sm:text-[1.15rem] text-[#224167] mb-2 sm:mb-3 leading-snug">
@@ -239,14 +239,14 @@ export default function GlobalHome() {
                 </div>
                 {/* Image Absolute Right */}
                 <div className="absolute right-[-5%] bottom-0 w-[50%] sm:w-[45%] h-[80%] sm:h-[85%] pointer-events-none group-hover:scale-105 transition-transform duration-500 origin-bottom-right">
-                  <img src="/reno.jpg" alt="Oppo Reno" className="w-full h-full object-contain object-bottom mix-blend-darken" />
+                  <img src="/reno.webp" alt="Oppo Reno" className="w-full h-full object-contain object-bottom mix-blend-darken" />
                 </div>
               </div>
 
               {/* ZTE Card */}
               <div className="bg-white/95 backdrop-blur-sm rounded-[24px] p-6 sm:p-8 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col h-full min-h-[300px] sm:min-h-[320px] relative overflow-hidden group">
                 <div className="w-14 sm:w-16 mb-4 sm:mb-6 relative z-10">
-                  <img src="/ZTE.PNG" alt="ZTE" className="w-full h-auto object-contain mix-blend-multiply" />
+                  <img src="/ZTE.webp" alt="ZTE" className="w-full h-auto object-contain mix-blend-multiply" />
                 </div>
                 <div className="relative z-10 w-[60%] sm:w-[55%] flex flex-col flex-grow">
                   <h3 className="font-heading font-700 text-[1.1rem] sm:text-[1.15rem] text-[#224167] mb-2 sm:mb-3 leading-snug">
@@ -264,7 +264,7 @@ export default function GlobalHome() {
                 </div>
                 {/* Image Absolute Right */}
                 <div className="absolute right-[-5%] bottom-0 w-[50%] sm:w-[45%] h-[80%] sm:h-[85%] pointer-events-none group-hover:scale-105 transition-transform duration-500 origin-bottom-right">
-                  <img src="/a56.PNG" alt="ZTE a56" className="w-full h-full object-contain object-bottom mix-blend-darken" />
+                  <img src="/a56.webp" alt="ZTE a56" className="w-full h-full object-contain object-bottom mix-blend-darken" />
                 </div>
               </div>
 
@@ -276,7 +276,7 @@ export default function GlobalHome() {
       <section 
         className="section-padding relative w-full border-b border-gray-100"
         style={{
-          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url("/bg3.PNG")',
+          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url("/bg3.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -363,7 +363,7 @@ export default function GlobalHome() {
       <section 
         className="section-padding relative w-full border-b border-gray-100 overflow-hidden"
         style={{
-          backgroundImage: 'linear-gradient(rgba(250, 250, 250, 0.92), rgba(250, 250, 250, 0.92)), url("/bg4.PNG")',
+          backgroundImage: 'linear-gradient(rgba(250, 250, 250, 0.92), rgba(250, 250, 250, 0.92)), url("/bg4.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'

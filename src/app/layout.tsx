@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     siteName: "GetPhone Limited",
     images: [
       {
-        url: "/herobg2.png",
+        url: "/herobg2.webp",
         width: 1200,
         height: 630,
         alt: "GetPhone Limited Global Operations",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "GetPhone Limited — Pan-African Smartphone Distribution",
     description: "Bridging global OEMs with African markets through reliable supply chains and localized distribution.",
-    images: ["/herobg2.png"],
+    images: ["/herobg2.webp"],
   },
 };
 

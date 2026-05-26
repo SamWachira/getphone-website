@@ -198,7 +198,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="bg-white rounded-[32px] p-4 md:p-6 border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)] overflow-hidden">
                 <img 
-                  src="/getphone_markets.PNG" 
+                  src="/getphone_markets.webp" 
                   alt="GetPhone Pan-African Presence Map" 
                   className="w-full h-auto object-contain max-h-[420px] rounded-2xl hover:scale-[1.02] transition-transform duration-700" 
                 />

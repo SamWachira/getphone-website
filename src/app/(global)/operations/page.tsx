@@ -174,7 +174,7 @@ export default function OperationsPage() {
                 </p>
                 <div className="bg-white rounded-[24px] p-5 border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.01)] hidden lg:block overflow-hidden max-w-[280px]">
                   <img 
-                    src="/getphone_markets.PNG" 
+                    src="/getphone_markets.webp" 
                     alt="Map" 
                     className="w-full h-auto object-contain hover:scale-105 transition-transform duration-500" 
                   />

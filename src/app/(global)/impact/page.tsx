@@ -122,7 +122,7 @@ export default function ImpactPage() {
             <div className="w-full lg:w-1/2 relative">
               <div className="bg-white rounded-[32px] p-4 border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.015)] overflow-hidden">
                 <img 
-                  src="/herobg.png" 
+                  src="/herobg.webp" 
                   alt="Digital Inclusion" 
                   className="w-full h-[320px] md:h-[400px] object-cover rounded-2xl" 
                 />
@@ -163,7 +163,7 @@ export default function ImpactPage() {
             <div className="w-full lg:w-1/2 relative">
               <div className="bg-white rounded-[32px] p-4 border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.015)] overflow-hidden">
                 <img 
-                  src="/gp4.PNG" 
+                  src="/gp4.webp" 
                   alt="Economic Growth" 
                   className="w-full h-[320px] md:h-[400px] object-cover rounded-2xl" 
                 />
