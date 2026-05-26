@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/how-it-works', label: 'How It Works' },
-  { href: '/phones', label: 'Phones' },
-  { href: '/about', label: 'About' },
-  { href: '/partners', label: 'Partners' },
-  { href: '/faq', label: 'FAQs' },
+  { href: '/so', label: 'Home' },
+  { href: '/so/how-it-works', label: 'How It Works' },
+  { href: '/so/phones', label: 'Phones' },
+  { href: '/so/about', label: 'About' },
+  { href: '/so/partners', label: 'Partners' },
+  { href: '/so/faq', label: 'FAQs' },
 ];
 
 export default function Navbar() {
@@ -18,7 +18,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   
-  const isHomePage = pathname === '/';
+  const isHomePage = pathname === '/' || pathname === '/so' || pathname === '/so/';
   const forceDark = scrolled || !isHomePage;
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export default function Navbar() {
 
           {/* Right side */}
           <div className="flex items-center gap-4">
-            <Link href="/find-shop" className="flex items-center gap-1.5 text-primary font-semibold hover:text-accent transition-colors">
+            <Link href="/so/find-shop" className="flex items-center gap-1.5 text-primary font-semibold hover:text-accent transition-colors">
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                 <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -73,7 +73,7 @@ export default function Navbar() {
               FIND SHOP
             </Link>
             <span className="hidden sm:block w-px h-3.5 bg-gray-200" />
-            <Link href="/sales" className="flex items-center gap-1.5 text-primary font-semibold hover:text-accent transition-colors">
+            <Link href="/so/sales" className="flex items-center gap-1.5 text-primary font-semibold hover:text-accent transition-colors">
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
               </svg>
@@ -121,7 +121,7 @@ export default function Navbar() {
       >
         <nav className="section-container flex items-center justify-between py-4 px-5 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 relative z-50">
+        <Link href="/so" className="flex items-center gap-2 relative z-50">
           <img 
             src="/logo1.webp" 
             alt="GetPhone" 
@@ -148,7 +148,7 @@ export default function Navbar() {
 
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-3">
-          <Link href="/contact" className="btn btn-primary text-sm !py-2.5 !px-5">
+          <Link href="/so/contact" className="btn btn-primary text-sm !py-2.5 !px-5">
             Contact Us
           </Link>
         </div>
@@ -197,7 +197,7 @@ export default function Navbar() {
           ))}
           <div className="mt-4">
             <Link
-              href="/find-shop"
+              href="/so/find-shop"
               onClick={() => setMobileOpen(false)}
               className="text-accent hover:text-white text-lg font-heading font-700 py-2 transition-colors flex items-center gap-2"
             >
@@ -210,7 +210,7 @@ export default function Navbar() {
           </div>
           <div className="mt-2">
             <Link
-              href="/contact"
+              href="/so/contact"
               onClick={() => setMobileOpen(false)}
               className="btn btn-primary text-lg !px-8 !py-3"
             >

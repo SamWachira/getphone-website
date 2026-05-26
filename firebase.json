@@ -14,17 +14,17 @@
       },
       {
         "source": "/v80-max/",
-        "destination": "/phones/",
+        "destination": "/so/phones/",
         "type": 301
       },
       {
         "source": "/shop/",
-        "destination": "/phones/",
+        "destination": "/so/phones/",
         "type": 301
       },
       {
         "source": "/product/**",
-        "destination": "/phones/",
+        "destination": "/so/phones/",
         "type": 301
       },
       {
@@ -35,6 +35,61 @@
       {
         "source": "/contact-us/",
         "destination": "/contact/",
+        "type": 301
+      },
+      {
+        "source": "/phones/**",
+        "destination": "/so/phones/:splat",
+        "type": 301
+      },
+      {
+        "source": "/phones",
+        "destination": "/so/phones",
+        "type": 301
+      },
+      {
+        "source": "/find-shop/**",
+        "destination": "/so/find-shop/:splat",
+        "type": 301
+      },
+      {
+        "source": "/find-shop",
+        "destination": "/so/find-shop",
+        "type": 301
+      },
+      {
+        "source": "/how-it-works",
+        "destination": "/so/how-it-works",
+        "type": 301
+      },
+      {
+        "source": "/sales/**",
+        "destination": "/so/sales/:splat",
+        "type": 301
+      },
+      {
+        "source": "/sales",
+        "destination": "/so/sales",
+        "type": 301
+      },
+      {
+        "source": "/partners",
+        "destination": "/so/partners",
+        "type": 301
+      },
+      {
+        "source": "/faq",
+        "destination": "/so/faq",
+        "type": 301
+      },
+      {
+        "source": "/terms",
+        "destination": "/so/terms",
+        "type": 301
+      },
+      {
+        "source": "/privacy",
+        "destination": "/so/privacy",
         "type": 301
       }
     ],

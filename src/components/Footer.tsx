@@ -1,19 +1,19 @@
 import Link from 'next/link';
 
 const quickLinks = [
-  { href: '/how-it-works', label: 'How It Works' },
-  { href: '/phones', label: 'Phones' },
-  { href: '/offers', label: 'Offers & Plans' },
-  { href: '/about', label: 'About GetPhone' },
-  { href: '/partners', label: 'Partners' },
+  { href: '/so/how-it-works', label: 'How It Works' },
+  { href: '/so/phones', label: 'Phones' },
+  { href: '/so/offers', label: 'Offers & Plans' },
+  { href: '/so/about', label: 'About GetPhone' },
+  { href: '/so/partners', label: 'Partners' },
 ];
 
 const supportLinks = [
-  { href: '/faq', label: 'FAQ' },
-  { href: '/contact', label: 'Contact Us' },
-  { href: '/phones', label: 'Apply Now' },
-  { href: '/terms', label: 'Terms of Service' },
-  { href: '/privacy', label: 'Privacy Policy' },
+  { href: '/so/faq', label: 'FAQ' },
+  { href: '/so/contact', label: 'Contact Us' },
+  { href: '/so/phones', label: 'Apply Now' },
+  { href: '/so/terms', label: 'Terms of Service' },
+  { href: '/so/privacy', label: 'Privacy Policy' },
 ];
 
 const socialLinks = [
@@ -61,7 +61,7 @@ export default function Footer() {
       <div className="section-container px-5 lg:px-8">
         <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-12">
           <div className="lg:col-span-1">
-            <Link href="/" className="mb-6 flex items-center gap-2">
+            <Link href="/so" className="mb-6 flex items-center gap-2">
               <img
                 src="/logo1.webp"
                 alt="GetPhone"
@@ -164,10 +164,10 @@ export default function Footer() {
             Copyright {new Date().getFullYear()} GetPhone Limited. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link href="/terms" className="text-sm text-white/40 transition-colors hover:text-white/70">
+            <Link href="/so/terms" className="text-sm text-white/40 transition-colors hover:text-white/70">
               Terms
             </Link>
-            <Link href="/privacy" className="text-sm text-white/40 transition-colors hover:text-white/70">
+            <Link href="/so/privacy" className="text-sm text-white/40 transition-colors hover:text-white/70">
               Privacy
             </Link>
           </div>
