@@ -77,13 +77,13 @@ export default function GlobalHome() {
         <div className="section-container px-5 lg:px-8 relative z-10 w-full py-12 md:py-16">
           <div className="max-w-xl lg:max-w-2xl">
             <h1 className="font-heading font-800 text-[2.25rem] md:text-[3rem] lg:text-[3.5rem] leading-[1.1] text-primary mb-4 tracking-tight">
-              Connecting Africa.
+              Smartphones for Africa.
               <br />
-              <span className="text-accent">Smarter Distribution.</span>
+              <span className="text-accent">Distribution Built to Scale.</span>
             </h1>
 
             <p className="text-sm md:text-base text-gray-600 max-w-[440px] leading-relaxed mb-8 font-medium">
-              Bridging global OEMs with African markets through reliable supply chains, strategic brand partnerships, and localized distribution networks.
+              Supplying trusted smartphone brands to African markets through reliable wholesale networks, OEM partnerships, and localized distribution strategies.
             </p>
 
             <div className="flex flex-col sm:flex-row items-start gap-4 mb-8">

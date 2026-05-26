@@ -21,9 +21,9 @@ const locations = [
   {
     city: 'Dar es Salaam, Tanzania',
     role: 'Major Distribution Center',
-    address: 'Maktaba Square, Ali Hassan Mwinyi Road\nDar es Salaam, Tanzania',
-    phone: '+255 700 000 000',
-    email: 'tz@getphonelimited.com',
+    address: 'Dar es Salaam, Tanzania',
+    phone: '+255 792 192 663',
+    email: 'info@getphonelimited.com',
     icon: (
       <svg className="w-5.5 h-5.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
         <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -33,9 +33,9 @@ const locations = [
   {
     city: 'Mogadishu, Somalia',
     role: 'Distribution & Smart Financing Hub',
-    address: 'Maka Al-Mukarama Road\nMogadishu, Somalia',
-    phone: '+252 61 000 0000',
-    email: 'so@getphonelimited.com',
+    address: 'Opposite Masjid Abaas Jimale, Taleh\nMogadishu, Somalia',
+    phone: '+252 615 051 729',
+    email: 'info@getphonelimited.com',
     icon: (
       <svg className="w-5.5 h-5.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
