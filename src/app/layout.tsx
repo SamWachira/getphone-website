@@ -16,21 +16,20 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: {
-    default: "GetPhone — Affordable Smartphones, Flexible Payments",
+    default: "GetPhone Limited — Pan-African Smartphone Distribution",
     template: "%s | GetPhone",
   },
   description:
-    "GetPhone helps people and businesses in Somalia access quality smartphones through flexible installment plans, trusted telecom integration, and daily connectivity benefits.",
+    "GetPhone Limited bridges global OEMs with vibrant African markets through reliable supply chains, strategic brand partnerships, and localized distribution networks across the continent.",
   keywords: [
     "GetPhone",
-    "smartphone financing",
-    "Somalia",
-    "installment plans",
-    "affordable phones",
-    "ZTE",
-    "Hormuud",
-    "EVC Plus",
+    "GetPhone Limited",
+    "smartphone distribution",
+    "Africa tech",
+    "mobile supply chain",
+    "OEM partner",
     "device financing",
+    "wholesale electronics",
   ],
   metadataBase: new URL("https://getphonelimited.com"),
   icons: {
@@ -38,25 +37,25 @@ export const metadata: Metadata = {
     apple: "/getphone_favicon.webp",
   },
   openGraph: {
-    title: "GetPhone — Affordable Smartphones, Flexible Payments",
-    description: "Access quality smartphones through flexible installment plans across Somalia with trusted telecom integration.",
+    title: "GetPhone Limited — Pan-African Smartphone Distribution",
+    description: "Bridging global OEMs with African markets through reliable supply chains and localized distribution.",
     type: "website",
     locale: "en_US",
-    siteName: "GetPhone",
+    siteName: "GetPhone Limited",
     images: [
       {
-        url: "/a36many.webp",
+        url: "/herobg2.png",
         width: 1200,
         height: 630,
-        alt: "GetPhone Smartphone Catalog",
+        alt: "GetPhone Limited Global Operations",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GetPhone — Affordable Smartphones, Flexible Payments",
-    description: "Access quality smartphones through flexible installment plans across Somalia.",
-    images: ["/a36many.webp"],
+    title: "GetPhone Limited — Pan-African Smartphone Distribution",
+    description: "Bridging global OEMs with African markets through reliable supply chains and localized distribution.",
+    images: ["/herobg2.png"],
   },
 };
 

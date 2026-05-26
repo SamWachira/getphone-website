@@ -2,6 +2,11 @@ import Link from 'next/link';
 import SectionHeading from '@/components/SectionHeading';
 import CTASection from '@/components/CTASection';
 
+export const metadata = {
+  title: 'Home | GetPhone Limited',
+  description: 'GetPhone Limited bridges global OEMs with African markets through reliable supply chains, strategic brand partnerships, and localized distribution networks.',
+};
+
 const values = [
   {
     title: 'Reliability',
@@ -82,13 +87,13 @@ export default function GlobalHome() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-start gap-4 mb-8">
-              <Link href="/operations" className="btn bg-primary hover:bg-primary/90 text-white text-sm !px-7 !py-3 shadow-lg shadow-primary/20 flex items-center gap-2 rounded-lg">
+              <Link id="btn-hero-explore" href="/operations" className="btn bg-primary hover:bg-primary/90 text-white text-sm !px-7 !py-3 shadow-lg shadow-primary/20 flex items-center gap-2 rounded-lg">
                 Explore Operations
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
-              <Link href="/contact" className="btn bg-white border border-gray-200 text-primary hover:border-accent hover:text-accent transition-all text-sm !px-7 !py-3 flex items-center gap-2 shadow-sm rounded-lg">
+              <Link id="btn-hero-contact" href="/contact" className="btn bg-white border border-gray-200 text-primary hover:border-accent hover:text-accent transition-all text-sm !px-7 !py-3 flex items-center gap-2 shadow-sm rounded-lg">
                 Contact Sales
                 <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />

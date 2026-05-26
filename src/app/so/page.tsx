@@ -1,5 +1,12 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import SectionHeading from '@/components/SectionHeading';
+
+export const metadata = {
+  title: 'Home | GetPhone Somalia',
+  description: 'Access quality smartphones in Somalia with flexible, affordable installment plans through trusted telecom partnerships.',
+};
+
 import FAQAccordion from '@/components/FAQAccordion';
 import CTASection from '@/components/CTASection';
 
@@ -207,15 +214,13 @@ export default function Home() {
               GetPhone helps people and businesses in Somalia access quality smartphones through flexible installment plans, trusted telecom integration, and valuable daily connectivity benefits.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-start gap-3">
-              <Link href="/phones" className="btn btn-primary text-sm !px-7 !py-3">
-                View Phones
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-200">
+              <Link id="btn-so-hero-phones" href="/phones" className="btn btn-primary text-sm !px-7 !py-3">
+                Browse Phones
               </Link>
-              <Link href="/how-it-works" className="btn !border-2 !border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all text-sm !px-7 !py-3">
-                How It Works
+              <div className="hidden sm:block text-white/50 text-sm">or</div>
+              <Link id="btn-so-hero-how" href="/how-it-works" className="btn !border-2 !border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all text-sm !px-7 !py-3">
+                See How It Works
               </Link>
             </div>
           </div>
