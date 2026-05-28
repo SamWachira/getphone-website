@@ -67,9 +67,9 @@ export default function GlobalHome() {
              <img 
                src="/herobg3.webp" 
                alt="Global Operations" 
-               className="w-full h-full object-cover object-right"
+               className="w-full h-full object-cover object-right opacity-25"
              />
-             <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent" />
+             <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-transparent" />
           </div>
         </div>
 
@@ -86,14 +86,14 @@ export default function GlobalHome() {
               Supplying trusted smartphone brands to African markets through reliable wholesale networks, OEM partnerships, and localized distribution strategies.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-start gap-4 mb-8">
-              <Link id="btn-hero-explore" href="/operations" className="btn bg-primary hover:bg-primary/90 text-white text-sm !px-7 !py-3 shadow-lg shadow-primary/20 flex items-center gap-2 rounded-lg">
+            <div className="flex flex-col sm:flex-row items-start gap-4 mb-8 w-full">
+              <Link id="btn-hero-explore" href="/operations" className="btn bg-primary hover:bg-primary/90 text-white text-sm !px-7 !py-3 shadow-lg shadow-primary/20 flex w-full sm:w-auto justify-center items-center gap-2 rounded-lg">
                 Explore Operations
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
-              <Link id="btn-hero-contact" href="/contact" className="btn bg-white border border-gray-200 text-primary hover:border-accent hover:text-accent transition-all text-sm !px-7 !py-3 flex items-center gap-2 shadow-sm rounded-lg">
+              <Link id="btn-hero-contact" href="/contact" className="btn bg-white border border-gray-200 text-primary hover:border-accent hover:text-accent transition-all text-sm !px-7 !py-3 flex w-full sm:w-auto justify-center items-center gap-2 shadow-sm rounded-lg">
                 Contact Sales
                 <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -102,7 +102,7 @@ export default function GlobalHome() {
             </div>
 
             {/* Bottom Stats Row */}
-            <div className="grid grid-cols-2 sm:flex sm:flex-row items-start sm:items-center gap-5 sm:gap-8 pt-5 border-t border-gray-100 max-w-[600px]">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8 pt-5 border-t border-gray-100 max-w-[600px] w-full">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-primary/5 flex items-center justify-center text-accent shrink-0">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
