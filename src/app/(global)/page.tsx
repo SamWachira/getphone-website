@@ -103,37 +103,34 @@ export default function GlobalHome() {
 
             {/* Bottom Stats Row */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8 pt-5 border-t border-gray-100 max-w-[600px] w-full">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
+              <div className="flex flex-row items-center gap-3">
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-primary/5 flex items-center justify-center text-accent shrink-0">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </div>
-                <div className="text-xs md:text-sm text-primary font-bold leading-tight">
-                  <span className="text-base sm:text-base">5</span><br className="hidden sm:block"/> <span className="sm:hidden">Markets</span>
-                  <span className="hidden sm:inline">Markets</span>
+                <div className="text-sm text-primary font-bold leading-tight">
+                  <span className="text-base">5</span> Markets
                 </div>
               </div>
               
               <div className="hidden sm:block w-px h-8 bg-gray-200" />
               
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
+              <div className="flex flex-row items-center gap-3">
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-primary/5 flex items-center justify-center text-accent shrink-0">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                 </div>
-                <div className="text-xs md:text-sm text-primary font-bold leading-tight">
-                  Trusted OEM<br className="hidden sm:block"/> <span className="sm:hidden">Partners</span>
-                  <span className="hidden sm:inline">Partners</span>
+                <div className="text-sm text-primary font-bold leading-tight">
+                  Trusted OEM<br className="hidden sm:block"/> Partners
                 </div>
               </div>
 
               <div className="hidden sm:block w-px h-8 bg-gray-200" />
               
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 col-span-2 sm:col-span-1">
+              <div className="flex flex-row items-center gap-3">
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-primary/5 flex items-center justify-center text-accent shrink-0">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                 </div>
-                <div className="text-xs md:text-sm text-primary font-bold leading-tight">
-                  Regional<br className="hidden sm:block"/> <span className="sm:hidden">Distribution Hubs</span>
-                  <span className="hidden sm:inline">Distribution Hubs</span>
+                <div className="text-sm text-primary font-bold leading-tight">
+                  Regional<br className="hidden sm:block"/> Distribution Hubs
                 </div>
               </div>
             </div>
