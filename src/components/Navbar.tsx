@@ -119,9 +119,11 @@ export default function Navbar() {
             : 'bg-transparent'
         }`}
       >
-        <nav className="section-container flex items-center justify-between py-4 px-5 lg:px-8">
+        <nav className={`section-container flex items-center justify-between px-5 lg:px-8 transition-all duration-300 ${
+          scrolled ? 'py-2.5' : 'py-4'
+        }`}>
         {/* Logo */}
-        <Link href="/so" className="flex items-center gap-2 relative z-50">
+        <Link href="/so" className={`flex items-center gap-2 relative z-50 transition-opacity duration-300 ${mobileOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
           <img 
             src="/logo1.webp" 
             alt="GetPhone" 
@@ -131,19 +133,26 @@ export default function Navbar() {
 
         {/* Desktop Nav Links */}
         <div className="hidden lg:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`px-3.5 py-2 rounded-lg text-[0.9375rem] font-medium transition-colors ${
-                forceDark
-                  ? 'text-gray-600 hover:text-primary hover:bg-primary/5'
-                  : 'text-white/80 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href || (link.href === '/so' && (pathname === '/so' || pathname === '/so/'));
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`px-3.5 py-2 rounded-lg text-[0.9375rem] font-medium transition-all ${
+                  isActive
+                    ? forceDark
+                      ? 'text-accent font-semibold bg-accent/5'
+                      : 'text-white font-bold bg-white/15'
+                    : forceDark
+                      ? 'text-gray-600 hover:text-primary hover:bg-primary/5'
+                      : 'text-white/80 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Desktop CTA */}

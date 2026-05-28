@@ -52,8 +52,13 @@ export default function BusinessModelPage() {
         {/* Decorative top gradient line */}
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#224167]/15 to-transparent" />
         
-        {/* Subtle decorative glow */}
+        {/* Subtle decorative glow — top-left */}
         <div className="absolute top-20 -left-32 w-96 h-96 bg-[#224167]/[0.03] rounded-full blur-3xl pointer-events-none" />
+        {/* Decorative gradient orb — bottom-right */}
+        <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-[#25a93e]/[0.03] rounded-full blur-3xl pointer-events-none" />
+
+        {/* Section step number watermark */}
+        <span className="absolute top-6 right-8 text-[5rem] font-800 font-heading leading-none text-primary/[0.03] pointer-events-none select-none">01</span>
 
         <div className="section-container px-5 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
@@ -64,7 +69,7 @@ export default function BusinessModelPage() {
               <div className="absolute inset-0 bg-gradient-to-br from-[#224167]/[0.07] to-[#25a93e]/[0.04] rounded-[32px] transform -rotate-2" />
               
               {/* Main card with gradient border effect */}
-              <div className="relative z-10 rounded-[32px] p-[1px] bg-gradient-to-br from-[#224167]/20 via-gray-200/50 to-[#25a93e]/15">
+              <div className="relative z-10 rounded-[32px] p-[1px] bg-gradient-to-br from-[#224167]/20 via-gray-200/50 to-[#25a93e]/15 transition-shadow duration-300 hover:shadow-[0_12px_40px_rgba(37,169,62,0.08)]">
                 <div className="bg-white rounded-[32px] p-8 md:p-10 shadow-[0_8px_40px_rgba(0,0,0,0.04)]">
                   {/* Icon */}
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#224167] to-[#1a3558] flex items-center justify-center mb-8 shadow-lg shadow-[#224167]/20">
@@ -82,7 +87,7 @@ export default function BusinessModelPage() {
                       { title: 'Retailer Networks', desc: 'Supplying thousands of verified independent electronics retailers.' },
                       { title: 'Telco Partnerships', desc: 'Providing hardware for major telecom operator retail outlets.' }
                     ].map((item, i) => (
-                      <li key={i} className="flex gap-4 group/item">
+                      <li key={i} className="flex gap-4 group/item hover:bg-[#F0FDF4] rounded-lg px-3 py-2 -mx-3 transition-colors">
                         <div className="w-7 h-7 rounded-full bg-[#25a93e]/10 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-[#25a93e]/20 transition-colors duration-300">
                           <svg className="w-3.5 h-3.5 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -116,7 +121,7 @@ export default function BusinessModelPage() {
               </p>
               <Link 
                 href="/contact" 
-                className="inline-flex items-center gap-2 text-sm font-bold text-white bg-[#224167] hover:bg-[#0c1f36] transition-all duration-300 px-7 py-4 rounded-xl shadow-lg shadow-[#224167]/15 group hover:shadow-xl hover:shadow-[#224167]/20"
+                className="inline-flex items-center gap-2 text-sm font-bold text-white bg-[#224167] hover:bg-[#0c1f36] transition-all duration-300 px-8 py-[1.1rem] rounded-xl shadow-lg shadow-[#224167]/20 group hover:shadow-xl hover:shadow-[#224167]/25"
               >
                 Become a Retail Partner
                 <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
@@ -134,9 +139,14 @@ export default function BusinessModelPage() {
 
       {/* ═══ SMART DEVICE FINANCING SECTION ═══ */}
       <section className="relative py-24 md:py-32 bg-[#FAFBFD] w-full overflow-hidden">
-        {/* Subtle decorative glow */}
+        {/* Subtle decorative glow — top-right */}
         <div className="absolute top-32 -right-32 w-96 h-96 bg-[#25a93e]/[0.03] rounded-full blur-3xl pointer-events-none" />
+        {/* Decorative gradient orb — bottom-left */}
+        <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-[#224167]/[0.03] rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-20 left-1/4 w-64 h-64 bg-[#224167]/[0.02] rounded-full blur-3xl pointer-events-none" />
+
+        {/* Section step number watermark */}
+        <span className="absolute top-6 right-8 text-[5rem] font-800 font-heading leading-none text-primary/[0.03] pointer-events-none select-none">02</span>
 
         {/* Decorative dot pattern */}
         <div className="absolute top-12 right-12 w-24 h-24 opacity-[0.04] pointer-events-none">
@@ -158,7 +168,7 @@ export default function BusinessModelPage() {
               <div className="absolute inset-0 bg-gradient-to-br from-[#25a93e]/[0.07] to-[#224167]/[0.04] rounded-[32px] transform rotate-2" />
 
               {/* Main card with gradient border effect */}
-              <div className="relative z-10 rounded-[32px] p-[1px] bg-gradient-to-br from-[#25a93e]/20 via-gray-200/50 to-[#224167]/15">
+              <div className="relative z-10 rounded-[32px] p-[1px] bg-gradient-to-br from-[#25a93e]/20 via-gray-200/50 to-[#224167]/15 transition-shadow duration-300 hover:shadow-[0_12px_40px_rgba(37,169,62,0.08)]">
                 <div className="bg-white rounded-[32px] p-8 md:p-10 shadow-[0_8px_40px_rgba(0,0,0,0.04)]">
                   {/* Icon */}
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#25a93e] to-[#1e8a32] flex items-center justify-center mb-8 shadow-lg shadow-[#25a93e]/20">
@@ -176,7 +186,7 @@ export default function BusinessModelPage() {
                       { title: 'Micro-Installments', desc: 'Flexible daily or weekly mobile money payments.' },
                       { title: 'Credit History Building', desc: 'Enabling consumers to build verifiable financial profiles.' }
                     ].map((item, i) => (
-                      <li key={i} className="flex gap-4 group/item">
+                      <li key={i} className="flex gap-4 group/item hover:bg-[#F0FDF4] rounded-lg px-3 py-2 -mx-3 transition-colors">
                         <div className="w-7 h-7 rounded-full bg-[#25a93e]/10 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-[#25a93e]/20 transition-colors duration-300">
                           <svg className="w-3.5 h-3.5 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -210,7 +220,7 @@ export default function BusinessModelPage() {
               </p>
               <Link 
                 href="/so" 
-                className="inline-flex items-center gap-2 text-sm font-bold text-[#224167] bg-white border border-gray-200 hover:border-[#25a93e] hover:text-[#25a93e] transition-all duration-300 px-7 py-4 rounded-xl shadow-sm hover:shadow-md group"
+                className="inline-flex items-center gap-2 text-sm font-bold text-[#224167] bg-white border border-gray-200 hover:border-[#25a93e] hover:text-[#25a93e] transition-all duration-300 px-8 py-[1.1rem] rounded-xl shadow-lg hover:shadow-xl group"
               >
                 Visit Somalia Site (Financing)
                 <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">

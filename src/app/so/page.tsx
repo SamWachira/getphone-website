@@ -214,12 +214,11 @@ export default function Home() {
               GetPhone helps people and businesses in Somalia access quality smartphones through flexible installment plans, trusted telecom integration, and valuable daily connectivity benefits.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-200">
-              <Link id="btn-so-hero-phones" href="/phones" className="btn btn-primary text-sm !px-7 !py-3">
+            <div className="flex flex-col sm:flex-row items-start gap-4 animate-fade-in-up delay-200 w-full">
+              <Link id="btn-so-hero-phones" href="/so/phones" className="btn btn-primary text-sm !px-7 !py-3 flex w-full sm:w-auto justify-center items-center">
                 Browse Phones
               </Link>
-              <div className="hidden sm:block text-white/50 text-sm">or</div>
-              <Link id="btn-so-hero-how" href="/how-it-works" className="btn !border-2 !border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all text-sm !px-7 !py-3">
+              <Link id="btn-so-hero-how" href="/so/how-it-works" className="btn !border-2 !border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all text-sm !px-7 !py-3 flex w-full sm:w-auto justify-center items-center">
                 See How It Works
               </Link>
             </div>
@@ -396,7 +395,7 @@ export default function Home() {
                 <div className={`text-xs font-semibold mb-4 ${phone.featured ? 'text-white/50' : 'text-muted/60'}`}>
                   Ideal for: <span className={phone.featured ? 'text-accent' : 'text-primary'}>{phone.idealFor}</span>
                 </div>
-                <Link href={`/phones/${phone.slug}`} className={`btn w-full text-sm ${phone.featured ? 'btn-white' : 'btn-primary'}`}>
+                <Link href={`/so/phones/${phone.slug}`} className={`btn w-full text-sm ${phone.featured ? 'btn-white' : 'btn-primary'}`}>
                   More about this Phone
                 </Link>
               </div>
@@ -404,7 +403,7 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-10">
-            <Link href="/phones" className="btn btn-secondary">
+            <Link href="/so/phones" className="btn btn-secondary">
               View All Devices
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                 <path d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -538,7 +537,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto">
             <FAQAccordion items={faqPreview} />
             <div className="text-center mt-8">
-              <Link href="/faq" className="text-primary font-semibold hover:text-accent transition-colors inline-flex items-center gap-2">
+              <Link href="/so/faq" className="text-primary font-semibold hover:text-accent transition-colors inline-flex items-center gap-2">
                 View all questions
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -554,9 +553,9 @@ export default function Home() {
         headline="Ready to Get Connected?"
         description="Take the first step toward owning a quality smartphone. Flexible payments, trusted devices, and daily connectivity benefits await."
         primaryLabel="Apply Now"
-        primaryHref="/apply"
+        primaryHref="/so/contact"
         secondaryLabel="Find a Branch"
-        secondaryHref="/contact"
+        secondaryHref="/so/contact"
       />
     </>
   );

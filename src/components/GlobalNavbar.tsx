@@ -119,11 +119,8 @@ export default function GlobalNavbar() {
 
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-3">
-          <Link href="/contact" className="btn bg-[#25a93e] hover:bg-[#1f8c33] text-white text-sm font-semibold !py-2.5 !px-5 flex items-center gap-2 rounded-md transition-colors shadow-lg shadow-accent/20">
+          <Link href="/contact" className="btn bg-[#25a93e] hover:bg-[#1f8c33] text-white text-sm font-semibold !py-2.5 !px-5 flex items-center rounded-md transition-colors shadow-lg shadow-accent/20">
             Partner With Us
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
           </Link>
         </div>
 

@@ -67,12 +67,12 @@ export default function ImpactPage() {
                 {i > 0 && (
                   <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 w-px h-12 bg-gradient-to-b from-transparent via-gray-200 to-transparent" />
                 )}
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#25a93e]/10 to-[#25a93e]/5 border border-[#25a93e]/10 text-[#25a93e] flex items-center justify-center mb-4 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-[#25a93e]/10 transition-all duration-300">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#25a93e]/10 to-[#143E6D]/5 border border-[#25a93e]/10 text-[#25a93e] flex items-center justify-center mb-4 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-[#25a93e]/10 transition-all duration-300">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d={metric.icon} />
                   </svg>
                 </div>
-                <div className="font-heading font-800 text-2xl md:text-3xl lg:text-4xl text-[#224167] mb-1.5">{metric.value}</div>
+                <div className="font-heading font-800 text-3xl md:text-4xl lg:text-[2.75rem] text-[#224167] mb-1.5">{metric.value}</div>
                 <div className="text-[0.6875rem] font-bold text-gray-500 tracking-wider uppercase">{metric.label}</div>
               </div>
             ))}
@@ -83,7 +83,7 @@ export default function ImpactPage() {
       {/* ═══ PILLARS SECTION ═══ */}
       <section className="py-20 md:py-28 bg-white w-full relative overflow-hidden">
         {/* Decorative background texture */}
-        <div className="absolute top-0 right-0 w-96 h-96 opacity-[0.03] pointer-events-none">
+        <div className="absolute top-0 right-0 w-96 h-96 opacity-[0.04] pointer-events-none">
           <svg width="100%" height="100%" viewBox="0 0 400 400" fill="none">
             <defs>
               <pattern id="impactDots1" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -93,7 +93,7 @@ export default function ImpactPage() {
             <rect width="400" height="400" fill="url(#impactDots1)" />
           </svg>
         </div>
-        <div className="absolute bottom-0 left-0 w-80 h-80 opacity-[0.03] pointer-events-none">
+        <div className="absolute bottom-0 left-0 w-80 h-80 opacity-[0.04] pointer-events-none">
           <svg width="100%" height="100%" viewBox="0 0 400 400" fill="none">
             <defs>
               <pattern id="impactDots2" width="24" height="24" patternUnits="userSpaceOnUse">
@@ -103,6 +103,9 @@ export default function ImpactPage() {
             <rect width="400" height="400" fill="url(#impactDots2)" />
           </svg>
         </div>
+        {/* Gradient orbs in empty corners */}
+        <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-gradient-to-br from-[#25a93e]/[0.04] to-transparent rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-20 -left-20 w-72 h-72 bg-gradient-to-br from-[#143E6D]/[0.04] to-transparent rounded-full blur-3xl pointer-events-none" />
 
         <div className="section-container px-5 lg:px-8 relative z-10">
           
@@ -122,7 +125,7 @@ export default function ImpactPage() {
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 mb-24">
             {/* Left Image container */}
             <div className="w-full lg:w-1/2 relative group">
-              <div className="bg-white rounded-3xl p-3 border border-gray-100 shadow-lg shadow-gray-100/50 overflow-hidden transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-gray-200/50">
+              <div className="bg-white rounded-3xl p-3 border border-gray-100 shadow-[0_12px_40px_rgba(0,0,0,0.06)] overflow-hidden transition-shadow duration-300 group-hover:shadow-[0_16px_50px_rgba(0,0,0,0.09)]">
                 <img 
                   src="/herobg.webp" 
                   alt="Digital Inclusion" 
@@ -133,7 +136,7 @@ export default function ImpactPage() {
               <div className="absolute -bottom-3 -right-3 w-24 h-24 border-2 border-[#25a93e]/10 rounded-2xl -z-10" />
             </div>
             {/* Right text content */}
-            <div className="w-full lg:w-1/2">
+            <div className="w-full lg:w-1/2 border-l-[3px] border-[#25a93e]/30 pl-6">
               <span className="inline-flex items-center gap-2.5 text-xs font-bold text-[#25a93e] tracking-widest uppercase mb-4">
                 <span className="w-6 h-6 rounded-lg bg-[#25a93e]/10 flex items-center justify-center text-[10px] font-800 text-[#25a93e]">01</span>
                 PILLAR ONE
@@ -173,7 +176,7 @@ export default function ImpactPage() {
           <div className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-16">
             {/* Right Image container */}
             <div className="w-full lg:w-1/2 relative group">
-              <div className="bg-white rounded-3xl p-3 border border-gray-100 shadow-lg shadow-gray-100/50 overflow-hidden transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-gray-200/50">
+              <div className="bg-white rounded-3xl p-3 border border-gray-100 shadow-[0_12px_40px_rgba(0,0,0,0.06)] overflow-hidden transition-shadow duration-300 group-hover:shadow-[0_16px_50px_rgba(0,0,0,0.09)]">
                 <img 
                   src="/gp4.webp" 
                   alt="Economic Growth" 
@@ -184,7 +187,7 @@ export default function ImpactPage() {
               <div className="absolute -bottom-3 -left-3 w-24 h-24 border-2 border-[#224167]/8 rounded-2xl -z-10" />
             </div>
             {/* Left text content */}
-            <div className="w-full lg:w-1/2">
+            <div className="w-full lg:w-1/2 border-l-[3px] border-[#143E6D]/20 pl-6">
               <span className="inline-flex items-center gap-2.5 text-xs font-bold text-[#224167] tracking-widest uppercase mb-4">
                 <span className="w-6 h-6 rounded-lg bg-[#224167]/10 flex items-center justify-center text-[10px] font-800 text-[#224167]">02</span>
                 PILLAR TWO

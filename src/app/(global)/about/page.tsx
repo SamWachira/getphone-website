@@ -181,6 +181,7 @@ export default function AboutPage() {
             {/* Mission Card (Solid Blue) */}
             <div className="bg-[#0F223F] p-10 md:p-14 rounded-[32px] shadow-sm relative overflow-hidden group">
               <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-2xl group-hover:scale-150 transition-all duration-700 pointer-events-none" />
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#25a93e]/10 rounded-full blur-[60px] animate-pulse-glow pointer-events-none" />
               <div className="relative z-10">
                 <div className="w-14 h-14 rounded-full bg-white/10 text-[#25a93e] flex items-center justify-center mb-8 border border-white/5 shadow-inner">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -197,7 +198,7 @@ export default function AboutPage() {
             </div>
 
             {/* Vision Card (White / Pattern Grid) */}
-            <div className="bg-[#FAFBFD] p-10 md:p-14 rounded-[32px] border border-gray-100 shadow-sm relative overflow-hidden group bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:20px_20px]">
+            <div className="gradient-border-card bg-[#FAFBFD] p-10 md:p-14 rounded-[32px] border border-gray-100 shadow-sm relative overflow-hidden group bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:20px_20px]">
               <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#25a93e]/5 rounded-full blur-2xl group-hover:scale-150 transition-all duration-700 pointer-events-none" />
               <div className="relative z-10">
                 <div className="w-14 h-14 rounded-full bg-[#25a93e]/10 text-[#25a93e] flex items-center justify-center mb-8 border border-[#25a93e]/5 shadow-sm">
@@ -241,9 +242,12 @@ export default function AboutPage() {
             {coreValues.map((value, idx) => (
               <div 
                 key={value.id}
-                className="animate-fade-in-up bg-white border border-gray-100 rounded-2xl p-7 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.01)] hover:-translate-y-1 hover:border-[#25a93e]/20 transition-all duration-300 flex flex-col group"
+                className="animate-fade-in-up relative bg-white border border-gray-100 rounded-2xl p-7 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.01)] hover:-translate-y-1 hover:border-[#25a93e]/20 transition-all duration-300 flex flex-col group overflow-hidden"
                 style={{ animationDelay: `${idx * 75}ms` }}
               >
+                <span className="absolute top-3 right-4 text-[2.5rem] font-extrabold text-primary/[0.04] font-heading leading-none select-none pointer-events-none">
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
                 <div className="flex items-center gap-4 mb-5">
                   <div className="w-11 h-11 rounded-xl bg-[#25a93e]/10 text-[#25a93e] flex items-center justify-center shrink-0 group-hover:bg-[#25a93e] group-hover:text-white transition-colors duration-300">
                     {value.icon}
@@ -265,8 +269,9 @@ export default function AboutPage() {
       <div className="w-full h-px bg-gradient-to-r from-transparent via-[#25a93e]/20 to-transparent" />
 
       {/* ═══ OUR IMPACT BANNER SECTION ═══ */}
-      <section className="py-16 md:py-20 bg-[#F4FDF9] w-full border-b border-gray-100">
-        <div className="section-container px-5 lg:px-8">
+      <section className="py-16 md:py-20 bg-[#F4FDF9] w-full border-b border-gray-100 relative overflow-hidden">
+        <div className="absolute right-[10%] top-1/2 -translate-y-1/2 w-48 h-48 bg-[#25a93e]/[0.08] rounded-full blur-[80px] pointer-events-none" />
+        <div className="section-container px-5 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             {/* Left Header */}

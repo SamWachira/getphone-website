@@ -87,17 +87,11 @@ export default function GlobalHome() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-start gap-4 mb-8 w-full">
-              <Link id="btn-hero-explore" href="/operations" className="btn bg-primary hover:bg-primary/90 text-white text-sm !px-7 !py-3 shadow-lg shadow-primary/20 flex w-full sm:w-auto justify-center items-center gap-2 rounded-lg">
+              <Link id="btn-hero-explore" href="/operations" className="btn bg-primary hover:bg-primary/90 text-white text-sm !px-7 !py-3 shadow-lg shadow-primary/20 flex w-full sm:w-auto justify-center items-center rounded-lg">
                 Explore Operations
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
               </Link>
-              <Link id="btn-hero-contact" href="/contact" className="btn bg-white border border-gray-200 text-primary hover:border-accent hover:text-accent transition-all text-sm !px-7 !py-3 flex w-full sm:w-auto justify-center items-center gap-2 shadow-sm rounded-lg">
+              <Link id="btn-hero-contact" href="/contact" className="btn bg-white border border-gray-200 text-primary hover:border-accent hover:text-accent transition-all text-sm !px-7 !py-3 flex w-full sm:w-auto justify-center items-center shadow-sm rounded-lg">
                 Contact Sales
-                <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
               </Link>
             </div>
 
@@ -164,11 +158,8 @@ export default function GlobalHome() {
                 Strategic footprint across five key markets, delivering products, partnerships, and innovation that move Africa forward.
               </p>
               <div className="pt-4">
-                <Link href="/operations" className="btn bg-[#224167] hover:bg-[#081b33] text-white text-sm !px-7 !py-3 shadow-lg shadow-primary/20 inline-flex items-center gap-2 rounded-md transition-all">
+                <Link href="/operations" className="btn bg-[#224167] hover:bg-[#081b33] text-white text-sm !px-7 !py-3 shadow-lg shadow-primary/20 inline-flex items-center rounded-md transition-all">
                   View Our Operations
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
                 </Link>
               </div>
             </div>
@@ -384,9 +375,8 @@ export default function GlobalHome() {
               <p className="text-gray-500 text-[0.95rem] leading-relaxed mb-8 max-w-md">
                 GetPhone combines pan-African market reach, trusted OEM partnerships, and reliable supply-chain execution to help brands and partners move smartphones efficiently across African markets.
               </p>
-              <Link href="/contact" className="btn bg-[#224167] hover:bg-[#081b33] text-white text-sm !px-7 !py-3.5 shadow-lg shadow-primary/20 inline-flex items-center gap-2 rounded-md transition-all self-start">
+              <Link href="/contact" className="btn bg-[#224167] hover:bg-[#081b33] text-white text-sm !px-7 !py-3.5 shadow-lg shadow-primary/20 inline-flex items-center rounded-md transition-all self-start">
                 Partner With GetPhone
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </Link>
             </div>
 

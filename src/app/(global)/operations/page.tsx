@@ -167,7 +167,7 @@ export default function OperationsPage() {
               {markets.map((market, i) => (
                 <div 
                   key={i} 
-                  className={`relative bg-white rounded-2xl p-8 border border-gray-100 hover:border-[#25a93e]/30 hover:shadow-lg transition-all duration-300 flex flex-col group animate-fade-in-up ${
+                  className={`relative bg-white rounded-2xl p-8 border border-gray-100 hover:border-[#25a93e]/30 hover:shadow-lg hover:bg-gradient-to-br hover:from-white hover:to-[#F0FDF4] transition-all duration-300 flex flex-col group animate-fade-in-up ${
                     i === markets.length - 1 ? 'md:col-span-2 md:max-w-md md:mx-auto md:w-full' : ''
                   }`}
                   style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}
@@ -209,6 +209,11 @@ export default function OperationsPage() {
           </svg>
         </div>
 
+        {/* Decorative gradient orbs */}
+        <div className="absolute top-10 right-10 w-48 h-48 rounded-full bg-[#25a93e]/[0.04] blur-[80px] pointer-events-none" />
+        <div className="absolute bottom-10 left-10 w-48 h-48 rounded-full bg-[#143E6D]/[0.05] blur-[80px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-[#25a93e]/[0.02] blur-[100px] pointer-events-none" />
+
         <div className="section-container px-5 lg:px-8 relative z-10">
           <div className="max-w-3xl mb-16 mx-auto text-center">
             <span className="inline-flex items-center gap-2 text-xs font-bold text-[#25a93e] tracking-widest uppercase mb-3 mx-auto">
@@ -228,12 +233,12 @@ export default function OperationsPage() {
           <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 mt-12 max-w-5xl mx-auto">
             
             {/* Connecting line (visible only on md+) */}
-            <div className="hidden md:block absolute top-8 left-[16.67%] right-[16.67%] h-px z-0">
-              <div className="w-full h-full bg-gradient-to-r from-[#25a93e]/20 via-[#25a93e]/40 to-[#25a93e]/20" />
+            <div className="hidden md:block absolute top-8 left-[16.67%] right-[16.67%] h-[3px] z-0">
+              <div className="w-full h-full bg-gradient-to-r from-[#25a93e]/30 via-[#25a93e]/60 to-[#25a93e]/30 rounded-full" />
               {/* Animated dots on the line */}
-              <div className="absolute top-1/2 left-1/4 w-2 h-2 -translate-y-1/2 rounded-full bg-[#25a93e]/30 animate-pulse" />
-              <div className="absolute top-1/2 left-1/2 w-2 h-2 -translate-y-1/2 rounded-full bg-[#25a93e]/30 animate-pulse delay-300" />
-              <div className="absolute top-1/2 left-3/4 w-2 h-2 -translate-y-1/2 rounded-full bg-[#25a93e]/30 animate-pulse delay-500" />
+              <div className="absolute top-1/2 left-1/4 w-2.5 h-2.5 -translate-y-1/2 rounded-full bg-[#25a93e]/50 animate-pulse shadow-sm shadow-[#25a93e]/30" />
+              <div className="absolute top-1/2 left-1/2 w-2.5 h-2.5 -translate-y-1/2 rounded-full bg-[#25a93e]/50 animate-pulse delay-300 shadow-sm shadow-[#25a93e]/30" />
+              <div className="absolute top-1/2 left-3/4 w-2.5 h-2.5 -translate-y-1/2 rounded-full bg-[#25a93e]/50 animate-pulse delay-500 shadow-sm shadow-[#25a93e]/30" />
             </div>
 
             {logistics.map((item, i) => (
@@ -243,7 +248,7 @@ export default function OperationsPage() {
                 style={{ animationDelay: `${i * 150}ms`, animationFillMode: 'both' }}
               >
                 {/* Step Number Circle */}
-                <div className="relative z-10 w-16 h-16 rounded-full bg-white border-2 border-gray-100 text-[#224167] font-heading font-800 text-xl flex items-center justify-center mb-6 group-hover:bg-[#224167] group-hover:text-white group-hover:border-[#224167] transition-all duration-300 shadow-sm group-hover:shadow-md">
+                <div className="relative z-10 w-16 h-16 rounded-full bg-white border-2 border-gray-100 text-[#224167] font-heading font-800 text-xl flex items-center justify-center mb-6 group-hover:bg-[#224167] group-hover:text-white group-hover:border-[#224167] transition-all duration-300 shadow-lg shadow-[#143E6D]/10 group-hover:shadow-xl group-hover:shadow-[#143E6D]/20 group-hover:scale-105">
                   {/* Glowing ring on hover */}
                   <div className="absolute inset-0 rounded-full bg-[#224167]/0 group-hover:bg-[#224167]/10 scale-100 group-hover:scale-[1.3] transition-all duration-500 pointer-events-none" />
                   <span className="relative z-10">{i + 1}</span>

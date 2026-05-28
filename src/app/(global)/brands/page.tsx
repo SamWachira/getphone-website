@@ -100,24 +100,27 @@ export default function BrandsPage() {
             <div className="w-full lg:w-7/12 relative h-[380px] md:h-[480px] animate-fade-in-up delay-100">
               {/* Gradient glow behind the showcase */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-[70%] h-[70%] rounded-full bg-gradient-to-br from-[#25a93e]/[0.08] via-[#25a93e]/[0.04] to-transparent blur-3xl" />
+                <div className="w-[70%] h-[70%] rounded-full bg-gradient-to-br from-[#25a93e]/[0.12] via-[#25a93e]/[0.07] to-transparent blur-3xl" />
               </div>
               <div className="absolute inset-0 bg-[#FAFBFD] rounded-[40px] transform -rotate-2 border border-gray-100 shadow-[0_8px_40px_rgba(37,169,62,0.06)]" />
               <img 
                 src="/reno.webp" 
                 alt="OPPO Reno Device" 
-                className="absolute top-1/2 -translate-y-1/2 left-[10%] w-[42%] h-auto object-contain drop-shadow-2xl z-20 hover:-translate-y-[calc(50%+8px)] transition-transform duration-500 rounded-2xl" 
+                className="absolute top-1/2 -translate-y-1/2 left-[10%] w-[42%] h-auto object-contain drop-shadow-2xl z-20 hover:-translate-y-[calc(50%+8px)] hover:drop-shadow-[0_25px_25px_rgba(0,0,0,0.15)] transition-all duration-500 rounded-2xl" 
               />
               <img 
                 src="/a36.webp" 
                 alt="OPPO A36 Device" 
-                className="absolute top-1/2 -translate-y-1/3 right-[10%] w-[42%] h-auto object-contain drop-shadow-2xl z-10 opacity-90 hover:-translate-y-[calc(33.33%+8px)] transition-transform duration-500" 
+                className="absolute top-1/2 -translate-y-1/3 right-[10%] w-[42%] h-auto object-contain drop-shadow-2xl z-10 opacity-90 hover:-translate-y-[calc(33.33%+8px)] hover:drop-shadow-[0_25px_25px_rgba(0,0,0,0.15)] transition-all duration-500" 
               />
             </div>
 
           </div>
         </div>
       </section>
+
+      {/* ═══ Section Divider ═══ */}
+      <div className="w-full h-1 bg-gradient-to-r from-transparent via-[#25a93e]/20 to-transparent" />
 
       {/* ═══ ZTE SECTION ═══ */}
       <section className="py-20 md:py-28 bg-[#FAFBFD] w-full border-b border-gray-100 overflow-hidden relative">
@@ -181,24 +184,27 @@ export default function BrandsPage() {
             <div className="w-full lg:w-7/12 relative h-[380px] md:h-[480px] animate-fade-in-up delay-100">
               {/* Gradient glow behind the showcase */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-[65%] h-[65%] rounded-full bg-gradient-to-br from-[#224167]/[0.06] via-[#25a93e]/[0.04] to-transparent blur-3xl" />
+                <div className="w-[65%] h-[65%] rounded-full bg-gradient-to-br from-[#224167]/[0.10] via-[#25a93e]/[0.07] to-transparent blur-3xl" />
               </div>
               <div className="absolute inset-0 bg-white rounded-[40px] transform rotate-2 border border-gray-100/60 shadow-[0_8px_40px_rgba(34,65,103,0.05)]" />
               <img 
                 src="/a56.webp" 
                 alt="ZTE a56 Device" 
-                className="absolute top-1/2 -translate-y-[45%] right-[15%] w-[38%] h-auto object-contain drop-shadow-2xl z-20 hover:-translate-y-[calc(45%+8px)] transition-transform duration-500" 
+                className="absolute top-1/2 -translate-y-[45%] right-[15%] w-[38%] h-auto object-contain drop-shadow-2xl z-20 hover:-translate-y-[calc(45%+8px)] hover:drop-shadow-[0_25px_25px_rgba(0,0,0,0.15)] transition-all duration-500" 
               />
               <img 
                 src="/v80.webp" 
                 alt="ZTE v80 Device" 
-                className="absolute top-1/2 -translate-y-[55%] left-[10%] w-[42%] h-auto object-contain drop-shadow-2xl z-10 hover:-translate-y-[calc(55%+8px)] transition-transform duration-500" 
+                className="absolute top-1/2 -translate-y-[55%] left-[10%] w-[42%] h-auto object-contain drop-shadow-2xl z-10 hover:-translate-y-[calc(55%+8px)] hover:drop-shadow-[0_25px_25px_rgba(0,0,0,0.15)] transition-all duration-500" 
               />
             </div>
 
           </div>
         </div>
       </section>
+
+      {/* ═══ Section Divider ═══ */}
+      <div className="w-full h-1 bg-gradient-to-r from-transparent via-[#143E6D]/15 to-transparent" />
 
       {/* ═══ WHY OEMS CHOOSE US ═══ */}
       <section className="py-20 md:py-28 bg-white w-full border-b border-gray-100 relative overflow-hidden">
@@ -255,7 +261,7 @@ export default function BrandsPage() {
                 key={i} 
                 className={`animate-fade-in-up ${feature.delay} bg-[#FAFBFD] rounded-2xl p-8 border border-gray-100 hover:border-[#25a93e]/20 hover:shadow-[0_8px_30px_rgba(37,169,62,0.08)] transition-all duration-300 flex flex-col group`}
               >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#25a93e]/10 to-[#25a93e]/5 flex items-center justify-center mb-6 group-hover:from-[#25a93e]/20 group-hover:to-[#25a93e]/10 group-hover:scale-110 transition-all duration-300">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#25a93e]/15 to-[#143E6D]/10 shadow-md flex items-center justify-center mb-6 group-hover:from-[#25a93e]/25 group-hover:to-[#143E6D]/15 group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
                   {feature.icon}
                 </div>
                 <h3 className="font-heading font-800 text-sm text-[#224167] tracking-wider uppercase mb-3">{feature.title}</h3>

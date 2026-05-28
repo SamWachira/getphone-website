@@ -83,6 +83,7 @@ export default function ContactPage() {
               </div>
               {/* Decorative green glow */}
               <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-[#25a93e]/5 rounded-full blur-[60px] pointer-events-none" />
+              <div className='absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#25a93e]/30 to-transparent rounded-b-[32px]' />
 
               <div className="relative z-10">
                 <span className="inline-flex items-center gap-2 text-xs font-bold text-[#25a93e] tracking-widest uppercase mb-3">
@@ -146,7 +147,7 @@ export default function ContactPage() {
             </div>
 
             {/* Send a message form */}
-            <div className="relative bg-white p-10 rounded-[32px] border border-gray-100 border-t-4 border-t-[#25a93e] shadow-[0_8px_30px_rgba(0,0,0,0.04)] flex flex-col justify-center animate-fade-in-up delay-100">
+            <div className="gradient-border-card relative bg-white p-10 rounded-[32px] border-t-4 border-t-[#25a93e] shadow-[0_12px_40px_rgba(0,0,0,0.06)] flex flex-col justify-center animate-fade-in-up delay-100">
               {/* Decorative glow */}
               <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-40 h-20 bg-[#25a93e]/8 rounded-full blur-[40px] pointer-events-none" />
 
@@ -221,14 +222,30 @@ export default function ContactPage() {
         </div>
       </section>
 
+      {/* ═══ TRUST BAR ═══ */}
+      <section className="bg-white py-10 border-b border-gray-100">
+        <div className="section-container px-5 lg:px-8">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-8 md:gap-16">
+            {['24-Hour Response Time', 'Pan-African Coverage', 'OEM Certified Partner'].map((item) => (
+              <div key={item} className="flex items-center gap-2.5">
+                <svg className="w-5 h-5 text-[#25a93e] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="text-sm font-semibold text-[#224167]">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ═══ CTA SECTION ═══ */}
       <CTASection
         headline="Looking for Distribution in Your Market?"
         description="We're actively expanding across Africa. If you're a retailer, telco, or enterprise buyer, let's talk."
-        primaryLabel="Partner With Us"
-        primaryHref="/contact"
-        secondaryLabel="View Operations"
-        secondaryHref="/operations"
+        primaryLabel="Explore Our Operations"
+        primaryHref="/operations"
+        secondaryLabel="View Regional Hubs"
+        secondaryHref="/locations"
       />
       
     </div>
