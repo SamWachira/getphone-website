@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import CTASection from '@/components/CTASection';
+import PageHero from '@/components/PageHero';
 
 export const metadata = {
   title: 'About Us | GetPhone',
@@ -86,83 +87,43 @@ export default function AboutPage() {
     <div className="flex flex-col min-h-screen bg-white">
       
       {/* ═══ HERO SECTION ═══ */}
-      <section className="relative bg-[#0F223F] pt-32 pb-24 md:pt-40 md:pb-36 overflow-hidden">
-        {/* Dotted background mesh on the right side */}
-        <div className="absolute right-0 top-0 bottom-0 w-full lg:w-1/2 opacity-[0.15] lg:opacity-25 pointer-events-none z-0">
-          <svg className="w-full h-full text-white" fill="none" viewBox="0 0 800 800">
-            <defs>
-              <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
-                <circle cx="2" cy="2" r="1.5" fill="currentColor" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-            {/* Africa connection path sketch in SVG lines */}
-            <path d="M 400,200 Q 550,220 500,450 T 450,700 Q 400,500 350,400 Z" stroke="currentColor" strokeWidth="1.5" strokeDasharray="5 5" fill="none" />
-            <circle cx="400" cy="200" r="5" fill="#25a93e" />
-            <circle cx="500" cy="450" r="5" fill="#25a93e" />
-            <circle cx="450" cy="700" r="5" fill="#25a93e" />
-            <path d="M 400,200 L 500,450 L 450,700" stroke="#25a93e" strokeWidth="1" opacity="0.5" />
-          </svg>
-        </div>
-        
-        <div className="section-container relative z-10 px-5 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="text-xs font-bold text-[#25a93e] tracking-widest uppercase block mb-3 animate-fade-in">
-              ABOUT GETPHONE
-            </span>
-            <h1 className="font-heading font-800 text-[2.5rem] md:text-[3.75rem] text-white leading-[1.1] mb-6 tracking-tight animate-fade-in-up">
-              Building Africa's<br />Smartphone Distribution Backbone
-            </h1>
-            <p className="text-base md:text-lg text-white/80 leading-relaxed font-medium mb-12 max-w-2xl animate-fade-in-up delay-100">
-              We connect global smartphone brands to African markets through reliable distribution, strong partnerships, and technology-driven supply chains that expand access and empower communities.
-            </p>
+      <PageHero
+        eyebrow="ABOUT GETPHONE"
+        title="Building Africa's Smartphone Distribution Backbone"
+        description="We connect global smartphone brands to African markets through reliable distribution, strong partnerships, and technology-driven supply chains that expand access and empower communities."
+        stats={[
+          {
+            icon: (
+              <svg className="w-5 h-5 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-.778.099-1.533.284-2.253" />
+              </svg>
+            ),
+            value: '5',
+            label: 'Active Markets'
+          },
+          {
+            icon: (
+              <svg className="w-5 h-5 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+              </svg>
+            ),
+            value: 'Trusted',
+            label: 'OEM Partnerships'
+          },
+          {
+            icon: (
+              <svg className="w-5 h-5 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+              </svg>
+            ),
+            value: 'Pan-African',
+            label: 'Distribution Network'
+          }
+        ]}
+      />
 
-            {/* Overlapping stat cards at the bottom of hero */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-              {[
-                {
-                  val: '5',
-                  lbl: 'Active Markets',
-                  icon: (
-                    <svg className="w-6 h-6 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-.778.099-1.533.284-2.253" />
-                    </svg>
-                  )
-                },
-                {
-                  val: 'Trusted',
-                  lbl: 'OEM Partnerships',
-                  icon: (
-                    <svg className="w-6 h-6 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                    </svg>
-                  )
-                },
-                {
-                  val: 'Pan-African',
-                  lbl: 'Distribution Network',
-                  icon: (
-                    <svg className="w-6 h-6 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                    </svg>
-                  )
-                }
-              ].map((item, idx) => (
-                <div key={idx} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex items-center gap-5">
-                  <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <div className="font-heading font-800 text-xl text-white">{item.val}</div>
-                    <div className="text-xs font-semibold text-white/70 tracking-wide uppercase mt-0.5">{item.lbl}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-          </div>
-        </div>
-      </section>
+      {/* ── Gradient divider ── */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#25a93e]/20 to-transparent" />
 
       {/* ═══ OUR STORY SECTION ═══ */}
       <section className="py-20 md:py-28 bg-white w-full border-b border-gray-100">
@@ -209,13 +170,16 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── Gradient divider ── */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#25a93e]/20 to-transparent" />
+
       {/* ═══ MISSION & VISION SECTION ═══ */}
-      <section className="py-16 md:py-24 bg-white w-full border-b border-gray-100">
+      <section className="py-16 md:py-24 bg-[#FAFBFD] w-full border-b border-gray-100">
         <div className="section-container px-5 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             
             {/* Mission Card (Solid Blue) */}
-            <div className="bg-[#0B2545] p-10 md:p-14 rounded-[32px] shadow-sm relative overflow-hidden group">
+            <div className="bg-[#0F223F] p-10 md:p-14 rounded-[32px] shadow-sm relative overflow-hidden group">
               <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-2xl group-hover:scale-150 transition-all duration-700 pointer-events-none" />
               <div className="relative z-10">
                 <div className="w-14 h-14 rounded-full bg-white/10 text-[#25a93e] flex items-center justify-center mb-8 border border-white/5 shadow-inner">
@@ -255,8 +219,11 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── Gradient divider ── */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#25a93e]/20 to-transparent" />
+
       {/* ═══ CORE VALUES SECTION ═══ */}
-      <section className="py-20 md:py-28 bg-[#FAFBFD] w-full border-b border-gray-100">
+      <section className="py-20 md:py-28 bg-white w-full border-b border-gray-100">
         <div className="section-container px-5 lg:px-8">
           <div className="max-w-3xl mb-16">
             <span className="text-xs font-bold text-[#25a93e] tracking-widest uppercase block mb-3">
@@ -271,10 +238,11 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {coreValues.map((value) => (
+            {coreValues.map((value, idx) => (
               <div 
-                key={value.id} 
-                className="bg-white border border-gray-100 rounded-2xl p-7 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.01)] hover:-translate-y-1 hover:border-[#25a93e]/20 transition-all duration-300 flex flex-col group"
+                key={value.id}
+                className="animate-fade-in-up bg-white border border-gray-100 rounded-2xl p-7 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.01)] hover:-translate-y-1 hover:border-[#25a93e]/20 transition-all duration-300 flex flex-col group"
+                style={{ animationDelay: `${idx * 75}ms` }}
               >
                 <div className="flex items-center gap-4 mb-5">
                   <div className="w-11 h-11 rounded-xl bg-[#25a93e]/10 text-[#25a93e] flex items-center justify-center shrink-0 group-hover:bg-[#25a93e] group-hover:text-white transition-colors duration-300">
@@ -292,6 +260,9 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Gradient divider ── */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#25a93e]/20 to-transparent" />
 
       {/* ═══ OUR IMPACT BANNER SECTION ═══ */}
       <section className="py-16 md:py-20 bg-[#F4FDF9] w-full border-b border-gray-100">

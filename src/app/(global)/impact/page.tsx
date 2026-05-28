@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import CTASection from '@/components/CTASection';
+import PageHero from '@/components/PageHero';
 
 export const metadata = {
   title: 'Our Impact | GetPhone',
@@ -18,93 +18,61 @@ export default function ImpactPage() {
     <div className="flex flex-col min-h-screen bg-white">
       
       {/* ═══ HERO SECTION ═══ */}
-      <section className="relative bg-[#0F223F] pt-32 pb-24 md:pt-40 md:pb-36 overflow-hidden">
-        {/* Abstract connection sketch on the right side */}
-        <div className="absolute right-0 top-0 bottom-0 w-full lg:w-1/2 opacity-[0.12] lg:opacity-20 pointer-events-none z-0">
-          <svg className="w-full h-full text-white" fill="none" viewBox="0 0 800 800">
-            <defs>
-              <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
-                <circle cx="2" cy="2" r="1.5" fill="currentColor" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-            <path d="M 150,200 C 350,150 450,450 650,400" stroke="currentColor" strokeWidth="1.5" strokeDasharray="5 5" fill="none" />
-            <circle cx="150" cy="200" r="5" fill="#25a93e" />
-            <circle cx="650" cy="400" r="5" fill="#25a93e" />
-          </svg>
-        </div>
-        
-        <div className="section-container relative z-10 px-5 lg:px-8">
-          <div className="max-w-3xl">
-            <span className="text-xs font-bold text-[#25a93e] tracking-widest uppercase block mb-3 animate-fade-in">
-              OUR SHARED MISSION
-            </span>
-            <h1 className="font-heading font-800 text-[2.5rem] md:text-[3.75rem] text-white leading-[1.1] mb-6 tracking-tight animate-fade-in-up">
-              More Than Just Hardware
-            </h1>
-            <p className="text-base md:text-lg text-white/80 leading-relaxed font-medium mb-12 max-w-2xl animate-fade-in-up delay-100">
-              At GetPhone, a smartphone is not just a device; it is a gateway to the modern economy. We measure our success by the communities we connect and the economic opportunities we create.
-            </p>
-
-            {/* Overlapping stat cards at the bottom of hero */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-              {[
-                {
-                  val: '2M+',
-                  lbl: 'Devices Distributed',
-                  icon: (
-                    <svg className="w-6 h-6 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-6 18.75h12" />
-                    </svg>
-                  )
-                },
-                {
-                  val: '500+',
-                  lbl: 'Direct Jobs Created',
-                  icon: (
-                    <svg className="w-6 h-6 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719" />
-                    </svg>
-                  )
-                },
-                {
-                  val: '10K+',
-                  lbl: 'Retailers Supported',
-                  icon: (
-                    <svg className="w-6 h-6 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72M6.75 18h.008v.008H6.75V18zm0-3h.008v.008H6.75V15zm0-3h.008v.008H6.75V12zm3 6h.008v.008H9.75V18zm0-3h.008v.008H9.75V15zm0-3h.008v.008H9.75V12z" />
-                    </svg>
-                  )
-                }
-              ].map((item, idx) => (
-                <div key={idx} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex items-center gap-5">
-                  <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <div className="font-heading font-800 text-xl text-white">{item.val}</div>
-                    <div className="text-xs font-semibold text-white/70 tracking-wide uppercase mt-0.5">{item.lbl}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="OUR IMPACT"
+        title="Creating Access. Driving Growth."
+        description="Through reliable distribution and smart financing, we're bridging the digital divide and empowering communities across Africa."
+        stats={[
+          {
+            icon: (
+              <svg className="w-5 h-5 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-6 18.75h12" />
+              </svg>
+            ),
+            value: '2M+',
+            label: 'Devices Distributed'
+          },
+          {
+            icon: (
+              <svg className="w-5 h-5 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719" />
+              </svg>
+            ),
+            value: '500+',
+            label: 'Jobs Created'
+          },
+          {
+            icon: (
+              <svg className="w-5 h-5 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72M6.75 18h.008v.008H6.75V18zm0-3h.008v.008H6.75V15zm0-3h.008v.008H6.75V12zm3 6h.008v.008H9.75V18zm0-3h.008v.008H9.75V15zm0-3h.008v.008H9.75V12z" />
+              </svg>
+            ),
+            value: '10K+',
+            label: 'Retailers Empowered'
+          }
+        ]}
+      />
 
       {/* ═══ METRICS BAR SECTION ═══ */}
-      <section className="py-14 md:py-16 bg-[#FAFBFD] w-full border-b border-gray-100">
+      <section className="py-14 md:py-16 bg-[#FAFBFD] w-full relative overflow-hidden">
+        {/* Subtle top gradient line */}
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#25a93e]/15 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200/60 to-transparent" />
+
         <div className="section-container px-5 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4 lg:divide-x lg:divide-gray-200/60 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4 max-w-5xl mx-auto">
             {metrics.map((metric, i) => (
-              <div key={i} className="flex flex-col items-center text-center p-4 lg:pl-6 first:pl-0 sm:pl-4">
-                <div className="w-10 h-10 rounded-xl bg-white border border-gray-100 shadow-sm text-[#25a93e] flex items-center justify-center mb-4">
+              <div key={i} className="relative flex flex-col items-center text-center p-6 group">
+                {/* Vertical divider between items (lg only) */}
+                {i > 0 && (
+                  <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 w-px h-12 bg-gradient-to-b from-transparent via-gray-200 to-transparent" />
+                )}
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#25a93e]/10 to-[#25a93e]/5 border border-[#25a93e]/10 text-[#25a93e] flex items-center justify-center mb-4 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-[#25a93e]/10 transition-all duration-300">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d={metric.icon} />
                   </svg>
                 </div>
-                <div className="font-heading font-800 text-2.5xl md:text-3.5xl text-[#224167] mb-1.5">{metric.value}</div>
+                <div className="font-heading font-800 text-2xl md:text-3xl lg:text-4xl text-[#224167] mb-1.5">{metric.value}</div>
                 <div className="text-[0.6875rem] font-bold text-gray-500 tracking-wider uppercase">{metric.label}</div>
               </div>
             ))}
@@ -113,74 +81,121 @@ export default function ImpactPage() {
       </section>
 
       {/* ═══ PILLARS SECTION ═══ */}
-      <section className="py-20 md:py-28 bg-white w-full border-b border-gray-100">
-        <div className="section-container px-5 lg:px-8">
+      <section className="py-20 md:py-28 bg-white w-full relative overflow-hidden">
+        {/* Decorative background texture */}
+        <div className="absolute top-0 right-0 w-96 h-96 opacity-[0.03] pointer-events-none">
+          <svg width="100%" height="100%" viewBox="0 0 400 400" fill="none">
+            <defs>
+              <pattern id="impactDots1" width="20" height="20" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1.5" fill="#224167" />
+              </pattern>
+            </defs>
+            <rect width="400" height="400" fill="url(#impactDots1)" />
+          </svg>
+        </div>
+        <div className="absolute bottom-0 left-0 w-80 h-80 opacity-[0.03] pointer-events-none">
+          <svg width="100%" height="100%" viewBox="0 0 400 400" fill="none">
+            <defs>
+              <pattern id="impactDots2" width="24" height="24" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1" fill="#25a93e" />
+              </pattern>
+            </defs>
+            <rect width="400" height="400" fill="url(#impactDots2)" />
+          </svg>
+        </div>
+
+        <div className="section-container px-5 lg:px-8 relative z-10">
           
+          {/* Section heading */}
+          <div className="text-center mb-16 md:mb-20">
+            <span className="inline-flex items-center gap-2 text-xs font-bold text-[#25a93e] tracking-widest uppercase mb-4">
+              <span className="w-8 h-px bg-[#25a93e]" />
+              HOW WE DO IT
+              <span className="w-8 h-px bg-[#25a93e]" />
+            </span>
+            <h2 className="font-heading font-800 text-2xl md:text-3xl lg:text-4xl text-[#224167] leading-[1.15]">
+              Our Impact Pillars
+            </h2>
+          </div>
+
           {/* Pillar 1 */}
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 mb-20">
-            {/* Left Image container in clean card */}
-            <div className="w-full lg:w-1/2 relative">
-              <div className="bg-white rounded-[32px] p-4 border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.015)] overflow-hidden">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 mb-24">
+            {/* Left Image container */}
+            <div className="w-full lg:w-1/2 relative group">
+              <div className="bg-white rounded-3xl p-3 border border-gray-100 shadow-lg shadow-gray-100/50 overflow-hidden transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-gray-200/50">
                 <img 
                   src="/herobg.webp" 
                   alt="Digital Inclusion" 
                   className="w-full h-[320px] md:h-[400px] object-cover rounded-2xl" 
                 />
               </div>
+              {/* Decorative accent corner */}
+              <div className="absolute -bottom-3 -right-3 w-24 h-24 border-2 border-[#25a93e]/10 rounded-2xl -z-10" />
             </div>
             {/* Right text content */}
             <div className="w-full lg:w-1/2">
-              <span className="text-xs font-bold text-[#25a93e] tracking-widest uppercase block mb-3">
+              <span className="inline-flex items-center gap-2.5 text-xs font-bold text-[#25a93e] tracking-widest uppercase mb-4">
+                <span className="w-6 h-6 rounded-lg bg-[#25a93e]/10 flex items-center justify-center text-[10px] font-800 text-[#25a93e]">01</span>
                 PILLAR ONE
               </span>
-              <h2 className="font-heading font-800 text-[2rem] md:text-[2.5rem] leading-[1.15] text-[#224167] mb-6">
+              <h2 className="font-heading font-800 text-2xl md:text-3xl lg:text-[2.5rem] leading-[1.15] text-[#224167] mb-6">
                 Bridging the Digital Divide
               </h2>
-              <p className="text-gray-500 text-sm leading-relaxed mb-6 font-medium">
-                In many parts of Africa, a smartphone is the primary means of accessing the internet, banking services, and educational resources. By ensuring a steady supply of affordable, high-quality devices, we are directly contributing to the continent's digital literacy and connectivity.
+              <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-8 font-medium">
+                In many parts of Africa, a smartphone is the primary means of accessing the internet, banking services, and educational resources. By ensuring a steady supply of affordable, high-quality devices, we are directly contributing to the continent&apos;s digital literacy and connectivity.
               </p>
               <ul className="space-y-4">
                 {[
                   "Empowering local entrepreneurs with digital tools.",
                   "Facilitating access to mobile money and banking."
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-[#25a93e]/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <li key={i} className="flex items-start gap-3 group/item">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#25a93e]/15 to-[#25a93e]/5 border border-[#25a93e]/15 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:scale-110 transition-transform duration-200">
                       <svg className="w-3.5 h-3.5 text-[#25a93e]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="text-sm text-[#224167] font-semibold">{item}</span>
+                    <span className="text-sm md:text-base text-[#224167] font-semibold">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
 
+          {/* Divider */}
+          <div className="flex items-center justify-center mb-24">
+            <div className="w-16 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+            <div className="w-2 h-2 rounded-full bg-[#25a93e]/20 mx-4" />
+            <div className="w-16 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+          </div>
+
           {/* Pillar 2 */}
           <div className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-16">
-            {/* Right Image container in clean card */}
-            <div className="w-full lg:w-1/2 relative">
-              <div className="bg-white rounded-[32px] p-4 border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.015)] overflow-hidden">
+            {/* Right Image container */}
+            <div className="w-full lg:w-1/2 relative group">
+              <div className="bg-white rounded-3xl p-3 border border-gray-100 shadow-lg shadow-gray-100/50 overflow-hidden transition-shadow duration-300 group-hover:shadow-xl group-hover:shadow-gray-200/50">
                 <img 
                   src="/gp4.webp" 
                   alt="Economic Growth" 
                   className="w-full h-[320px] md:h-[400px] object-cover rounded-2xl" 
                 />
               </div>
+              {/* Decorative accent corner */}
+              <div className="absolute -bottom-3 -left-3 w-24 h-24 border-2 border-[#224167]/8 rounded-2xl -z-10" />
             </div>
             {/* Left text content */}
             <div className="w-full lg:w-1/2">
-              <span className="text-xs font-bold text-[#224167] tracking-widest uppercase block mb-3">
+              <span className="inline-flex items-center gap-2.5 text-xs font-bold text-[#224167] tracking-widest uppercase mb-4">
+                <span className="w-6 h-6 rounded-lg bg-[#224167]/10 flex items-center justify-center text-[10px] font-800 text-[#224167]">02</span>
                 PILLAR TWO
               </span>
-              <h2 className="font-heading font-800 text-[2rem] md:text-[2.5rem] leading-[1.15] text-[#224167] mb-6">
-                Economic Empowerment & Job Creation
+              <h2 className="font-heading font-800 text-2xl md:text-3xl lg:text-[2.5rem] leading-[1.15] text-[#224167] mb-6">
+                Economic Empowerment &amp; Job Creation
               </h2>
-              <p className="text-gray-500 text-sm leading-relaxed mb-6 font-medium">
-                Our operations don't just move boxes; they move economies. From our warehouse logistics teams to our extensive network of independent retail partners, GetPhone's ecosystem supports thousands of livelihoods across East and Southern Africa.
+              <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-6 font-medium">
+                Our operations don&apos;t just move boxes; they move economies. From our warehouse logistics teams to our extensive network of independent retail partners, GetPhone&apos;s ecosystem supports thousands of livelihoods across East and Southern Africa.
               </p>
-              <p className="text-gray-500 text-sm leading-relaxed mb-6 font-medium">
+              <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-6 font-medium">
                 Furthermore, our Smart Device Financing model in Somalia is allowing thousands of individuals to build credit histories for the first time, unlocking future financial opportunities.
               </p>
             </div>

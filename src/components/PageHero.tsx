@@ -1,80 +1,86 @@
-import HeroBackdrop from '@/components/HeroBackdrop';
+import Link from 'next/link';
+
+interface HeroStat {
+  icon: React.ReactNode;
+  value: string;
+  label: string;
+}
 
 interface PageHeroProps {
   title: string;
   description?: string;
   eyebrow?: string;
-  details?: { label: string; value: string }[];
+  stats?: HeroStat[];
+  backgroundImage?: string;
 }
 
 export default function PageHero({
   title,
   description,
-  eyebrow = 'GetPhone',
-  details,
+  eyebrow,
+  stats,
+  backgroundImage = '/herobg4.webp',
 }: PageHeroProps) {
   return (
-    <section className="relative overflow-hidden bg-background-alt pt-28 pb-10 md:pt-32 md:pb-12 lg:pt-36 lg:pb-14">
-      <HeroBackdrop />
-      
-      {/* ── Floating Product Image (Desktop) ── */}
-      <div className="absolute right-[-2%] bottom-0 w-[45%] h-[65%] pointer-events-none hidden md:block opacity-40">
+    <section className="relative overflow-hidden bg-[#0a1628] pt-32 pb-24 md:pt-40 md:pb-32">
+      {/* ── Background Image ── */}
+      <div className="absolute inset-0 w-full h-full">
         <img
-          src="/a56many.webp"
-          alt="ZTE Smartphones"
-          className="w-full h-full object-contain object-right-bottom"
-          style={{
-            filter: 'drop-shadow(0 -10px 40px rgba(0,0,0,0.1))',
-          }}
+          src={backgroundImage}
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover object-right opacity-70"
         />
-        {/* Gradient fade to blend into background (horizontal and vertical) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background-alt via-background-alt/10 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-background-alt/40" />
+        {/* Left-to-right gradient to keep text readable */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/80 to-transparent" />
+        {/* Bottom fade for smooth section transition */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/60 via-transparent to-[#0a1628]/30" />
       </div>
 
-      {/* ── Mobile peeking visual ── */}
-      <div className="absolute -right-8 -bottom-8 w-48 h-48 md:hidden pointer-events-none opacity-20 rotate-[-10deg]">
-        <img
-          src="/a56many.webp"
-          alt="ZTE Smartphones"
-          className="w-full h-full object-contain object-right-bottom"
-        />
-      </div>
+      {/* ── Decorative Elements ── */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#25a93e]/30 to-transparent" />
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#25a93e]/20 to-transparent" />
 
+      {/* ── Content ── */}
       <div className="section-container relative z-10 px-5 lg:px-8">
-        <div className="max-w-3xl border-l-4 border-accent pl-5 sm:pl-6">
-          <div className="mb-5 inline-flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-accent" />
-            <span className="text-[0.72rem] font-bold uppercase tracking-[0.22em] text-primary/70">
+        <div className="max-w-3xl">
+          {eyebrow && (
+            <span className="inline-flex items-center gap-2 text-xs font-bold text-[#25a93e] tracking-widest uppercase mb-4 animate-fade-in">
+              <span className="w-8 h-px bg-[#25a93e]" />
               {eyebrow}
             </span>
-          </div>
+          )}
 
-          <h1 className="font-heading text-4xl font-800 leading-[1.05] tracking-tight text-primary sm:text-5xl lg:text-[3.75rem]">
+          <h1 className="font-heading font-800 text-[2.25rem] md:text-[3rem] lg:text-[3.75rem] text-white leading-[1.08] mb-6 tracking-tight animate-fade-in-up">
             {title}
           </h1>
 
           {description && (
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+            <p className="text-base md:text-lg text-white/70 leading-relaxed font-medium max-w-2xl animate-fade-in-up delay-100">
               {description}
             </p>
           )}
-
-          {details && details.length > 0 && (
-            <div className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
-              {details.map((detail, index) => (
-                <div key={index} className="flex flex-col">
-                  <span className="text-[0.65rem] font-bold uppercase tracking-widest text-muted/60 mb-1">
-                    {detail.label}
-                  </span>
-                  <span className="text-sm font-semibold text-primary/80">
-                    {detail.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
+
+        {/* ── Stat Cards ── */}
+        {stats && stats.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-12 max-w-4xl animate-fade-in-up delay-200">
+            {stats.map((stat, idx) => (
+              <div
+                key={idx}
+                className="bg-white/[0.06] backdrop-blur-md border border-white/[0.08] rounded-2xl p-5 flex items-center gap-4 hover:bg-white/[0.1] hover:border-[#25a93e]/20 transition-all duration-300 group"
+              >
+                <div className="w-11 h-11 rounded-xl bg-[#25a93e]/15 flex items-center justify-center shrink-0 group-hover:bg-[#25a93e]/25 transition-colors duration-300">
+                  {stat.icon}
+                </div>
+                <div>
+                  <div className="font-heading font-800 text-lg text-white">{stat.value}</div>
+                  <div className="text-[0.6875rem] font-semibold text-white/50 tracking-wide uppercase mt-0.5">{stat.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

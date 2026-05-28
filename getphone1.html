@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GetPhone Limited - Corporate Profile</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React and Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Phosphor Icons for elegant tech icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        @page { size: A4; margin: 0; }
+        
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body { 
+            background-color: #f0fdf4; /* Very light green tint for preview */
+            font-family: 'Inter', system-ui, sans-serif; 
+            margin: 0; 
+        }
+        
+        @media print {
+            body { background: none; }
+            .no-print { display: none; }
+            
+            * {
+                filter: none !important;
+                backdrop-filter: none !important;
+            }
+
+            .page-container {
+                page-break-after: always;
+                break-after: page;
+                box-shadow: none !important;
+                margin: 0 !important;
+            }
+        }
+
+        /* Custom Tech Patterns */
+        .dot-pattern-dark {
+            background-image: radial-gradient(#ffffff 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.05;
+        }
+        .dot-pattern-light {
+            background-image: radial-gradient(#143e6d 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.05;
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #44b74a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #143e6d; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Curated high-quality placeholders related to telecom, tech, and devices
+        const IMAGES = {
+            cover: "gp1.PNG",
+            coverPhone: "https://images.unsplash.com/photo-1605236453806-6ff36851218e?auto=format&fit=crop&w=800&q=80",
+            dealPhone: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=600&q=80",
+            securePhone: "https://images.unsplash.com/photo-1614064641913-a53b91bc69ea?auto=format&fit=crop&w=600&q=80",
+            digitalDivide: "gp3.PNG",
+            retailNetwork: "gp2.PNG",
+            hormuudDeal: "https://images.unsplash.com/photo-1520869562399-e772f042f422?auto=format&fit=crop&w=1600&q=80",
+            phoneA36: "a36.PNG",
+            phoneA56: "a56.PNG",
+            phoneA76: "a76.PNG",
+            phoneV80: "v80.PNG",
+            financingBg: "gp4.PNG",
+            impactBg: "gp4.PNG",
+            backCover: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2000&q=80",
+            // New Pan-African Assets
+            africaMap: "getphone_markets.png",
+            logistics: "https://images.unsplash.com/photo-1586528116311-ad8ed38900ad?auto=format&fit=crop&w=1600&q=80",
+            phoneOppo1: "reno.jpg", 
+            phoneOppo2: "oppoa.jpg"
+        };
+
+        // Redesigned Creative Page Component
+        const Page = ({ children, type = 'inside', pageNumber = null, title = "", theme = "light", bgImage = null, pattern = true }) => {
+            const isDark = theme === 'dark';
+
+            return (
+                <div className={`page-container relative w-[210mm] h-[297mm] ${isDark ? 'bg-[#143e6d]' : 'bg-white'} shadow-2xl mb-12 overflow-hidden flex flex-col shrink-0 font-sans`}>
+                    
+                    {/* Background Imagery / Patterns */}
+                    {bgImage && (
+                        <div className="absolute inset-0 z-0">
+                            <img src={bgImage} className="w-full h-full object-cover" alt="Background" />
+                            {isDark && <div className="absolute inset-0 bg-[#143e6d]/90" />}
+                            {!isDark && <div className="absolute inset-0 bg-white/95" />}
+                        </div>
+                    )}
+                    
+                    {pattern && !bgImage && (
+                        <div className={`absolute inset-0 z-0 ${isDark ? 'dot-pattern-dark' : 'dot-pattern-light'}`}></div>
+                    )}
+
+                    {/* Creative Structural Accents */}
+                    {(type !== 'cover' && type !== 'back') && (
+                        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#44b74a] to-[#143e6d] z-30" />
+                    )}
+
+                    {/* Main Content Wrapper */}
+                    <div className="relative z-20 flex flex-col flex-1 p-[20mm]">
+                        
+                        {/* Modern Minimal Header */}
+                        {(type !== 'cover' && type !== 'back') && (
+                            <div className="flex justify-between items-center mb-8 z-50">
+                                <div className={`px-4 py-1.5 rounded-full text-[9pt] font-black tracking-widest uppercase shadow-sm backdrop-blur-md ${isDark ? 'bg-white/10 text-[#44b74a]' : 'bg-[#143e6d]/20 text-[#44b74a] border border-[#143e6d]/10'}`}>
+                                    {title}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Page Content */}
+                        <div className={`flex-1 flex flex-col z-20 ${isDark ? 'text-white' : 'text-gray-800'}`}>
+                            {children}
+                        </div>
+
+                        {/* Floating Footer Tech Style */}
+                        {(type !== 'cover' && type !== 'back') && (
+                            <div className="mt-6 shrink-0 z-50 flex justify-between items-end">
+                                <div className={`flex items-center gap-3 ${isDark ? 'text-white/60' : 'text-[#143e6d]/60'}`}>
+                                    <div className={`w-8 h-[2px] ${isDark ? 'bg-[#44b74a]' : 'bg-[#44b74a]'}`}></div>
+                                    <span className="text-[8pt] font-bold tracking-widest uppercase">GetPhone Limited • 2026</span>
+                                </div>
+                                
+                                {pageNumber && (
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center text-[10pt] font-black ${isDark ? 'bg-[#44b74a] text-white' : 'bg-[#143e6d] text-white'}`}>
+                                        {String(pageNumber).padStart(2, '0')}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        const SectionTitle = ({ children, highlight = "", dark = false }) => (
+            <div className="mb-6 relative">
+                <div className={`absolute -left-4 top-2 w-1.5 h-8 rounded-r-md ${dark ? 'bg-[#44b74a]' : 'bg-[#44b74a]'}`}></div>
+                <h2 className={`text-[24pt] font-black leading-[1.1] tracking-tight ${dark ? 'text-white' : 'text-[#143e6d]'}`}>
+                    {children}
+                    {highlight && <><br/><span className="text-[#44b74a]">{highlight}</span></>}
+                </h2>
+            </div>
+        );
+
+        const App = () => {
+            return (
+                <div className="min-h-screen flex flex-col items-center py-10 print:py-0">
+                    
+                    {/* PAGE 1: COVER (Original Design Maintained) */}
+                    <Page type="cover" theme="dark">
+                        {/* Creative Cover Background */}
+                        <div className="absolute inset-0 z-0 overflow-hidden bg-[#143e6d]">
+                            <img src={IMAGES.cover} className="w-full h-full object-cover opacity-50" alt="Cover" />
+                            {/* Subtle green glow behind the text only */}
+                            <div className="absolute top-[38%] left-[8%] w-[35%] h-[45%] bg-[#44b74a] rounded-full blur-[90px] opacity-20"></div>
+                            {/* Deep navy vignettes */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#143e6d]/90 via-transparent to-[#143e6d]/30"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#143e6d]/60 via-transparent to-transparent"></div>
+                        </div>
+
+                        {/* Top Right Special Shaped Container */}
+                        <div className="absolute top-0 right-0 w-[420px] z-20 pointer-events-none">
+                            <img src="logobg22.PNG" alt="Logo Background Container" className="w-full h-auto object-right-top drop-shadow-2xl" />
+                        </div>
+                        
+                        <div className="absolute top-[50px] right-[35px] z-30 w-44 flex justify-center">
+                            <img src="getphone.PNG" alt="GetPhone Logo" className="w-full object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                        </div>
+
+                        <div className="flex flex-col h-full relative z-10 p-[10mm] justify-between">
+                            
+                            {/* Spacer to maintain flex layout structure */}
+                            <div></div>
+                            
+                            <div className="mt-auto mb-20 relative">
+                                {/* Decorative Tech Lines */}
+                                <div className="absolute -left-10 top-0 h-full w-1 border-l border-dashed border-[#44b74a]/50"></div>
+                                <div className="absolute -left-12 top-5 w-4 h-4 rounded-full bg-[#44b74a]"></div>
+
+                                <div className="pl-6 relative z-10 max-w-3xl">
+                                    <div className="inline-block px-5 py-2 rounded-xl bg-[#44b74a] text-white text-[16pt] font-black tracking-wider uppercase mb-4 shadow-lg border border-[#44b74a]/50">
+                                        Corporate Profile
+                                    </div>
+                                    <h1 className="text-[60pt] font-black leading-[0.95] tracking-tighter text-white mb-6">
+                                        Connecting<br />
+                                        The African<br />
+                                        <span className="text-[#44b74a]">Continent.</span>
+                                    </h1>
+                                    <p className="text-[12pt] font-medium text-white/80 max-w-2xl leading-relaxed">
+                                        Africa's premier smartphone distributor. Bridging the technological divide through powerful supply chains, curated brand partnerships, and innovative market access strategies across East and Southern Africa.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center justify-between border-t border-white/20 pt-6 px-6 text-[9pt] font-bold tracking-widest text-[#44b74a] uppercase">
+                                <div className="flex items-center gap-2"><i className="ph-fill ph-globe-hemisphere-east"></i> Pan-African Operations</div>
+                                <div className="flex items-center gap-2"><i className="ph-fill ph-globe"></i> www.getphonelimited.com</div>
+                            </div>
+                        </div>
+                    </Page>
+
+                    {/* PAGE 2: INTRODUCTION */}
+                    <Page pageNumber={1} title="01. Company Overview">
+                        <div className="flex flex-col h-full">
+                            
+                            <SectionTitle highlight="In Mobile Distribution.">A New Paradigm</SectionTitle>
+                            
+                            <div className="flex gap-6 mb-3">
+                                <div className="w-[55%] flex flex-col">
+                                    <div className="text-[9.5pt] leading-[1.6] text-gray-700 space-y-2.5">
+                                        <p>
+                                            <strong className="text-[#143e6d] font-black text-[10pt]">GetPhone Limited</strong> has rapidly evolved into a formidable pan-African smartphone distributor. We have built upon early strategic successes, which include pioneering device financing in specialized markets like Somalia. Today, we are dedicated to ensuring that quality, affordable technology flows seamlessly into the hands of millions across the continent.
+                                        </p>
+                                        <p>
+                                            We operate at the critical intersection of global tech manufacturing and African retail markets. By establishing robust supply chains, we supply high-demand smart devices to vast networks of retailers, telecom operators, and enterprises across multiple borders.
+                                        </p>
+                                        <div className="bg-[#f0fdf4] border-l-4 border-[#44b74a] p-3 rounded-r-xl my-2.5 shadow-sm relative overflow-hidden">
+                                            <i className="ph-fill ph-quotes text-[28pt] absolute -right-2 -top-2 text-[#44b74a]/10"></i>
+                                            <p className="text-[8.5pt] font-medium text-[#143e6d] italic relative z-10">
+                                                "Our mission transcends simple logistics. We are architecting the distribution pathways that will power Africa's digital revolution, ensuring reliable hardware access from bustling capital cities to remote communities."
+                                            </p>
+                                        </div>
+                                        <p>
+                                            Today, GetPhone is a trusted wholesale partner for world-class brands like <strong>ZTE</strong> and <strong>OPPO</strong>. With strategic hubs established in Nairobi, Dar es Salaam, and Mogadishu, we have the logistical agility and market intelligence to dominate smartphone distribution in East and Southern Africa.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="w-[45%] relative min-h-[200px]">
+                                    <div className="absolute -right-4 -bottom-4 w-32 h-32 bg-[#44b74a]/10 rounded-full blur-2xl -z-10"></div>
+                                    <div className="absolute inset-0 rounded-[1.5rem] overflow-hidden shadow-xl border-4 border-white">
+                                        <img src={IMAGES.digitalDivide} className="w-full h-full object-cover" alt="Company Overview" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#143e6d]/80 via-transparent to-transparent"></div>
+                                        
+                                        <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3 rounded-xl shadow-lg flex items-center gap-3">
+                                            <div className="w-10 h-10 rounded-full bg-[#44b74a] flex items-center justify-center text-white shrink-0 shadow-inner">
+                                                <i className="ph-bold ph-truck text-[16pt]"></i>
+                                            </div>
+                                            <div>
+                                                <div className="text-[7pt] text-gray-500 font-bold uppercase tracking-widest mb-0.5">Scale & Reach</div>
+                                                <div className="text-[9pt] font-black text-[#143e6d] leading-tight">Mastering Pan-African<br/>Supply Chains</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-auto bg-[#143e6d] rounded-[1.5rem] p-5 shadow-2xl relative overflow-hidden shrink-0">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-[#44b74a]/20 rounded-full blur-3xl pointer-events-none"></div>
+                                
+                                <h4 className="text-[10pt] font-black text-[#44b74a] uppercase mb-4 flex items-center gap-2 relative z-10">
+                                    <i className="ph-fill ph-target text-[14pt]"></i> Core Pillars of Operation
+                                </h4>
+
+                                <div className="grid grid-cols-2 gap-2.5 relative z-10">
+                                    <div className="bg-white/5 border border-white/10 p-2.5 rounded-xl flex gap-3 items-start hover:bg-white/10 transition-colors">
+                                        <div className="w-8 h-8 rounded-full bg-[#44b74a] text-[#143e6d] flex items-center justify-center text-[12pt] shrink-0">
+                                            <i className="ph-fill ph-buildings"></i>
+                                        </div>
+                                        <div>
+                                            <h5 className="font-black text-white text-[9pt] mb-0.5">B2B Wholesale Hubs</h5>
+                                            <p className="text-[7.5pt] text-white/70 leading-snug">Managing massive inventory to supply retail networks across multiple African borders.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="bg-white/5 border border-white/10 p-2.5 rounded-xl flex gap-3 items-start hover:bg-white/10 transition-colors">
+                                        <div className="w-8 h-8 rounded-full bg-[#44b74a] text-[#143e6d] flex items-center justify-center text-[12pt] shrink-0">
+                                            <i className="ph-fill ph-handshake"></i>
+                                        </div>
+                                        <div>
+                                            <h5 className="font-black text-white text-[9pt] mb-0.5">Brand Partnerships</h5>
+                                            <p className="text-[7.5pt] text-white/70 leading-snug">Acting as the exclusive or primary distributor for top-tier global OEMs like ZTE and OPPO.</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-white/5 border border-white/10 p-2.5 rounded-xl flex gap-3 items-start hover:bg-white/10 transition-colors">
+                                        <div className="w-8 h-8 rounded-full bg-[#44b74a] text-[#143e6d] flex items-center justify-center text-[12pt] shrink-0">
+                                            <i className="ph-fill ph-chart-line-up"></i>
+                                        </div>
+                                        <div>
+                                            <h5 className="font-black text-white text-[9pt] mb-0.5">Market Penetration</h5>
+                                            <p className="text-[7.5pt] text-white/70 leading-snug">Leveraging localized intelligence to push technology deep into emerging markets.</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-white/5 border border-white/10 p-2.5 rounded-xl flex gap-3 items-start hover:bg-white/10 transition-colors">
+                                        <div className="w-8 h-8 rounded-full bg-[#44b74a] text-[#143e6d] flex items-center justify-center text-[12pt] shrink-0">
+                                            <i className="ph-fill ph-credit-card"></i>
+                                        </div>
+                                        <div>
+                                            <h5 className="font-black text-white text-[9pt] mb-0.5">Localized Financing</h5>
+                                            <p className="text-[7.5pt] text-white/70 leading-snug">Maintaining our legacy of device financing exclusively tailored for the Somali market.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </Page>
+
+                    {/* PAGE 3: MAP / FOOTPRINT */}
+                    <Page pageNumber={2} title="02. Pan-African Footprint">
+                        <div className="flex flex-col h-full">
+                            <SectionTitle highlight="Operations Across Africa">Our Geographic Reach</SectionTitle>
+                            
+                            <p className="text-[10pt] text-gray-700 leading-relaxed mb-4 max-w-3xl shrink-0">
+                                GetPhone's distribution network is rapidly expanding. We have successfully bridged the gap between global manufacturers and African retailers, establishing thriving operations in five key nations across East and Southern Africa.
+                            </p>
+
+                            {/* The Map Graphic - Restrained to fully prevent vertical overflow */}
+                            <div className="w-full flex-1 relative bg-white border border-gray-100 rounded-3xl shadow-sm overflow-hidden mb-5">
+                                <div className="absolute inset-0 z-0 dot-pattern-light opacity-50"></div>
+                                <div className="absolute inset-4 z-10 flex items-center justify-center">
+                                    <img src={IMAGES.africaMap} alt="GetPhone Africa Operations" className="max-w-full max-h-full object-contain" />
+                                </div>
+                            </div>
+
+                            {/* Country Breakdown */}
+                            <div className="grid grid-cols-5 gap-3 shrink-0">
+                                <div className="bg-[#143e6d] rounded-2xl p-4 text-center border-b-4 border-[#44b74a] shadow-md">
+                                    <i className="ph-fill ph-map-pin text-[20pt] text-[#44b74a] mb-2"></i>
+                                    <h4 className="text-[10pt] font-black text-white uppercase">Kenya</h4>
+                                    <p className="text-[7pt] text-white/70 uppercase tracking-wide mt-1">Regional HQ Hub</p>
+                                </div>
+                                <div className="bg-white border border-gray-200 rounded-2xl p-4 text-center shadow-sm">
+                                    <i className="ph-fill ph-map-pin text-[20pt] text-[#143e6d] mb-2"></i>
+                                    <h4 className="text-[10pt] font-black text-[#143e6d] uppercase">Tanzania</h4>
+                                    <p className="text-[7pt] text-gray-500 uppercase tracking-wide mt-1">Major Dist. Center</p>
+                                </div>
+                                <div className="bg-white border border-gray-200 rounded-2xl p-4 text-center shadow-sm">
+                                    <i className="ph-fill ph-map-pin text-[20pt] text-[#143e6d] mb-2"></i>
+                                    <h4 className="text-[10pt] font-black text-[#143e6d] uppercase">Somalia</h4>
+                                    <p className="text-[7pt] text-gray-500 uppercase tracking-wide mt-1">Dist. & Financing</p>
+                                </div>
+                                <div className="bg-white border border-gray-200 rounded-2xl p-4 text-center shadow-sm">
+                                    <i className="ph-fill ph-map-pin text-[20pt] text-[#143e6d] mb-2"></i>
+                                    <h4 className="text-[10pt] font-black text-[#143e6d] uppercase">Mozambique</h4>
+                                    <p className="text-[7pt] text-gray-500 uppercase tracking-wide mt-1">Southern Expansion</p>
+                                </div>
+                                <div className="bg-white border border-gray-200 rounded-2xl p-4 text-center shadow-sm">
+                                    <i className="ph-fill ph-map-pin text-[20pt] text-[#143e6d] mb-2"></i>
+                                    <h4 className="text-[10pt] font-black text-[#143e6d] uppercase">Lesotho</h4>
+                                    <p className="text-[7pt] text-gray-500 uppercase tracking-wide mt-1">Emerging Market</p>
+                                </div>
+                            </div>
+                        </div>
+                    </Page>
+
+                    {/* PAGE 4: VISION & VALUES */}
+                    <Page pageNumber={3} title="03. Vision & Values" theme="dark" bgImage={IMAGES.impactBg}>
+                        <div className="flex flex-col h-full relative z-10">
+                            
+                            <div className="grid grid-cols-2 gap-6 mb-10">
+                                <div className="bg-gradient-to-br from-[#1e4e8c]/90 to-[#143e6d]/90 backdrop-blur-md p-8 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden">
+                                    <i className="ph-fill ph-binoculars text-[#44b74a]/20 text-[80pt] absolute -bottom-6 -right-6"></i>
+                                    <h2 className="text-[12pt] font-bold uppercase tracking-widest text-[#44b74a] mb-2">Our Vision</h2>
+                                    <p className="text-[16pt] leading-snug font-medium text-white relative z-10">
+                                        To be the most efficient, trusted, and expansive technology distributor in Africa.
+                                    </p>
+                                </div>
+                                <div className="bg-gradient-to-br from-[#1e4e8c]/90 to-[#143e6d]/90 backdrop-blur-md p-8 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden">
+                                    <i className="ph-fill ph-rocket-launch text-[#44b74a]/20 text-[80pt] absolute -bottom-6 -right-6"></i>
+                                    <h2 className="text-[12pt] font-bold uppercase tracking-widest text-[#44b74a] mb-2">Our Mission</h2>
+                                    <p className="text-[12pt] leading-snug font-medium text-white relative z-10">
+                                        To empower African markets by building unbreakable supply chains that deliver top-tier global smartphone brands reliably and affordably.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <SectionTitle highlight="The Foundation" dark={true}>Core Values</SectionTitle>
+                            
+                            <div className="grid grid-cols-4 gap-4 flex-1">
+                                {[
+                                    { id: 'Reliability', i: 'ph-shield-check', t: 'Reliability', d: 'Consistent supply chains and authentic hardware guaranteed.' },
+                                    { id: 'Scale', i: 'ph-trend-up', t: 'Scale', d: 'Continuously expanding our footprint across the continent.' },
+                                    { id: 'Partnership', i: 'ph-handshake', t: 'Partnership', d: 'Building lasting alliances with OEMs and local retailers.' },
+                                    { id: 'Agility', i: 'ph-lightning', t: 'Agility', d: 'Adapting swiftly to diverse African market dynamics.' },
+                                    { id: 'Inclusion', i: 'ph-users-three', t: 'Inclusion', d: 'Connecting underserved regions to global technology.' },
+                                    { id: 'Excellence', i: 'ph-star', t: 'Excellence', d: 'Striving for peak service delivery in wholesale logistics.' },
+                                    { id: 'Transparency', i: 'ph-eye', t: 'Transparency', d: 'Honesty and openness in our pricing and B2B processes.' },
+                                    { id: 'Innovation', i: 'ph-lightbulb', t: 'Innovation', d: 'Leveraging smart finance where it accelerates adoption.' }
+                                ].map((v) => (
+                                    <div key={v.id} className="bg-white/5 backdrop-blur-sm border border-white/10 p-5 rounded-3xl flex flex-col items-center text-center hover:bg-white/10 transition-colors shadow-lg">
+                                        <div className="w-14 h-14 rounded-2xl bg-[#44b74a] text-[#143e6d] flex items-center justify-center text-[24pt] mb-4 shadow-lg shadow-[#44b74a]/20">
+                                            <i className={`ph-fill ${v.i}`}></i>
+                                        </div>
+                                        <h4 className="text-[11pt] font-black text-white uppercase tracking-wide mb-2">{v.t}</h4>
+                                        <p className="text-[8.5pt] text-white/70 leading-relaxed">{v.d}</p>
+                                    </div>
+                                ))}
+                            </div>
+
+                        </div>
+                    </Page>
+
+                    {/* PAGE 5: BRAND PORTFOLIO (ZTE & OPPO) */}
+                    <Page pageNumber={4} title="04. Brand Portfolio">
+                        <div className="flex flex-col h-full">
+                            <SectionTitle highlight="Strategic OEM Partnerships">Global Brands.</SectionTitle>
+                            
+                            <p className="text-[10pt] text-gray-700 mb-8 leading-relaxed max-w-3xl">
+                                We curate our product portfolio carefully, partnering with global smartphone manufacturers who understand the nuances of the African market. Our dual-brand strategy ensures we cater to both value-driven consumers and premium-seeking demographics.
+                            </p>
+
+                            {/* OPPO Section */}
+                            <div className="mb-6 bg-gradient-to-r from-gray-900 to-gray-800 rounded-[2rem] p-6 text-white shadow-xl relative overflow-hidden flex flex-col">
+                                <div className="absolute top-0 right-0 w-64 h-full bg-white/5 skew-x-12 -mr-10 pointer-events-none"></div>
+                                
+                                <div className="flex justify-between items-center border-b border-white/20 pb-4 mb-4 relative z-10">
+                                    <h3 className="text-[24pt] font-black tracking-widest text-[#44b74a]">OPPO</h3>
+                                    <span className="text-[9pt] font-bold uppercase tracking-widest bg-white/10 px-4 py-1.5 rounded-full">Premium & Mid-Tier</span>
+                                </div>
+                                
+                                <div className="grid grid-cols-2 gap-6 relative z-10">
+                                    <div className="flex gap-4 items-center">
+                                        <div className="w-[90px] h-[120px] bg-white/10 rounded-xl flex items-center justify-center shrink-0 overflow-hidden">
+                                            <img src={IMAGES.phoneOppo1} className="w-full h-full object-cover opacity-80" alt="OPPO Device" />
+                                        </div>
+                                        <div>
+                                            <h4 className="text-[12pt] font-bold text-white mb-1">Reno Series</h4>
+                                            <p className="text-[8pt] text-white/70 leading-snug">Flagship-level photography, sleek design, and rapid charging for the premium African consumer.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4 items-center">
+                                        <div className="w-[90px] h-[120px] bg-white/10 rounded-xl flex items-center justify-center shrink-0 overflow-hidden">
+                                            <img src={IMAGES.phoneOppo2} className="w-full h-full object-cover opacity-80" alt="OPPO Device" />
+                                        </div>
+                                        <div>
+                                            <h4 className="text-[12pt] font-bold text-white mb-1">A Series</h4>
+                                            <p className="text-[8pt] text-white/70 leading-snug">Reliable performance, large batteries, and immersive displays designed for everyday excellence.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* ZTE Section */}
+                            <div className="flex-1 bg-white border border-gray-200 rounded-[2rem] p-6 shadow-xl relative overflow-hidden flex flex-col">
+                                <div className="absolute top-0 right-0 w-64 h-full bg-[#143e6d]/5 skew-x-12 -mr-10 pointer-events-none"></div>
+                                
+                                <div className="flex justify-between items-center border-b border-gray-200 pb-4 mb-4 relative z-10">
+                                    <h3 className="text-[24pt] font-black tracking-widest text-[#143e6d]">ZTE</h3>
+                                    <span className="text-[9pt] font-bold uppercase tracking-widest bg-[#143e6d]/10 text-[#143e6d] px-4 py-1.5 rounded-full">Value & Durability</span>
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-6 relative z-10 flex-1">
+                                    <div className="flex gap-4 items-center">
+                                        <div className="w-[90px] h-[120px] shrink-0 flex items-center justify-center">
+                                            <img src={IMAGES.phoneA36} className="max-w-full max-h-full object-contain" alt="ZTE Blade" />
+                                        </div>
+                                        <div>
+                                            <h4 className="text-[12pt] font-bold text-[#143e6d] mb-1">Blade Series (Entry)</h4>
+                                            <p className="text-[8pt] text-gray-600 leading-snug">Massive battery capacities and solid durability at highly accessible entry-level price points.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4 items-center">
+                                        <div className="w-[90px] h-[120px] shrink-0 flex items-center justify-center">
+                                            <img src={IMAGES.phoneA56} className="max-w-full max-h-full object-contain" alt="ZTE Advanced" />
+                                        </div>
+                                        <div>
+                                            <h4 className="text-[12pt] font-bold text-[#143e6d] mb-1">Blade 5G (Mid-Tier)</h4>
+                                            <p className="text-[8pt] text-gray-600 leading-snug">Bringing affordable 5G connectivity and superior storage to the growing middle class.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </Page>
+
+                    {/* PAGE 6: BUSINESS MODELS (DISTRIBUTION vs FINANCING) */}
+                    <Page pageNumber={5} title="05. Business Models">
+                        <div className="flex flex-col h-full">
+                            
+                            <SectionTitle highlight="Our Dual Engine Approach.">Market Strategies</SectionTitle>
+                            <p className="text-[9.5pt] text-gray-700 leading-relaxed max-w-3xl mb-6">
+                                GetPhone operates on two distinct but complementary business models. While our primary focus is pan-African wholesale distribution, we maintain a specialized, highly successful device financing division exclusively serving the Somali market.
+                            </p>
+
+                            {/* Primary Model: Distribution */}
+                            <div className="bg-white rounded-3xl p-6 shadow-xl border border-gray-100 mb-6 relative overflow-hidden">
+                                <div className="absolute left-0 top-0 w-2 h-full bg-[#143e6d]"></div>
+                                <div className="flex items-center gap-4 mb-4">
+                                    <div className="w-14 h-14 rounded-full bg-[#143e6d] text-white flex items-center justify-center text-[24pt] shadow-md">
+                                        <i className="ph-fill ph-truck"></i>
+                                    </div>
+                                    <div>
+                                        <div className="text-[8pt] font-black text-[#44b74a] uppercase tracking-widest mb-0.5">Primary Model (Kenya, Tanzania, Mozambique, Lesotho)</div>
+                                        <h3 className="text-[18pt] font-black text-[#143e6d] leading-none">B2B Wholesale Distribution</h3>
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-3 gap-4 text-[8.5pt] text-gray-700 mt-4">
+                                    <div className="bg-[#f8fcf9] p-4 rounded-xl border border-gray-100">
+                                        <i className="ph-bold ph-storefront text-[16pt] text-[#44b74a] mb-2"></i>
+                                        <h4 className="font-bold text-[#143e6d] mb-1 text-[9pt]">Retail Network Supply</h4>
+                                        <p>Supplying massive volumes of OPPO and ZTE devices to independent electronics retailers and chain stores.</p>
+                                    </div>
+                                    <div className="bg-[#f8fcf9] p-4 rounded-xl border border-gray-100">
+                                        <i className="ph-bold ph-broadcast text-[16pt] text-[#44b74a] mb-2"></i>
+                                        <h4 className="font-bold text-[#143e6d] mb-1 text-[9pt]">Telco Partnerships</h4>
+                                        <p>Fulfilling hardware requirements for national telecommunications providers across the region.</p>
+                                    </div>
+                                    <div className="bg-[#f8fcf9] p-4 rounded-xl border border-gray-100">
+                                        <i className="ph-bold ph-shield-check text-[16pt] text-[#44b74a] mb-2"></i>
+                                        <h4 className="font-bold text-[#143e6d] mb-1 text-[9pt]">Warranty & Support</h4>
+                                        <p>Acting as the official channel for authentic devices, managing regional warranties and B2B after-sales support.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Secondary Model: Somalia Financing */}
+                            <div className="bg-[#143e6d] rounded-3xl p-6 shadow-2xl border border-[#143e6d] relative overflow-hidden flex-1 flex flex-col text-white">
+                                <div className="absolute right-0 top-0 w-64 h-64 bg-[#44b74a]/10 rounded-bl-full pointer-events-none"></div>
+                                <div className="absolute left-0 top-0 w-2 h-full bg-[#44b74a]"></div>
+                                
+                                <div className="flex items-center gap-4 mb-4 relative z-10">
+                                    <div className="w-14 h-14 rounded-full bg-[#44b74a] text-[#143e6d] flex items-center justify-center text-[24pt] shadow-md">
+                                        <i className="ph-fill ph-credit-card"></i>
+                                    </div>
+                                    <div>
+                                        <div className="text-[8pt] font-black text-[#44b74a] uppercase tracking-widest mb-0.5">Specialized Model (Somalia Exclusive)</div>
+                                        <h3 className="text-[18pt] font-black text-white leading-none">Smart Device Financing</h3>
+                                    </div>
+                                </div>
+                                
+                                <p className="text-[9pt] text-white/80 mb-4 max-w-3xl relative z-10 leading-relaxed">
+                                    In Somalia, alongside distribution, GetPhone operates a highly successful B2C financing model designed to bridge the digital divide. This localized innovation relies on deep tech integrations and strategic telecom alliances.
+                                </p>
+
+                                <div className="grid grid-cols-2 gap-4 flex-1 relative z-10">
+                                    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 flex flex-col justify-center">
+                                        <h4 className="text-[10pt] font-black text-[#44b74a] uppercase mb-2 flex items-center gap-2"><i className="ph-fill ph-handshake"></i> Hormuud Telecom Alliance</h4>
+                                        <p className="text-[8pt] text-white/90 leading-snug">
+                                            Our strategic partnership with Somalia's leading telco allows us to offer unmatched value. Customers financing devices through GetPhone receive exclusive connectivity perks, deeply incentivizing digital adoption.
+                                        </p>
+                                    </div>
+                                    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 flex flex-col justify-center">
+                                        <h4 className="text-[10pt] font-black text-[#44b74a] uppercase mb-2 flex items-center gap-2"><i className="ph-fill ph-money"></i> EVC Plus & VDMS Tech</h4>
+                                        <p className="text-[8pt] text-white/90 leading-snug">
+                                            Flexible daily or weekly micro-installments are collected seamlessly via automated EVC Plus integration. Risk is mitigated using automated VDMS lock technology embedded in the distributed devices.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </Page>
+
+                    {/* PAGE 7: SOCIAL & ECONOMIC IMPACT (NEW PAGE 6) */}
+                    <Page pageNumber={6} title="06. Social & Economic Impact">
+                        <div className="flex flex-col h-full">
+                            
+                            <SectionTitle highlight="Empowering Communities.">Beyond Distribution</SectionTitle>
+                            <p className="text-[9.5pt] text-gray-700 leading-relaxed max-w-3xl mb-5 shrink-0">
+                                At GetPhone, our success is measured not just by the sheer volume of devices we distribute, but by the tangible economic and social empowerment those devices unlock in emerging markets across the continent. We don't just move boxes; we supply the foundational hardware for Africa's digital future.
+                            </p>
+
+                            {/* Big Image Section */}
+                            <div className="w-full flex-1 relative rounded-[2rem] overflow-hidden mb-6 shadow-2xl border-4 border-white shrink-0 min-h-[250px]">
+                                <img src={IMAGES.retailNetwork} alt="Retail Network Empowerment" className="w-full h-full object-cover" />
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#143e6d]/95 via-[#143e6d]/70 to-transparent"></div>
+                                
+                                <div className="absolute top-0 left-0 w-full h-full p-8 flex flex-col justify-center max-w-2xl">
+                                    <div className="inline-block px-4 py-1.5 rounded-full bg-[#44b74a] text-white text-[7.5pt] font-black tracking-widest uppercase mb-4 shadow-lg w-max border border-[#44b74a]/50">
+                                        The Ripple Effect
+                                    </div>
+                                    <h3 className="text-[32pt] font-black text-white leading-[1.05] mb-4">
+                                        Catalyzing Africa's<br/>Tech Revolution.
+                                    </h3>
+                                    <p className="text-[10pt] text-white/90 leading-[1.6]">
+                                        Every smartphone we supply acts as a micro-hub for economic activity. By building reliable, affordable pipelines for high-quality devices, we are directly enabling mobile banking, e-learning, and digital entrepreneurship in communities that were previously marginalized from the global digital economy.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Impact Pillars */}
+                            <div className="grid grid-cols-3 gap-4 shrink-0">
+                                <div className="bg-[#f8fcf9] p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div className="w-12 h-12 rounded-full bg-[#44b74a]/10 text-[#44b74a] flex items-center justify-center text-[20pt] mb-4 border border-[#44b74a]/20">
+                                        <i className="ph-fill ph-storefront"></i>
+                                    </div>
+                                    <h4 className="font-black text-[#143e6d] mb-1.5 text-[10pt]">Retailer Empowerment</h4>
+                                    <p className="text-[8pt] text-gray-600 leading-snug">
+                                        We empower thousands of local, independent tech retailers by providing them with consistent inventory, authentic warranties, and massive B2B scale advantages.
+                                    </p>
+                                </div>
+                                
+                                <div className="bg-[#f8fcf9] p-5 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div className="w-12 h-12 rounded-full bg-[#44b74a]/10 text-[#44b74a] flex items-center justify-center text-[20pt] mb-4 border border-[#44b74a]/20">
+                                        <i className="ph-fill ph-wallet"></i>
+                                    </div>
+                                    <h4 className="font-black text-[#143e6d] mb-1.5 text-[10pt]">Financial Inclusion</h4>
+                                    <p className="text-[8pt] text-gray-600 leading-snug">
+                                        By distributing the smart devices required to access mobile money platforms, we serve as the foundational hardware layer for Africa's booming fintech ecosystem.
+                                    </p>
+                                </div>
+
+                                <div className="bg-[#143e6d] p-5 rounded-2xl border border-[#143e6d] shadow-xl text-white relative overflow-hidden">
+                                    <div className="absolute -right-4 -bottom-4 w-32 h-32 bg-[#44b74a]/20 rounded-full blur-2xl pointer-events-none"></div>
+                                    <div className="w-12 h-12 rounded-full bg-[#44b74a] text-[#143e6d] flex items-center justify-center text-[20pt] mb-4 relative z-10 shadow-sm">
+                                        <i className="ph-fill ph-globe-hemisphere-east"></i>
+                                    </div>
+                                    <h4 className="font-black text-[#44b74a] mb-1.5 text-[10pt] relative z-10">DE4A Alignment</h4>
+                                    <p className="text-[8pt] text-white/80 leading-snug relative z-10">
+                                        Our strategic goals align perfectly with the Digital Economy for Africa (DE4A) initiative, actively ensuring no community is left behind in the transition to global digitalization.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </Page>
+
+                    {/* PAGE 8: BACK COVER (Original Design Maintained) */}
+                    <Page type="back" theme="dark">
+                         <div className="absolute inset-0 z-0 overflow-hidden bg-[#143e6d]">
+                            <img src={IMAGES.backCover} className="w-full h-full object-cover opacity-20 mix-blend-luminosity" alt="Cover" />
+                            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-[#143e6d] via-transparent to-[#143e6d]/80"></div>
+                        </div>
+
+                        <div className="flex flex-col h-full items-center text-center relative z-10 p-[10mm] justify-center">
+                            
+                            <div className="w-56 mb-12 bg-white p-5 rounded-2xl shadow-2xl">
+                                <img src="getphone.PNG" alt="GetPhone" className="w-full object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                            </div>
+
+                            <div className="w-full max-w-3xl">
+                                <h1 className="text-[46pt] leading-[1.05] mb-6 tracking-tighter font-black text-white uppercase">
+                                    Powering Africa's<br />
+                                    <span className="text-[#44b74a]">Digital Economy.</span>
+                                </h1>
+                                
+                                <p className="mx-auto text-[12pt] text-white/80 font-medium mb-16 leading-relaxed px-12 italic border-l-4 border-r-4 border-[#44b74a]">
+                                    "Your trusted partner in smartphone distribution across East and Southern Africa. Connecting global innovation with local markets."
+                                </p>
+
+                                {/* Maintained the beautiful 2x2 grid design for the new contact info */}
+                                <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto text-left">
+                                    <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors">
+                                        <div className="w-12 h-12 shrink-0 rounded-full bg-[#44b74a] flex items-center justify-center text-[#143e6d]">
+                                            <i className="ph-fill ph-globe text-[20pt]"></i>
+                                        </div>
+                                        <div>
+                                            <div className="text-[7.5pt] uppercase tracking-widest font-bold text-[#44b74a] mb-0.5">Website & Email</div>
+                                            <div className="text-[10pt] font-medium text-white leading-snug">www.getphonelimited.com</div>
+                                            <div className="text-[10pt] font-medium text-white/80 leading-snug">info@getphonelimited.com</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors">
+                                        <div className="w-12 h-12 shrink-0 rounded-full bg-[#44b74a] flex items-center justify-center text-[#143e6d]">
+                                            <i className="ph-fill ph-map-pin text-[20pt]"></i>
+                                        </div>
+                                        <div>
+                                            <div className="text-[7.5pt] uppercase tracking-widest font-bold text-[#44b74a] mb-0.5">Kenya Hub</div>
+                                            <div className="text-[10pt] font-medium text-white leading-snug">Nairobi Office</div>
+                                            <div className="text-[10pt] font-medium text-white/80 leading-snug">+254 795 619 255</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors">
+                                        <div className="w-12 h-12 shrink-0 rounded-full bg-[#44b74a] flex items-center justify-center text-[#143e6d]">
+                                            <i className="ph-fill ph-map-pin text-[20pt]"></i>
+                                        </div>
+                                        <div>
+                                            <div className="text-[7.5pt] uppercase tracking-widest font-bold text-[#44b74a] mb-0.5">Tanzania Hub</div>
+                                            <div className="text-[10pt] font-medium text-white leading-snug">Dar es Salaam</div>
+                                            <div className="text-[10pt] font-medium text-white/80 leading-snug">+255 792 192 663</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors">
+                                        <div className="w-12 h-12 shrink-0 rounded-full bg-[#44b74a] flex items-center justify-center text-[#143e6d]">
+                                            <i className="ph-fill ph-map-pin text-[20pt]"></i>
+                                        </div>
+                                        <div>
+                                            <div className="text-[7.5pt] uppercase tracking-widest font-bold text-[#44b74a] mb-0.5">Somalia Hub</div>
+                                            <div className="text-[10pt] font-medium text-white leading-snug">Mogadishu</div>
+                                            <div className="text-[10pt] font-medium text-white/80 leading-snug">+252 615 051 729</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Page>
+
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
