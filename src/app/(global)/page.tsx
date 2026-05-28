@@ -53,21 +53,21 @@ export default function GlobalHome() {
         {/* Background image */}
         <div className="absolute inset-0 w-full h-full bg-white">
           {/* Desktop background */}
-          <div className="absolute top-0 right-0 hidden md:block w-full md:w-[60%] lg:w-[55%] h-full">
+          <div className="absolute top-0 right-0 hidden md:block w-full h-full opacity-90">
             <img 
-              src="/herobg2.webp" 
+              src="/herobg3.webp" 
               alt="Global Operations" 
-              className="w-full h-full object-cover object-[75%_center]"
+              className="w-full h-full object-cover object-right"
             />
-            {/* Gradient fade only on the left edge of the image to keep the people clear */}
-            <div className="absolute inset-y-0 left-0 w-[50%] bg-gradient-to-r from-white via-white/80 to-transparent" />
+            {/* Gradient fade to blend the image into the left side content */}
+            <div className="absolute inset-y-0 left-0 w-[60%] bg-gradient-to-r from-white via-white/80 to-transparent" />
           </div>
           {/* Mobile/Tablet Visual */}
           <div className="absolute inset-0 md:hidden pointer-events-none overflow-hidden">
              <img 
-               src="/herobg2.webp" 
+               src="/herobg3.webp" 
                alt="Global Operations" 
-               className="w-full h-full object-cover object-[70%_center] opacity-15"
+               className="w-full h-full object-cover object-right"
              />
              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent" />
           </div>
