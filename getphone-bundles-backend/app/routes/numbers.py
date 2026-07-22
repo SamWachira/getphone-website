@@ -10,7 +10,6 @@ from app.models import BundleNumber
 from app.auth import get_current_user
 from app.services import provision_bundle, _get_next_midnight
 from app.schemas import AddNumberRequest, AddNumberResponse, NumberResponse, StatusMessageResponse, ProvisioningResult
-from app.hormuud_client import HormuudClient
 
 
 router = APIRouter(prefix="/numbers", tags=["numbers"])
