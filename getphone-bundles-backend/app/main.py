@@ -33,17 +33,35 @@ app = FastAPI(
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# CORS — only allow requests from Getphone's Firebase Hosting domains
-# Security: Restrict methods and headers to only those actually used (H1)
+# CORS — allow Getphone frontend domains and regex fallback
 origins = [origin.strip() for origin in settings.CORS_ORIGINS.split(",") if origin.strip()]
+if "https://getphonelimited.com" not in origins:
+    origins.append("https://getphonelimited.com")
+if "https://www.getphonelimited.com" not in origins:
+    origins.append("https://www.getphonelimited.com")
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
+    allow_origin_regex=r"https://.*\.getphonelimited\.com|https://.*\.web\.app|https://.*\.firebaseapp\.com",
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PATCH", "OPTIONS"],
-    allow_headers=["Authorization", "Content-Type"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
+
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    logging.error("Unhandled exception on %s: %s", request.url.path, str(exc), exc_info=True)
+    origin = request.headers.get("origin", "*")
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "Internal server error", "error": str(exc)},
+        headers={
+            "Access-Control-Allow-Origin": origin,
+            "Access-Control-Allow-Credentials": "true",
+        },
+    )
 
 
 @app.get("/health")
