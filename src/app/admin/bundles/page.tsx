@@ -500,7 +500,7 @@ function AdminDashboard({ user }: { user: User }) {
                             {log.response_status || "—"}
                           </span>
                         </td>
-                        <td className="px-4 py-3 text-gray-500 hidden lg:table-cell max-w-[250px] truncate">{log.response_message || "—"}</td>
+                        <td className="px-4 py-3 text-gray-500 hidden lg:table-cell max-w-[350px] truncate" title={log.response_message || ""}>{log.response_message || "—"}</td>
                       </tr>
                     ))}
                     {logs.length === 0 && (
