@@ -16,6 +16,7 @@ const API_BASE = "https://getphone-bundles-api-577769500526.us-central1.run.app"
 // ── Types ────────────────────────────────────────────────────────────
 interface BundleNumber {
   mobile_number: string;
+  network?: string;
   status: string;
   last_attempt_at: string | null;
   last_success_at: string | null;
@@ -39,6 +40,7 @@ interface DashboardData {
 interface LogEntry {
   id: number;
   mobile_number: string;
+  network?: string;
   call_type: string;
   triggered_by: string;
   http_status: number | null;
@@ -73,7 +75,7 @@ function fmtDate(d: string | null) {
   });
 }
 
-// ── Status Badge ─────────────────────────────────────────────────────
+// ── Status & Network Badges ──────────────────────────────────────────
 function StatusBadge({ status }: { status: string }) {
   const colors: Record<string, string> = {
     active: "bg-green-100 text-green-800",
@@ -83,6 +85,19 @@ function StatusBadge({ status }: { status: string }) {
   return (
     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${colors[status] || "bg-gray-100 text-gray-800"}`}>
       {status}
+    </span>
+  );
+}
+
+function NetworkBadge({ network, number }: { network?: string; number?: string }) {
+  const net = (network || (number?.startsWith("68") ? "somnet" : "hormuud")).toLowerCase();
+  const isSomnet = net === "somnet";
+
+  return (
+    <span className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider ${
+      isSomnet ? "bg-blue-100 text-blue-800 border border-blue-200" : "bg-emerald-100 text-emerald-800 border border-emerald-200"
+    }`}>
+      {isSomnet ? "Somnet" : "Hormuud"}
     </span>
   );
 }
@@ -386,6 +401,7 @@ function AdminDashboard({ user }: { user: User }) {
                   <thead className="bg-gray-50 border-b border-gray-100">
                     <tr>
                       <th className="text-left px-4 py-3 font-semibold text-gray-600">Number</th>
+                      <th className="text-left px-4 py-3 font-semibold text-gray-600">Network</th>
                       <th className="text-left px-4 py-3 font-semibold text-gray-600">Status</th>
                       <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden md:table-cell">Last Success</th>
                       <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden lg:table-cell">Next Run</th>
@@ -398,6 +414,7 @@ function AdminDashboard({ user }: { user: User }) {
                     {numbers.map((n) => (
                       <tr key={n.mobile_number} className="hover:bg-gray-50/50 transition">
                         <td className="px-4 py-3 font-mono font-medium text-gray-900">{n.mobile_number}</td>
+                        <td className="px-4 py-3"><NetworkBadge network={n.network} number={n.mobile_number} /></td>
                         <td className="px-4 py-3"><StatusBadge status={n.status} /></td>
                         <td className="px-4 py-3 text-gray-500 hidden md:table-cell">{fmtDate(n.last_success_at)}</td>
                         <td className="px-4 py-3 text-gray-500 hidden lg:table-cell">{fmtDate(n.next_run_at)}</td>
