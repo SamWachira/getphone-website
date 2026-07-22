@@ -43,6 +43,9 @@ next-env.d.ts
 # reference / briefing files (not part of production)
 getphone.html
 getphone_website_brief.md
+getphone benefits/
+getphone benefits
+
 
 # firebase
 .firebase

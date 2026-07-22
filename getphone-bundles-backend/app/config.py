@@ -7,14 +7,11 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str
 
-    # Hormuud API
-    HORMUUD_BASE_URL: str = "https://hintegrations.hormuud.com/api"
-    HORMUUD_USERNAME: str
-    HORMUUD_PASSWORD: str
-
-    # Offer configuration
-    OFFER_ID: str = "getPhone_24hours_0.25USD"
-    PRODUCT_ID: str = "3000060"
+    # Topup API (Hormuud & Somnet)
+    TOPUP_API_BASE_URL: str = "https://opsapi.hormuud.com/api/v1"
+    TOPUP_API_USERNAME: str
+    TOPUP_API_PASSWORD: str
+    DEFAULT_TOPUP_AMOUNT: float = 0.25
 
     # Scheduling and dedup
     SAFETY_GUARD_HOURS: int = 6

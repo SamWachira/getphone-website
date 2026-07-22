@@ -10,6 +10,7 @@ class BundleNumber(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     mobile_number = Column(String(20), unique=True, nullable=False, index=True)
+    network = Column(String(20), nullable=False, default="hormuud", index=True)
     status = Column(String(20), nullable=False, default="active")
 
     last_attempt_at = Column(DateTime, nullable=True)
@@ -27,15 +28,17 @@ class BundleNumber(Base):
 
 
 class BundleCallLog(Base):
-    """Records every Hormuud API call attempt for audit and troubleshooting."""
+    """Records every top-up API call attempt for audit and troubleshooting."""
 
     __tablename__ = "bundle_call_logs"
 
     id = Column(Integer, primary_key=True, index=True)
     mobile_number = Column(String(20), nullable=False, index=True)
+    network = Column(String(20), nullable=True)
 
     call_type = Column(String(50), nullable=False, default="subscribe")
     triggered_by = Column(String(50), nullable=False)
+    transfer_id = Column(String(100), nullable=True)
 
     http_status = Column(Integer, nullable=True)
     response_code = Column(String(20), nullable=True)

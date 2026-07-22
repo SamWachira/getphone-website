@@ -52,8 +52,10 @@ async def get_logs(
         LogEntry(
             id=log.id,
             mobile_number=log.mobile_number,
+            network=log.network or ("somnet" if log.mobile_number.startswith("68") else "hormuud"),
             call_type=log.call_type,
             triggered_by=log.triggered_by,
+            transfer_id=log.transfer_id,
             http_status=log.http_status,
             response_code=log.response_code,
             response_status=log.response_status,
@@ -92,7 +94,15 @@ async def get_dashboard(
         db.query(BundleCallLog)
         .filter(BundleCallLog.attempted_at >= today_start_utc)
         .filter(BundleCallLog.response_status == "success")
-        .filter(BundleCallLog.call_type == "subscribe")
+        .filter(BundleCallLog.call_type.in_(["subscribe", "topup"]))
+        .count()
+    )
+
+    failed_today = (
+        db.query(BundleCallLog)
+        .filter(BundleCallLog.attempted_at >= today_start_utc)
+        .filter(BundleCallLog.response_status == "error")
+        .filter(BundleCallLog.call_type.in_(["subscribe", "topup"]))
         .count()
     )
 

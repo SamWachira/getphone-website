@@ -17,7 +17,7 @@ class AddNumberRequest(BaseModel):
         if not is_valid_mobile_number(normalized):
             raise ValueError(
                 "Invalid mobile number format. "
-                "Must be exactly 9 digits, not starting with 0. Example: 610000000"
+                "Must be a 9-digit Hormuud (61, 77) or Somnet (68) mobile number. Example: 610000000 or 689000000"
             )
         return normalized
 
@@ -30,6 +30,7 @@ class HealthResponse(BaseModel):
 
 class NumberResponse(BaseModel):
     mobile_number: str
+    network: str = "hormuud"
     status: str
     last_attempt_at: Optional[datetime] = None
     last_success_at: Optional[datetime] = None
@@ -43,6 +44,8 @@ class NumberResponse(BaseModel):
 
 class ProvisioningResult(BaseModel):
     status: str
+    network: Optional[str] = None
+    transfer_id: Optional[str] = None
     http_status: Optional[int] = None
     code: Optional[str] = None
     message: str
@@ -50,6 +53,7 @@ class ProvisioningResult(BaseModel):
 
 class AddNumberResponse(BaseModel):
     mobile_number: str
+    network: str = "hormuud"
     provisioning_result: ProvisioningResult
 
 
@@ -70,8 +74,10 @@ class DashboardResponse(BaseModel):
 class LogEntry(BaseModel):
     id: int
     mobile_number: str
+    network: Optional[str] = None
     call_type: str
     triggered_by: str
+    transfer_id: Optional[str] = None
     http_status: Optional[int] = None
     response_code: Optional[str] = None
     response_status: Optional[str] = None

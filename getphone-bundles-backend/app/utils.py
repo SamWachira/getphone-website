@@ -23,10 +23,25 @@ def normalize_mobile_number(raw_number: str) -> str:
 
 def is_valid_mobile_number(number: str) -> bool:
     """
-    Validate that a normalized mobile number meets Hormuud's format.
+    Validate that a normalized mobile number is a valid Hormuud (61, 77) or Somnet (68) MSISDN.
 
     Rules:
     - Exactly 9 digits
-    - Must not start with 0
+    - Starts with 61, 77 (Hormuud) or 68 (Somnet)
     """
-    return bool(re.fullmatch(r"[1-9][0-9]{8}", number))
+    return bool(re.fullmatch(r"^(61|77|68)[0-9]{7}$", number))
+
+
+def resolve_network(number: str) -> str:
+    """
+    Resolve the network carrier from a normalized 9-digit MSISDN.
+
+    - 61, 77 -> 'hormuud'
+    - 68 -> 'somnet'
+    """
+    normalized = normalize_mobile_number(number)
+    if normalized.startswith("61") or normalized.startswith("77"):
+        return "hormuud"
+    elif normalized.startswith("68"):
+        return "somnet"
+    return "unknown"

@@ -5,7 +5,8 @@ from sqlalchemy.orm import Session
 
 from app.config import settings
 from app.models import BundleNumber, BundleCallLog
-from app.hormuud_client import HormuudClient
+from app.topup_client import TopupApiClient
+from app.utils import resolve_network
 
 
 logger = logging.getLogger(__name__)
@@ -42,15 +43,16 @@ async def provision_bundle(
     triggered_by: str,
 ) -> dict:
     """
-    Provision the daily bundle for a single mobile number.
+    Provision the daily bundle for a single mobile number (Hormuud or Somnet).
 
     Steps:
     1. Look up the number record.
-    2. Check it's active.
-    3. Check the 6-hour safety guard.
-    4. Call Hormuud POST /subscribe.
-    5. Log the result.
-    6. Update the number record (next_run_at, failure_count, etc.).
+    2. Resolve network operator (Hormuud or Somnet).
+    3. Check it's active.
+    4. Check the 6-hour safety guard.
+    5. Call Topup API (POST /topup/airtime or POST /topup/somnet/airtime).
+    6. Log the result and transferId.
+    7. Update the number record (next_run_at, failure_count, etc.).
     """
     record = (
         db.query(BundleNumber)
@@ -76,69 +78,58 @@ async def provision_bundle(
             "message": "Bundle already provisioned recently (safety guard)",
         }
 
-    # Call Hormuud
-    client = HormuudClient()
+    # Auto-resolve network
+    network = resolve_network(mobile_number)
+    record.network = network
+    db.commit()
 
-    try:
-        result = await client.subscribe(mobile_number)
-    except Exception as e:
-        logger.error("Hormuud API call failed for %s: %s", mobile_number, str(e))
-        # Log the failure
-        log = BundleCallLog(
-            mobile_number=mobile_number,
-            call_type="subscribe",
-            triggered_by=triggered_by,
-            http_status=None,
-            response_code=None,
-            response_status="error",
-            response_message=str(e),
-        )
-        db.add(log)
-
-        now = datetime.utcnow()
-        record.last_attempt_at = now
-        record.failure_count += 1
-        record.last_response_status = "error"
-        record.last_response_message = str(e)
-        # Retry after 1 hour on network errors
-        record.next_run_at = now + timedelta(hours=1)
-        db.commit()
-
+    if network == "unknown":
         return {
             "status": "error",
-            "message": f"API call failed: {str(e)}",
+            "message": f"Unsupported carrier prefix for number {mobile_number}",
         }
 
-    http_status = result["http_status"]
-    body = result["body"]
+    now = datetime.utcnow()
+    bundle_id = f"GETPHONE-{network.upper()}-{record.id}-{int(now.timestamp())}"
 
-    response_code = str(body.get("code", ""))
-    response_status = body.get("status", "")
-    response_message = body.get("message", "")
+    client = TopupApiClient()
+    result = await client.topup_airtime(
+        network=network,
+        receiver=mobile_number,
+        amount=settings.DEFAULT_TOPUP_AMOUNT,
+        bundle_id=bundle_id,
+    )
+
+    http_status = result["http_status"]
+    result_code = result["result_code"]
+    result_desc = result["result_desc"]
+    transfer_id = result.get("transfer_id")
+    is_success = result["success"]
 
     # Log every API call
     log = BundleCallLog(
         mobile_number=mobile_number,
-        call_type="subscribe",
+        network=network,
+        call_type="topup",
         triggered_by=triggered_by,
+        transfer_id=transfer_id,
         http_status=http_status,
-        response_code=response_code,
-        response_status=response_status,
-        response_message=response_message,
+        response_code=result_code,
+        response_status="success" if is_success else "error",
+        response_message=result_desc,
     )
     db.add(log)
 
-    now = datetime.utcnow()
     record.last_attempt_at = now
-    record.last_response_status = response_status
-    record.last_response_message = response_message
+    record.last_response_status = "success" if is_success else "error"
+    record.last_response_message = result_desc
 
-    if http_status == 200 and response_status == "success" and response_code == "0":
+    if is_success:
         # Success — schedule next run at next midnight
         record.last_success_at = now
         record.next_run_at = _get_next_midnight()
         record.failure_count = 0
-        logger.info("Bundle provisioned successfully for %s", mobile_number)
+        logger.info("Topup provisioned successfully for %s (%s) [transferId: %s]", mobile_number, network, transfer_id)
     else:
         # Failure — retry with backoff based on failure count
         record.failure_count += 1
@@ -149,21 +140,25 @@ async def provision_bundle(
         elif record.failure_count <= 3:
             record.next_run_at = now + timedelta(hours=4)
         else:
-            # After 4+ failures, schedule for next midnight but flag for review
+            # After 4+ failures, schedule for next midnight
             record.next_run_at = _get_next_midnight()
 
         logger.warning(
-            "Bundle provisioning failed for %s: HTTP %d - %s",
+            "Topup provisioning failed for %s (%s): HTTP %d - Code %s - %s",
             mobile_number,
+            network,
             http_status,
-            response_message,
+            result_code,
+            result_desc,
         )
 
     db.commit()
 
     return {
-        "status": response_status or "error",
+        "status": "success" if is_success else "error",
+        "network": network,
+        "transfer_id": transfer_id,
         "http_status": http_status,
-        "code": response_code,
-        "message": response_message,
+        "code": result_code,
+        "message": result_desc,
     }
