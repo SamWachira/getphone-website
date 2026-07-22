@@ -31,3 +31,18 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+def init_db_schema():
+    """Ensure database tables and newly added columns exist in Cloud SQL PostgreSQL."""
+    if not db_url or "sqlite" in db_url:
+        return
+    try:
+        from sqlalchemy import text
+        with engine.connect() as conn:
+            conn.execute(text("ALTER TABLE bundle_numbers ADD COLUMN IF NOT EXISTS network VARCHAR(20) DEFAULT 'hormuud';"))
+            conn.execute(text("ALTER TABLE bundle_call_logs ADD COLUMN IF NOT EXISTS network VARCHAR(20);"))
+            conn.execute(text("ALTER TABLE bundle_call_logs ADD COLUMN IF NOT EXISTS transfer_id VARCHAR(100);"))
+            conn.commit()
+    except Exception:
+        pass

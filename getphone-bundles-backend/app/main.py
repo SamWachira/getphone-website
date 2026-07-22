@@ -64,6 +64,12 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 
+@app.on_event("startup")
+def on_startup():
+    from app.database import init_db_schema
+    init_db_schema()
+
+
 @app.get("/health")
 def health_check():
     """Health check endpoint for Cloud Run and monitoring."""
