@@ -46,6 +46,9 @@ getphone_website_brief.md
 getphone benefits/
 getphone benefits
 
+# python
+__pycache__/
+*.pyc
 
 # firebase
 .firebase
