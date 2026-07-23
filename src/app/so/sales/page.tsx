@@ -60,10 +60,6 @@ export default function SalesPage() {
       <div className="section-container px-6">
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            Getphone Mobile Applications
-          </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Internal & Customer Applications</h1>
           <p className="text-lg text-gray-600">
             Download the latest Android APK builds directly for your device or scan the QR code.
