@@ -75,8 +75,8 @@ gcloud run deploy getphone-bundles-api \
   --region us-central1 \
   --allow-unauthenticated \
   --add-cloudsql-instances getphone-website:us-central1:getphone-bundles-db \
-  --set-secrets DATABASE_URL=database-url:latest,HORMUUD_USERNAME=hormuud-username:latest,HORMUUD_PASSWORD=hormuud-password:latest,SCHEDULER_SECRET=scheduler-secret:latest \
-  --set-env-vars HORMUUD_BASE_URL=https://hintegrations.hormuud.com/api,OFFER_ID=getPhone_24hours_0.25USD,PRODUCT_ID=3000060,SAFETY_GUARD_HOURS=6,TIMEZONE=Africa/Mogadishu,CORS_ORIGINS=https://getphone-website.web.app,https://getphone-website.firebaseapp.com
+  --set-secrets DATABASE_URL=database-url:latest,TOPUP_API_USERNAME=topup-api-username:latest,TOPUP_API_PASSWORD=topup-api-password:latest,SCHEDULER_SECRET=scheduler-secret:latest \
+  --set-env-vars "^;;^TOPUP_API_BASE_URL=https://opsapi.hormuud.com/api/v1;;HORMUUD_TOPUP_AMOUNT=0.20;;SOMNET_TOPUP_AMOUNT=0.20;;SAFETY_GUARD_HOURS=6;;TIMEZONE=Africa/Mogadishu;;CORS_ORIGINS=https://getphone-website.web.app,https://getphone-website.firebaseapp.com,https://getphonelimited.com,https://www.getphonelimited.com"
 ```
 
 After deployment, note the **Service URL** printed (e.g., `https://getphone-bundles-api-xxxxx-uc.a.run.app`).

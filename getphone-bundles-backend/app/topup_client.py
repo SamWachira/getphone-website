@@ -37,7 +37,7 @@ class TopupApiClient:
 
         :param network: 'hormuud' or 'somnet'
         :param receiver: 9-digit MSISDN (e.g. 61XXXXXXX or 68XXXXXXX)
-        :param amount: Numeric amount (defaults to DEFAULT_TOPUP_AMOUNT, e.g. 1)
+        :param amount: Numeric amount (defaults to the configured network amount)
         :param bundle_id: Unique tenant reference for reconciliation
         :param callback_url: Optional HTTPS URL for async callback delivery
         """
@@ -48,7 +48,7 @@ class TopupApiClient:
             path = "/topup/airtime"
 
         url = f"{self.base_url}{path}"
-        topup_amount = amount if amount is not None else settings.DEFAULT_TOPUP_AMOUNT
+        topup_amount = amount if amount is not None else settings.topup_amount_for_network(net)
 
         payload = {
             "receiver": receiver,

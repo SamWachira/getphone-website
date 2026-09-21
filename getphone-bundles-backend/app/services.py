@@ -96,7 +96,7 @@ async def provision_bundle(
     result = await client.topup_airtime(
         network=network,
         receiver=mobile_number,
-        amount=settings.DEFAULT_TOPUP_AMOUNT,
+        amount=settings.topup_amount_for_network(network),
         bundle_id=bundle_id,
     )
 
