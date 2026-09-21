@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     TOPUP_API_USERNAME: str = "getphone"
     TOPUP_API_PASSWORD: str = ""
     HORMUUD_TOPUP_AMOUNT: float = 0.20
-    SOMNET_TOPUP_AMOUNT: float = 0.20
+    SOMNET_TOPUP_AMOUNT: float = 0.25
 
     def topup_amount_for_network(self, network: str) -> float:
         return self.SOMNET_TOPUP_AMOUNT if network == "somnet" else self.HORMUUD_TOPUP_AMOUNT

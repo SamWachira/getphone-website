@@ -9,20 +9,20 @@ from app import topup_client
 
 
 @pytest.mark.parametrize(
-    ("network", "path"),
+    ("network", "path", "expected_amount"),
     [
-        ("hormuud", "/api/v1/topup/airtime"),
-        ("somnet", "/api/v1/topup/somnet/airtime"),
+        ("hormuud", "/api/v1/topup/airtime", 0.20),
+        ("somnet", "/api/v1/topup/somnet/airtime", 0.25),
     ],
 )
-def test_network_topup_amount_and_endpoint(monkeypatch, network, path):
+def test_network_topup_amount_and_endpoint(monkeypatch, network, path, expected_amount):
     config = Settings(
         _env_file=None,
         TOPUP_API_BASE_URL="https://topup.example/api/v1",
         TOPUP_API_USERNAME="test-user",
         TOPUP_API_PASSWORD="test-password",
         HORMUUD_TOPUP_AMOUNT=0.20,
-        SOMNET_TOPUP_AMOUNT=0.20,
+        SOMNET_TOPUP_AMOUNT=0.25,
     )
     monkeypatch.setattr(topup_client, "settings", config)
     calls = []
@@ -50,5 +50,5 @@ def test_network_topup_amount_and_endpoint(monkeypatch, network, path):
     assert result["success"] is True
     assert len(calls) == 1
     assert calls[0][0].endswith(path)
-    assert calls[0][1]["amount"] == 0.20
+    assert calls[0][1]["amount"] == expected_amount
     assert calls[0][1]["bundleId"] == "test-bundle"
