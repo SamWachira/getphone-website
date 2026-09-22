@@ -12,7 +12,7 @@ from app import topup_client
     ("network", "path", "expected_amount"),
     [
         ("hormuud", "/api/v1/topup/airtime", 0.20),
-        ("somnet", "/api/v1/topup/somnet/airtime", 0.25),
+        ("somnet", "/api/v1/topup/somnet/airtime", 0.20),
     ],
 )
 def test_network_topup_amount_and_endpoint(monkeypatch, network, path, expected_amount):
@@ -22,7 +22,7 @@ def test_network_topup_amount_and_endpoint(monkeypatch, network, path, expected_
         TOPUP_API_USERNAME="test-user",
         TOPUP_API_PASSWORD="test-password",
         HORMUUD_TOPUP_AMOUNT=0.20,
-        SOMNET_TOPUP_AMOUNT=0.25,
+        SOMNET_TOPUP_AMOUNT=0.20,
     )
     monkeypatch.setattr(topup_client, "settings", config)
     calls = []
