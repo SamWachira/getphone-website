@@ -8,6 +8,7 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 
 from app.config import settings
+from app.benefits import close_daily_calculation
 from app.database import get_db, SessionLocal
 from app.models import BundleNumber
 from app.services import provision_bundle
@@ -151,3 +152,29 @@ async def provision_daily(
     )
 
     return summary
+
+
+@router.post("/close-benefit-calculation")
+@limiter.limit("5/minute")
+async def close_benefit_calculation(
+    request: Request,
+    db: Session = Depends(get_db),
+    _: None = Depends(verify_scheduler_secret),
+):
+    """Close the tenant-local daily value at 11:59 PM without initiating payment."""
+    calculation = close_daily_calculation(db)
+    logger.info(
+        "Closed standalone benefit calculation for %s: %s %s",
+        calculation.business_date,
+        calculation.currency,
+        calculation.calculated_value,
+    )
+    return {
+        "business_date": calculation.business_date.isoformat(),
+        "successful_benefits": calculation.successful_benefits,
+        "unpriced_successful_benefits": calculation.unpriced_successful_benefits,
+        "calculated_value": float(calculation.calculated_value),
+        "currency": calculation.currency,
+        "settlement_status": calculation.settlement_status,
+        "closed_at": calculation.closed_at.isoformat(),
+    }

@@ -7,7 +7,7 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
 from app.config import settings
-from app.routes import numbers, jobs, logs
+from app.routes import jobs, logs, numbers
 
 
 # Configure logging

@@ -9,7 +9,14 @@ from app.database import get_db
 from app.models import BundleNumber
 from app.auth import get_current_user
 from app.services import provision_bundle, _get_next_midnight
-from app.schemas import AddNumberRequest, AddNumberResponse, NumberResponse, StatusMessageResponse, ProvisioningResult
+from app.schemas import (
+    AddNumberRequest,
+    AddNumberResponse,
+    NumberResponse,
+    ProvisioningOwnerUpdateRequest,
+    ProvisioningResult,
+    StatusMessageResponse,
+)
 
 
 router = APIRouter(prefix="/numbers", tags=["numbers"])
@@ -55,10 +62,21 @@ async def add_number(
     )
 
     if existing:
+        if (existing.provisioning_owner or "standalone") != "standalone":
+            return AddNumberResponse(
+                mobile_number=mobile_number,
+                network=existing.network or network,
+                provisioning_result=ProvisioningResult(
+                    status="exists",
+                    network=existing.network or network,
+                    message="This number is managed by another provisioning system",
+                ),
+            )
         if existing.status == "stopped":
             # Reactivate a previously stopped number
             existing.status = "active"
             existing.network = network
+            existing.provisioning_owner = "standalone"
             existing.next_run_at = datetime.utcnow()
             existing.created_by = user["email"]
             existing.failure_count = 0
@@ -78,6 +96,7 @@ async def add_number(
         record = BundleNumber(
             mobile_number=mobile_number,
             network=network,
+            provisioning_owner="standalone",
             status="active",
             next_run_at=datetime.utcnow(),
             created_by=user["email"],
@@ -113,6 +132,7 @@ async def list_numbers(
         NumberResponse(
             mobile_number=r.mobile_number,
             network=r.network or ("somnet" if r.mobile_number.startswith("68") else "hormuud"),
+            provisioning_owner=r.provisioning_owner or "standalone",
             status=r.status,
             last_attempt_at=r.last_attempt_at,
             last_success_at=r.last_success_at,
@@ -189,6 +209,39 @@ async def stop_number(
     db.commit()
 
     return StatusMessageResponse(status="success", message="Number stopped")
+
+
+@router.patch("/{mobile_number}/ownership", response_model=StatusMessageResponse)
+@limiter.limit("10/minute")
+async def update_provisioning_owner(
+    request: Request,
+    mobile_number: str = Path(..., pattern=MOBILE_NUMBER_PATTERN),
+    payload: ProvisioningOwnerUpdateRequest = ...,
+    db: Session = Depends(get_db),
+    user: dict = Depends(get_current_user),
+):
+    """Transfer a number out of standalone delivery before another system owns it."""
+    _validate_mobile_number_param(mobile_number)
+    record = db.query(BundleNumber).filter_by(mobile_number=mobile_number).first()
+
+    if not record:
+        raise HTTPException(status_code=404, detail="Number not found")
+
+    record.provisioning_owner = payload.provisioning_owner
+    if payload.provisioning_owner == "orbit":
+        # Fail closed: a transferred number cannot remain eligible for this scheduler.
+        record.status = "stopped"
+        record.next_run_at = None
+
+    db.commit()
+    return StatusMessageResponse(
+        status="success",
+        message=(
+            "Number moved to Orbit and stopped in standalone provisioning"
+            if payload.provisioning_owner == "orbit"
+            else "Number is marked as standalone-managed"
+        ),
+    )
 
 
 @router.post("/{mobile_number}/retry")

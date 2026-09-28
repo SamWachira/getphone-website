@@ -97,6 +97,11 @@ When prompted for password, enter the DB password from Step 3. Then paste the co
 
 Type `\q` to exit.
 
+For an existing production database, also run
+`getphone-bundles-backend/migrations/002_benefit_value_calculator.sql`. The
+service applies the same additive upgrade on startup, but running the script
+keeps the production database change explicit in the deployment record.
+
 ## Step 7: Create Cloud Scheduler Job
 
 ```bash
@@ -114,6 +119,25 @@ gcloud scheduler jobs create http provision-daily-bundles \
 ```
 
 Replace `YOUR_CLOUD_RUN_URL` with the actual Cloud Run service URL from Step 5.
+
+## Step 7a: Close Daily Benefit Value
+
+Create this second scheduler job to persist the confirmed standalone benefit
+value at 11:59 PM Africa/Mogadishu. It does not initiate a payment or settlement.
+
+```bash
+gcloud scheduler jobs create http close-daily-bundle-benefits \
+  --schedule="59 23 * * *" \
+  --uri="https://YOUR_CLOUD_RUN_URL/jobs/close-benefit-calculation" \
+  --http-method=POST \
+  --headers="X-Scheduler-Secret=$SCHEDULER_SECRET" \
+  --time-zone="Africa/Mogadishu" \
+  --location=us-central1
+```
+
+The calculator totals only successful logs recorded after this release, because
+those logs include an immutable amount and business date. Earlier successful
+logs remain visible as legacy/unpriced until reconciled with provider records.
 
 ## Step 8: Update Frontend API URL
 

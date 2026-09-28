@@ -1,6 +1,6 @@
 from pydantic import BaseModel, field_validator
-from typing import Optional
-from datetime import datetime
+from typing import Literal, Optional
+from datetime import date, datetime
 from app.utils import normalize_mobile_number, is_valid_mobile_number
 
 
@@ -31,6 +31,7 @@ class HealthResponse(BaseModel):
 class NumberResponse(BaseModel):
     mobile_number: str
     network: str = "hormuud"
+    provisioning_owner: str = "standalone"
     status: str
     last_attempt_at: Optional[datetime] = None
     last_success_at: Optional[datetime] = None
@@ -62,6 +63,10 @@ class StatusMessageResponse(BaseModel):
     message: str
 
 
+class ProvisioningOwnerUpdateRequest(BaseModel):
+    provisioning_owner: Literal["standalone", "orbit"]
+
+
 class DashboardResponse(BaseModel):
     active_count: int
     paused_count: int
@@ -75,9 +80,13 @@ class LogEntry(BaseModel):
     id: int
     mobile_number: str
     network: Optional[str] = None
+    provisioning_owner: Optional[str] = None
     call_type: str
     triggered_by: str
     transfer_id: Optional[str] = None
+    benefit_value: Optional[float] = None
+    currency: Optional[str] = None
+    business_date: Optional[date] = None
     http_status: Optional[int] = None
     response_code: Optional[str] = None
     response_status: Optional[str] = None
@@ -90,3 +99,25 @@ class JobSummaryResponse(BaseModel):
     successful: int
     failed: int
     skipped: int
+
+
+class DailyBenefitCalculationResponse(BaseModel):
+    business_date: date
+    successful_benefits: int
+    unpriced_successful_benefits: int
+    failed_attempts: int
+    calculated_value: float
+    currency: str
+    closed_at: Optional[datetime] = None
+    settlement_status: str
+
+
+class BenefitsCalculationResponse(BaseModel):
+    start_date: date
+    end_date: date
+    currency: str
+    successful_benefits: int
+    unpriced_successful_benefits: int
+    failed_attempts: int
+    calculated_value: float
+    daily_calculations: list[DailyBenefitCalculationResponse]

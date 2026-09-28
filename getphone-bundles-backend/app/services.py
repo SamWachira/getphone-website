@@ -1,9 +1,15 @@
 import logging
 from datetime import datetime, timedelta
+from decimal import Decimal
 from zoneinfo import ZoneInfo
 from sqlalchemy.orm import Session
 
 from app.config import settings
+from app.benefits import (
+    STANDALONE_OWNER,
+    current_business_date,
+    has_successful_delivery_for_business_date,
+)
 from app.models import BundleNumber, BundleCallLog
 from app.topup_client import TopupApiClient
 from app.utils import resolve_network
@@ -72,10 +78,24 @@ async def provision_bundle(
             "message": f"Number is {record.status}",
         }
 
+    provisioning_owner = record.provisioning_owner or STANDALONE_OWNER
+    if provisioning_owner != STANDALONE_OWNER:
+        return {
+            "status": "skipped",
+            "message": "Number is managed by another provisioning system",
+        }
+
     if should_skip_safety_guard(record):
         return {
             "status": "skipped",
             "message": "Bundle already provisioned recently (safety guard)",
+        }
+
+    business_date = current_business_date()
+    if has_successful_delivery_for_business_date(db, mobile_number, business_date):
+        return {
+            "status": "skipped",
+            "message": "A successful benefit is already recorded for this business day",
         }
 
     # Auto-resolve network
@@ -110,9 +130,13 @@ async def provision_bundle(
     log = BundleCallLog(
         mobile_number=mobile_number,
         network=network,
+        provisioning_owner=provisioning_owner,
         call_type="topup",
         triggered_by=triggered_by,
         transfer_id=transfer_id,
+        benefit_value=Decimal(str(settings.topup_amount_for_network(network))),
+        currency="USD",
+        business_date=business_date,
         http_status=http_status,
         response_code=result_code,
         response_status="success" if is_success else "error",

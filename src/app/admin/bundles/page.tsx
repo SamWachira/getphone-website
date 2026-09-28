@@ -17,6 +17,7 @@ const API_BASE = "https://getphone-bundles-api-577769500526.us-central1.run.app"
 interface BundleNumber {
   mobile_number: string;
   network?: string;
+  provisioning_owner?: string;
   status: string;
   last_attempt_at: string | null;
   last_success_at: string | null;
@@ -41,6 +42,7 @@ interface LogEntry {
   id: number;
   mobile_number: string;
   network?: string;
+  provisioning_owner?: string;
   call_type: string;
   triggered_by: string;
   http_status: number | null;
@@ -48,6 +50,28 @@ interface LogEntry {
   response_status: string | null;
   response_message: string | null;
   attempted_at: string | null;
+}
+
+interface DailyBenefitCalculation {
+  business_date: string;
+  successful_benefits: number;
+  unpriced_successful_benefits: number;
+  failed_attempts: number;
+  calculated_value: number;
+  currency: string;
+  closed_at: string | null;
+  settlement_status: string;
+}
+
+interface BenefitsCalculation {
+  start_date: string;
+  end_date: string;
+  currency: string;
+  successful_benefits: number;
+  unpriced_successful_benefits: number;
+  failed_attempts: number;
+  calculated_value: number;
+  daily_calculations: DailyBenefitCalculation[];
 }
 
 // ── API Helper ───────────────────────────────────────────────────────
@@ -73,6 +97,15 @@ function fmtDate(d: string | null) {
     hour: "2-digit", minute: "2-digit",
     timeZone: "Africa/Mogadishu",
   });
+}
+
+function fmtMoney(value: number | undefined, currency: string = "USD") {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value ?? 0);
 }
 
 // ── Status & Network Badges ──────────────────────────────────────────
@@ -168,10 +201,14 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
 // MAIN ADMIN DASHBOARD
 // ══════════════════════════════════════════════════════════════════════
 function AdminDashboard({ user }: { user: User }) {
-  const [tab, setTab] = useState<"dashboard" | "numbers" | "logs">("dashboard");
+  const [tab, setTab] = useState<"dashboard" | "benefits" | "numbers" | "logs">("dashboard");
   const [dashboard, setDashboard] = useState<DashboardData | null>(null);
   const [numbers, setNumbers] = useState<BundleNumber[]>([]);
   const [logs, setLogs] = useState<LogEntry[]>([]);
+  const [benefits, setBenefits] = useState<BenefitsCalculation | null>(null);
+  const [benefitPeriod, setBenefitPeriod] = useState<"today" | "yesterday" | "7d" | "30d" | "ytd" | "custom">("today");
+  const [benefitStartDate, setBenefitStartDate] = useState("");
+  const [benefitEndDate, setBenefitEndDate] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [addMsg, setAddMsg] = useState<{ type: "success" | "error" | "info"; text: string } | null>(null);
   const [loading, setLoading] = useState(false);
@@ -229,6 +266,19 @@ function AdminDashboard({ user }: { user: User }) {
       if (res.ok) setLogs(await res.json());
     } catch { /* ignore */ }
   }, [getToken, logFilter]);
+
+  const fetchBenefits = useCallback(async (requestedPeriod: typeof benefitPeriod = benefitPeriod) => {
+    try {
+      const token = await getToken();
+      const params = new URLSearchParams({ period: requestedPeriod });
+      if (requestedPeriod === "custom" && benefitStartDate && benefitEndDate) {
+        params.set("start_date", benefitStartDate);
+        params.set("end_date", benefitEndDate);
+      }
+      const res = await apiFetch(`/benefits/calculations?${params.toString()}`, token);
+      if (res.ok) setBenefits(await res.json());
+    } catch { /* preserve the most recent successful calculation */ }
+  }, [benefitEndDate, benefitPeriod, benefitStartDate, getToken]);
 
   useEffect(() => {
     fetchDashboard();
@@ -302,8 +352,31 @@ function AdminDashboard({ user }: { user: User }) {
     setActionLoading(null);
   };
 
+  const handleMoveToOrbit = async (number: string) => {
+    if (!window.confirm(`Move ${number} to Orbit? This immediately stops standalone provisioning for this number.`)) return;
+    setActionLoading(`${number}-ownership`);
+    try {
+      const token = await getToken();
+      const res = await apiFetch(`/numbers/${number}/ownership`, token, {
+        method: "PATCH",
+        body: JSON.stringify({ provisioning_owner: "orbit" }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.detail || "Could not move this number to Orbit.");
+      }
+      fetchNumbers();
+      fetchDashboard();
+    } catch {
+      alert("Could not move this number to Orbit.");
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
   const tabs = [
     { id: "dashboard" as const, label: "Dashboard" },
+    { id: "benefits" as const, label: "Benefit Value" },
     { id: "numbers" as const, label: "Numbers" },
     { id: "logs" as const, label: "Logs" },
   ];
@@ -330,7 +403,10 @@ function AdminDashboard({ user }: { user: User }) {
       <div className="bg-white border-b border-gray-100">
         <div className="section-container px-4 sm:px-6 flex gap-1">
           {tabs.map((t) => (
-            <button key={t.id} onClick={() => setTab(t.id)} className={`px-4 py-3 text-sm font-semibold border-b-2 transition ${tab === t.id ? "border-primary text-primary" : "border-transparent text-gray-500 hover:text-gray-700"}`}>
+            <button key={t.id} onClick={() => {
+              setTab(t.id);
+              if (t.id === "benefits") void fetchBenefits();
+            }} className={`px-4 py-3 text-sm font-semibold border-b-2 transition ${tab === t.id ? "border-primary text-primary" : "border-transparent text-gray-500 hover:text-gray-700"}`}>
               {t.label}
             </button>
           ))}
@@ -376,6 +452,111 @@ function AdminDashboard({ user }: { user: User }) {
           </div>
         )}
 
+        {/* ── Benefit Value Tab ─────────────────────────── */}
+        {tab === "benefits" && (
+          <div className="space-y-6 animate-fade-in">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <h2 className="text-xl font-bold text-gray-900">Daily Benefit Value</h2>
+                <p className="mt-1 text-sm text-gray-500">Confirmed standalone top-ups only. Daily values close at 11:59 PM Africa/Mogadishu and remain unsettled.</p>
+              </div>
+              <button onClick={() => void fetchBenefits()} className="btn btn-navy px-5 py-2.5 text-sm">Refresh</button>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-1 rounded-lg border border-gray-200 bg-white p-1">
+              {([
+                ["today", "Today"],
+                ["yesterday", "Yesterday"],
+                ["7d", "7 days"],
+                ["30d", "30 days"],
+                ["ytd", "YTD"],
+                ["custom", "Custom"],
+              ] as const).map(([id, label]) => (
+                <button
+                  key={id}
+                  onClick={() => {
+                    setBenefitPeriod(id);
+                    if (id !== "custom") void fetchBenefits(id);
+                  }}
+                  className={`rounded-md px-3 py-2 text-sm font-semibold transition ${benefitPeriod === id ? "bg-primary text-white" : "text-gray-600 hover:bg-gray-100"}`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            {benefitPeriod === "custom" && (
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <label className="flex flex-1 flex-col gap-1 text-sm font-medium text-gray-600">
+                  Start date
+                  <input type="date" value={benefitStartDate} onChange={(e) => setBenefitStartDate(e.target.value)} className="rounded-lg border border-gray-200 px-3 py-2.5 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                </label>
+                <label className="flex flex-1 flex-col gap-1 text-sm font-medium text-gray-600">
+                  End date
+                  <input type="date" value={benefitEndDate} onChange={(e) => setBenefitEndDate(e.target.value)} className="rounded-lg border border-gray-200 px-3 py-2.5 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                </label>
+                <button onClick={() => void fetchBenefits()} disabled={!benefitStartDate || !benefitEndDate} className="btn btn-primary self-end px-5 py-2.5 text-sm disabled:opacity-50">Apply</button>
+              </div>
+            )}
+
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              {[
+                { label: "Calculated value", value: fmtMoney(benefits?.calculated_value, benefits?.currency), color: "text-primary", bg: "bg-blue-50" },
+                { label: "Confirmed benefits", value: benefits?.successful_benefits ?? "—", color: "text-green-700", bg: "bg-green-50" },
+                { label: "Failed attempts", value: benefits?.failed_attempts ?? "—", color: "text-red-700", bg: "bg-red-50" },
+                { label: "Legacy, unpriced", value: benefits?.unpriced_successful_benefits ?? "—", color: "text-amber-700", bg: "bg-amber-50" },
+              ].map((metric) => (
+                <div key={metric.label} className={`${metric.bg} rounded-xl p-5`}>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">{metric.label}</p>
+                  <p className={`mt-2 text-2xl font-bold ${metric.color}`}>{metric.value}</p>
+                </div>
+              ))}
+            </div>
+
+            {(benefits?.unpriced_successful_benefits ?? 0) > 0 && (
+              <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+                {benefits?.unpriced_successful_benefits} legacy successful top-up{benefits?.unpriced_successful_benefits === 1 ? "" : "s"} {benefits?.unpriced_successful_benefits === 1 ? "is" : "are"} excluded from the value total because the historic logs do not contain an immutable amount.
+              </div>
+            )}
+
+            <div className="overflow-hidden rounded-xl border border-gray-100 bg-white">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead className="border-b border-gray-100 bg-gray-50">
+                    <tr>
+                      <th className="px-4 py-3 text-left font-semibold text-gray-600">Business date</th>
+                      <th className="px-4 py-3 text-right font-semibold text-gray-600">Confirmed</th>
+                      <th className="px-4 py-3 text-right font-semibold text-gray-600">Value</th>
+                      <th className="px-4 py-3 text-right font-semibold text-gray-600">Legacy</th>
+                      <th className="px-4 py-3 text-right font-semibold text-gray-600">Failed</th>
+                      <th className="px-4 py-3 text-left font-semibold text-gray-600">Settlement</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-50">
+                    {benefits?.daily_calculations.map((calculation) => (
+                      <tr key={calculation.business_date} className="hover:bg-gray-50/50">
+                        <td className="px-4 py-3 font-medium text-gray-900">{calculation.business_date}</td>
+                        <td className="px-4 py-3 text-right text-gray-700">{calculation.successful_benefits}</td>
+                        <td className="px-4 py-3 text-right font-semibold text-gray-900">{fmtMoney(calculation.calculated_value, calculation.currency)}</td>
+                        <td className="px-4 py-3 text-right text-amber-700">{calculation.unpriced_successful_benefits}</td>
+                        <td className="px-4 py-3 text-right text-red-700">{calculation.failed_attempts}</td>
+                        <td className="px-4 py-3">
+                          <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ${calculation.settlement_status === "unsettled" ? "bg-amber-100 text-amber-800" : "bg-gray-100 text-gray-700"}`}>
+                            {calculation.settlement_status === "not_closed" ? "Live" : calculation.settlement_status === "unsettled" ? "Not settled" : calculation.settlement_status}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                    {!benefits?.daily_calculations.length && (
+                      <tr><td colSpan={6} className="px-4 py-12 text-center text-gray-400">No recorded benefit deliveries in this period.</td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* ── Numbers Tab ───────────────────────────────── */}
         {tab === "numbers" && (
           <div className="space-y-4 animate-fade-in">
@@ -402,6 +583,7 @@ function AdminDashboard({ user }: { user: User }) {
                     <tr>
                       <th className="text-left px-4 py-3 font-semibold text-gray-600">Number</th>
                       <th className="text-left px-4 py-3 font-semibold text-gray-600">Network</th>
+                      <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden lg:table-cell">Owner</th>
                       <th className="text-left px-4 py-3 font-semibold text-gray-600">Status</th>
                       <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden md:table-cell">Last Success</th>
                       <th className="text-left px-4 py-3 font-semibold text-gray-600 hidden lg:table-cell">Next Run</th>
@@ -415,6 +597,11 @@ function AdminDashboard({ user }: { user: User }) {
                       <tr key={n.mobile_number} className="hover:bg-gray-50/50 transition">
                         <td className="px-4 py-3 font-mono font-medium text-gray-900">{n.mobile_number}</td>
                         <td className="px-4 py-3"><NetworkBadge network={n.network} number={n.mobile_number} /></td>
+                        <td className="px-4 py-3 hidden lg:table-cell">
+                          <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-semibold ${(n.provisioning_owner || "standalone") === "orbit" ? "bg-violet-100 text-violet-800" : "bg-gray-100 text-gray-700"}`}>
+                            {n.provisioning_owner || "standalone"}
+                          </span>
+                        </td>
                         <td className="px-4 py-3"><StatusBadge status={n.status} /></td>
                         <td className="px-4 py-3 text-gray-500 hidden md:table-cell">{fmtDate(n.last_success_at)}</td>
                         <td className="px-4 py-3 text-gray-500 hidden lg:table-cell">{fmtDate(n.next_run_at)}</td>
@@ -445,12 +632,17 @@ function AdminDashboard({ user }: { user: User }) {
                             <button onClick={() => handleCheckOffer(n.mobile_number)} disabled={actionLoading === `${n.mobile_number}-offer`} className="px-2.5 py-1 text-xs font-medium rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 transition disabled:opacity-50" title="Check Offer">
                               Check
                             </button>
+                            {(n.provisioning_owner || "standalone") === "standalone" && (
+                              <button onClick={() => handleMoveToOrbit(n.mobile_number)} disabled={actionLoading === `${n.mobile_number}-ownership`} className="px-2.5 py-1 text-xs font-medium rounded-lg bg-violet-100 text-violet-700 hover:bg-violet-200 transition disabled:opacity-50" title="Move to Orbit and stop standalone delivery">
+                                Move to Orbit
+                              </button>
+                            )}
                           </div>
                         </td>
                       </tr>
                     ))}
                     {numbers.length === 0 && (
-                      <tr><td colSpan={7} className="px-4 py-12 text-center text-gray-400">No numbers registered yet</td></tr>
+                      <tr><td colSpan={9} className="px-4 py-12 text-center text-gray-400">No numbers registered yet</td></tr>
                     )}
                   </tbody>
                 </table>

@@ -1,18 +1,19 @@
 import re
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from typing import Optional
 from zoneinfo import ZoneInfo
-from fastapi import APIRouter, Depends, Query, Request
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 
 from app.config import settings
+from app.benefits import calculate_benefits, resolve_date_range
 from app.database import get_db
 from app.models import BundleNumber, BundleCallLog
 from app.auth import get_current_user
-from app.schemas import DashboardResponse, LogEntry
+from app.schemas import BenefitsCalculationResponse, DashboardResponse, LogEntry
 
 
 router = APIRouter(tags=["logs"])
@@ -53,9 +54,13 @@ async def get_logs(
             id=log.id,
             mobile_number=log.mobile_number,
             network=log.network or ("somnet" if log.mobile_number.startswith("68") else "hormuud"),
+            provisioning_owner=log.provisioning_owner,
             call_type=log.call_type,
             triggered_by=log.triggered_by,
             transfer_id=log.transfer_id,
+            benefit_value=float(log.benefit_value) if log.benefit_value is not None else None,
+            currency=log.currency,
+            business_date=log.business_date,
             http_status=log.http_status,
             response_code=log.response_code,
             response_status=log.response_status,
@@ -106,14 +111,6 @@ async def get_dashboard(
         .count()
     )
 
-    failed_today = (
-        db.query(BundleCallLog)
-        .filter(BundleCallLog.attempted_at >= today_start_utc)
-        .filter(BundleCallLog.response_status != "success")
-        .filter(BundleCallLog.call_type == "subscribe")
-        .count()
-    )
-
     # Last scheduler run
     last_scheduler_log = (
         db.query(BundleCallLog)
@@ -129,4 +126,33 @@ async def get_dashboard(
         successful_today=successful_today,
         failed_today=failed_today,
         last_job_time=last_scheduler_log.attempted_at if last_scheduler_log else None,
+    )
+
+
+@router.get("/benefits/calculations", response_model=BenefitsCalculationResponse)
+@limiter.limit("60/minute")
+async def get_benefit_calculations(
+    request: Request,
+    period: str = Query(default="today"),
+    start_date: Optional[date] = Query(default=None),
+    end_date: Optional[date] = Query(default=None),
+    db: Session = Depends(get_db),
+    user: dict = Depends(get_current_user),
+):
+    """Return confirmed standalone benefit value, never deriving money for legacy logs."""
+    try:
+        start, end = resolve_date_range(period, start_date, end_date)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    result = calculate_benefits(db, start, end)
+    return BenefitsCalculationResponse(
+        **{
+            **result,
+            "calculated_value": float(result["calculated_value"]),
+            "daily_calculations": [
+                {**item, "calculated_value": float(item["calculated_value"])}
+                for item in result["daily_calculations"]
+            ],
+        }
     )
