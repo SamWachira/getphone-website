@@ -50,7 +50,7 @@ async def provision_daily(
     Finds all active numbers where next_run_at <= now and provisions
     the daily bundle for each using controlled parallelism.
 
-    Concurrency is capped by MAX_CONCURRENT_PROVISIONS (default 10)
+    Concurrency is capped by MAX_CONCURRENT_PROVISIONS (default 3)
     to avoid overwhelming the Hormuud API or the DB connection pool.
 
     Security:

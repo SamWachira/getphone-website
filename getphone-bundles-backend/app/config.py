@@ -20,7 +20,8 @@ class Settings(BaseSettings):
     # Scheduling and dedup
     SAFETY_GUARD_HOURS: int = 6
     TIMEZONE: str = "Africa/Mogadishu"
-    MAX_CONCURRENT_PROVISIONS: int = 10
+    MAX_CONCURRENT_PROVISIONS: int = 3
+    PERMANENT_FAILURE_STOP_THRESHOLD: int = 3
 
     # Scheduler authentication
     SCHEDULER_SECRET: str = ""

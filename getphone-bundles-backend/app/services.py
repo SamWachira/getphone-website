@@ -18,6 +18,11 @@ from app.utils import resolve_network
 logger = logging.getLogger(__name__)
 
 
+# Subscriber authentication failures are number-specific business failures,
+# not transient transport failures. Stop retrying after a small bounded count.
+NON_RETRYABLE_PROVIDER_CODES = {"20000003"}
+
+
 def _get_next_midnight() -> datetime:
     """Calculate the next midnight in the configured timezone (Africa/Mogadishu)."""
     tz = ZoneInfo(settings.TIMEZONE)
@@ -63,6 +68,7 @@ async def provision_bundle(
     record = (
         db.query(BundleNumber)
         .filter(BundleNumber.mobile_number == mobile_number)
+        .with_for_update()
         .first()
     )
 
@@ -98,19 +104,43 @@ async def provision_bundle(
             "message": "A successful benefit is already recorded for this business day",
         }
 
-    # Auto-resolve network
+    # Auto-resolve network while retaining the row lock. Committing before the
+    # provider call would release the lock and permit an overlapping worker.
     network = resolve_network(mobile_number)
     record.network = network
-    db.commit()
 
     if network == "unknown":
+        now = datetime.utcnow()
+        message = f"Unsupported carrier prefix for number {mobile_number}"
+        record.status = "stopped"
+        record.next_run_at = None
+        record.last_attempt_at = now
+        record.last_response_status = "error"
+        record.last_response_message = message
+        record.failure_count += 1
+        db.add(
+            BundleCallLog(
+                mobile_number=mobile_number,
+                network=network,
+                provisioning_owner=provisioning_owner,
+                call_type="validation",
+                triggered_by=triggered_by,
+                business_date=business_date,
+                response_code="UNSUPPORTED_CARRIER",
+                response_status="error",
+                response_message=message,
+            )
+        )
+        db.commit()
         return {
             "status": "error",
-            "message": f"Unsupported carrier prefix for number {mobile_number}",
+            "code": "UNSUPPORTED_CARRIER",
+            "message": message,
         }
 
     now = datetime.utcnow()
-    bundle_id = f"GETPHONE-{network.upper()}-{record.id}-{int(now.timestamp())}"
+    # Reuse one provider reference for every retry of the same daily benefit.
+    bundle_id = f"GETPHONE-{network.upper()}-{record.id}-{business_date:%Y%m%d}"
 
     client = TopupApiClient()
     result = await client.topup_airtime(
@@ -157,7 +187,19 @@ async def provision_bundle(
     else:
         # Failure — retry with backoff based on failure count
         record.failure_count += 1
-        if record.failure_count <= 1:
+        if (
+            result_code in NON_RETRYABLE_PROVIDER_CODES
+            and record.failure_count >= settings.PERMANENT_FAILURE_STOP_THRESHOLD
+        ):
+            record.status = "stopped"
+            record.next_run_at = None
+            logger.error(
+                "Stopped provisioning for %s after %d non-retryable provider failures (%s)",
+                mobile_number,
+                record.failure_count,
+                result_code,
+            )
+        elif record.failure_count <= 1:
             record.next_run_at = now + timedelta(hours=1)
         elif record.failure_count <= 2:
             record.next_run_at = now + timedelta(hours=2)

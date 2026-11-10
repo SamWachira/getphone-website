@@ -62,6 +62,13 @@ CREATE INDEX IF NOT EXISTS idx_bundle_call_logs_attempted_at
 CREATE INDEX IF NOT EXISTS idx_bundle_call_logs_business_date
     ON bundle_call_logs (business_date, provisioning_owner, response_status);
 
+-- A number can have at most one confirmed top-up for a business date.
+CREATE UNIQUE INDEX IF NOT EXISTS uq_bundle_success_per_number_day
+    ON bundle_call_logs (mobile_number, business_date)
+    WHERE call_type = 'topup'
+      AND response_status = 'success'
+      AND business_date IS NOT NULL;
+
 -- Daily value snapshots close at 11:59 PM Africa/Mogadishu. They do not pay anyone.
 CREATE TABLE IF NOT EXISTS bundle_daily_calculations (
     id SERIAL PRIMARY KEY,
