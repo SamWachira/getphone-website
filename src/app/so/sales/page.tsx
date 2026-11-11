@@ -42,7 +42,7 @@ const APPS: AppItem[] = [
     badge: "Customer App",
     badgeColor: "bg-blue-100 text-blue-800 border-blue-200",
     description: "Self-service mobile app for customers to manage accounts, track installment payments, and view benefits.",
-    apkUrl: "https://firebasestorage.googleapis.com/v0/b/getphone-website.firebasestorage.app/o/apks%2Fgetphone-customer.apk?alt=media",
+    apkUrl: "https://firebasestorage.googleapis.com/v0/b/getphone-website.firebasestorage.app/o/apks%2Fgetphone-customer.apk?alt=media&v=1.0.1-2",
     iconSvg: "customer",
   },
 ];
